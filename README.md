@@ -5,7 +5,7 @@
 ## Description
 
 This app is a Lawyer Matching Service platform which allows match clients and lawyers. As a client you can create your own accound and hire(create a case) a layer based on filter parameters as budget, avialability, lawer type.
-As a lawyer you can create your own account, fill information about yourself, like price, (eg. Business, Criminal, Family), age, expirience, location, etc.
+As a lawyer you can create your own account, fill information about yourself, like price, occupation (eg. Business, Criminal, Family), age, experience, location, etc.
 
 ## Base url
 
@@ -58,11 +58,11 @@ Request body example
 
 ```json
 {
-	"firstName": "firstName",
-	"lastName": "lastName",
-	"email": "email@email.com",
-	"password": "password123",
-    "userType": "lawyer" | "client",
+  "firstName": "firstName",
+  "lastName": "lastName",
+  "email": "email@email.com",
+  "password": "password123",
+  "role": "lawyer" | "client",
 }
 ```
 
@@ -70,15 +70,17 @@ Expected response `201 Created`
 
 ```json
 {
-	"id": "1",
-	"email": "email@email.com",
-	"firstName": "firstName",
-	"lastName": "lastName",
-	"userType": "lawyer" | "client",
+  "result": {
+    "id": "1",
+    "email": "email@email.com",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "role": "lawyer" | "client",
+  }
 }
 ```
 
-Expected errors message `400 Bad Request`
+Expected errors `400 Bad Request`
 
 ```json
 {
@@ -105,19 +107,21 @@ Expected response `200 OK`
 
 ```json
 {
-	"id": "1",
-	"email": "email@email.com",
-	"firstName": "firstName",
-	"lastName": "lastName",
-	"userType": "lawyer" | "client",
-    "tokens": {
-      "refresh": "231dsf123asfds",
-      "access": "sdfwqreew3",
+  "result": {
+    "id": "1",
+    "email": "email@email.com",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "role": "lawyer" | "client",
+      "tokens": {
+        "refresh": "231dsf123asfds",
+        "access": "sdfwqreew3",
+    },
   }
 }
 ```
 
-Expected errors message `400 Bad Request`
+Expected errors `400 Bad Request`
 
 ```json
 {
@@ -137,12 +141,282 @@ Authorizations: bearer {access-token}
 
 Expected response `200 OK`
 
-Expected errors message `400 Bad Request`
+Expected errors `400 Bad Request`
 
 ```json
 {
 	"error": {
 		"message": "Sesion Does not Exist"
+	}
+}
+```
+
+## `/users`
+
+Endpoint to work with users
+
+### Get All Users
+
+`GET /users` - get all user with base info
+
+Expected response `200 OK`
+
+```json
+{
+	"result": [
+      {
+        "id": "1",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "email": "email@email.com",
+        "role": "lawyer" | "client",
+        "city": "Kyiv",
+      },
+      {
+        "id": "2",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "email": "email2@email.com",
+        "role": "lawyer" | "client",
+        "city": "Lviv",
+      }
+  ]
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Get User By Id
+
+`GET /users/:id` - get user by id
+
+Expected response `200 OK`
+
+```json
+{
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "role": "lawyer" | "client",
+    "city": "Kyiv",
+  }
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+## `/lawyers`
+
+Endpoint to work with lawyers
+
+### Get Lawyers
+
+`get /lawyers` - get all lawyers with all info
+
+Expected response `200 OK`
+
+```json
+{
+	"result": [
+		{
+			"id": "1",
+			"firstName": "firstName",
+			"lastName": "lastName",
+			"email": "email@email.com",
+			"password": "password123",
+			"role": "lawyer",
+			"age": "44",
+			"occupation": "Business",
+			"price": "228",
+			"experience": "10 years",
+			"city": "Kyiv",
+			"available": true
+		}
+	]
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Get Lawyer By Id
+
+`get /lawyers/:id` - get lawyer by id
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"password": "password123",
+		"role": "lawyer",
+		"age": "44",
+		"occupation": "Business",
+		"price": "228",
+		"experience": "10 years",
+		"city": "Kyiv",
+		"available": true
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Update Lawyer Info
+
+`POST /lawyers/:id`
+
+Request body example
+
+```json
+{
+	"age": "44",
+	"occupation": "Business",
+	"price": "228",
+	"experience": "10 years",
+	"available": false
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"password": "password123",
+		"role": "lawyer",
+		"age": "44",
+		"occupation": "Business",
+		"price": "228",
+		"experience": "10 years",
+		"city": "Kyiv",
+		"available": false
+	}
+}
+```
+
+Expected errors `400 Bad Request`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+## `/clients`
+
+Endpoint to work with clients
+
+### Get All Clients
+
+`GET /clients` - get all clients with all info
+
+Expected response `200 OK`
+
+```json
+{
+	"result": [
+		{
+			"id": "1",
+			"firstName": "firstName",
+			"lastName": "lastName",
+			"email": "email@email.com",
+			"role": "client",
+			"city": "Kyiv",
+			"budget": 228
+		},
+		{
+			"id": "2",
+			"firstName": "firstName",
+			"lastName": "lastName",
+			"email": "email2@email.com",
+			"role": "client",
+			"city": "Lviv",
+			"budget": 228
+		}
+	]
+}
+```
+
+Expected errors `400 Bad Request`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Get Client By Id
+
+`GET /clients/:id` - get client by id with all info
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"role": "client",
+		"city": "Kyiv",
+		"budget": 228
+	}
+}
+```
+
+Expected errors `400 Bad Request`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
 	}
 }
 ```
