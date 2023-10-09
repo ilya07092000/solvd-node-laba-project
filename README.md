@@ -1,5 +1,18 @@
 # API documentation
 
+### Navigation
+
+- [Project Description](#description)
+- [Exceptions](#exceptions)
+- [Authentication](#authentication)
+- [End Points](#end-points)
+  - [Auth](#auth)
+  - [Users](#users)
+  - [Lawyers](#clients)
+  - [Clients](#clients)
+  - [Cases](#cases)
+  - [Admins](#admins)
+
 ---
 
 ## Description
