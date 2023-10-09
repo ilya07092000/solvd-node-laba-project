@@ -1069,3 +1069,189 @@ Expected errors `401 Unathorized`
 	}
 }
 ```
+
+## `/admins`
+
+Endpoint to work with users
+
+### Get All Admins
+
+`GET /admins` - get all admins
+
+Expected response `200 OK`
+
+```json
+{
+	"result": [
+		{
+			"id": "1",
+			"firstName": "firstName",
+			"lastName": "lastName",
+			"email": "email@email.com",
+			"role": "admin",
+			"city": "Kyiv",
+			"isActive": true
+		},
+		{
+			"id": "2",
+			"firstName": "firstName",
+			"lastName": "lastName",
+			"email": "email2@email.com",
+			"role": "admin",
+			"city": "Kyiv",
+			"isActive": false
+		}
+	]
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Get Admin By Id
+
+`GET /admins/:id` - get admin by id
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"role": "admin",
+		"city": "Kyiv",
+		"isActive": true
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Create Admin
+
+`POST /admins`
+
+Request body example
+
+```json
+{
+	"firstName": "firstName",
+	"lastName": "lastName",
+	"email": "email@email.com",
+	"role": "admin",
+	"city": "Kyiv",
+	"isActive": true
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"role": "admin",
+		"city": "Kyiv",
+		"isActive": true
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Edit Admin By Id
+
+`PUT /admins/:id`
+
+Request body example
+
+```json
+{
+	"isActive": false
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"role": "admin",
+		"city": "Kyiv",
+		"isActive": false
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Delete Admin By Id
+
+`DELETE /admin/:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"role": "admin",
+		"city": "Kyiv",
+		"isActive": true
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
