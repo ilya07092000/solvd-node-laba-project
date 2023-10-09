@@ -767,6 +767,36 @@ Expected errors `401 Unathorized`
 }
 ```
 
+### Delete Client By Id
+
+`DELETE /clients/:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"role": "client",
+		"city": "Kyiv",
+		"budget": 228
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
 ## `/cases`
 
 Endpoint to work with cases
