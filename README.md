@@ -154,6 +154,46 @@ Expected errors `400 Bad Request`
 }
 ```
 
+`POST /auth/refresh-token`
+Request Example
+
+Request body example
+
+```json
+{
+	"refreshToken": "sdffs123dsf"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"email": "email@email.com",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"city": "Kyiv",
+		"role": "lawyer | client",
+		"tokens": {
+			"refresh": "231dsf123asfds",
+			"access": "sdfwqreew3"
+		}
+	}
+}
+```
+
+Expected errors `400 Bad Request`
+
+```json
+{
+	"error": {
+		"message": "Token is not valid"
+	}
+}
+```
+
 ## `/users`
 
 Endpoint to work with users
