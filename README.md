@@ -63,6 +63,7 @@ Request body example
   "email": "email@email.com",
   "password": "password123",
   "role": "lawyer" | "client",
+  "city": "Kyiv",
 }
 ```
 
@@ -76,6 +77,7 @@ Expected response `201 Created`
     "firstName": "firstName",
     "lastName": "lastName",
     "role": "lawyer" | "client",
+    "city": "Kyiv",
   }
 }
 ```
@@ -112,6 +114,7 @@ Expected response `200 OK`
     "email": "email@email.com",
     "firstName": "firstName",
     "lastName": "lastName",
+    "city": "Kyiv",
     "role": "lawyer" | "client",
       "tokens": {
         "refresh": "231dsf123asfds",
@@ -301,7 +304,7 @@ Expected errors `401 Unathorized`
 
 ### Update Lawyer Info
 
-`POST /lawyers/:id`
+`PUT /lawyers/:id`
 
 Request body example
 
@@ -336,7 +339,7 @@ Expected response `200 OK`
 }
 ```
 
-Expected errors `400 Bad Request`
+Expected errors `401 Unathorized`
 
 ```json
 {
@@ -381,7 +384,7 @@ Expected response `200 OK`
 }
 ```
 
-Expected errors `400 Bad Request`
+Expected errors `401 Unathorized`
 
 ```json
 {
@@ -411,12 +414,220 @@ Expected response `200 OK`
 }
 ```
 
-Expected errors `400 Bad Request`
+Expected errors `401 Unathorized`
 
 ```json
 {
 	"error": {
 		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Update Client Info
+
+`PUT /clients/:id`
+
+Request body example
+
+```json
+{
+	"budget": 228
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"role": "client",
+		"city": "Kyiv",
+		"budget": 228
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+## `/cases`
+
+Endpoint to work with cases
+
+### Create A Case
+
+`POST /cases`
+
+Request body example
+
+```json
+{
+	"lawyerId": 1,
+	"clientId": 2,
+  "status": "active"|"fulfilled"|"failed",
+  "budget": 228,
+  "start_date": "13-09-2023",
+  "end_date": "15-09-2023",
+}
+```
+
+Expected response `201 Created`
+
+```json
+{
+	"result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "active"|"fulfilled"|"failed"|"creating",
+    "budget": 228,
+    "start_date": "13-09-2023",
+    "end_date": "15-09-2023",
+  }
+}
+```
+
+Expected errors message `400 Bad Request`
+
+```json
+{
+	"error": {
+		"message": "Lawyer with such id does not exist"
+	}
+}
+```
+
+### Get All Cases
+
+`Get /cases`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": [
+    {
+      "id": 1,
+      "lawyerId": 1,
+      "clientId": 2,
+      "status": "active"|"fulfilled"|"failed"|"creating",
+      "budget": 228,
+      "start_date": "13-09-2023",
+      "end_date": "15-09-2023",
+    },
+    {
+      "id": 2,
+      "lawyerId": 1,
+      "clientId": 2,
+      "status": "active"|"fulfilled"|"failed"|"creating",
+      "budget": 228,
+      "start_date": "13-09-2023",
+      "end_date": "15-09-2023",
+    },
+    {
+      "id": 3,
+      "lawyerId": 1,
+      "clientId": 2,
+      "status": "active"|"fulfilled"|"failed"|"creating",
+      "budget": 228,
+      "start_date": "13-09-2023",
+      "end_date": "15-09-2023",
+    }
+  ]
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Get Case By ID
+
+`GET /cases:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "active"|"fulfilled"|"failed"|"creating",
+    "budget": 228,
+    "start_date": "13-09-2023",
+    "end_date": "15-09-2023",
+  }
+}
+```
+
+Expected errors message `400 Bad Request`
+
+```json
+{
+	"error": {
+		"message": "Case with such id does not exist"
+	}
+}
+```
+
+### Edit A Case
+
+`PUT /cases/:id`
+
+Request body example
+
+```json
+{
+	"lawyerId": 1,
+	"clientId": 2,
+  "status": "active"|"fulfilled"|"failed",
+  "budget": 228,
+  "start_date": "13-09-2023",
+  "end_date": "22-09-2023",
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "active"|"fulfilled"|"failed"|"creating",
+    "budget": 228,
+    "start_date": "13-09-2023",
+    "end_date": "22-09-2023",
+  }
+}
+```
+
+Expected errors message `400 Bad Request`
+
+```json
+{
+	"error": {
+		"message": "Case with such id does not exist"
 	}
 }
 ```
