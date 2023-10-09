@@ -474,8 +474,8 @@ Request body example
 
 ```json
 {
-	"lawyerId": 1,
-	"clientId": 2,
+  "lawyerId": 1,
+  "clientId": 2,
   "status": "active"|"fulfilled"|"failed",
   "budget": 228,
   "start_date": "13-09-2023",
@@ -487,7 +487,7 @@ Expected response `201 Created`
 
 ```json
 {
-	"result": {
+  "result": {
     "id": 1,
     "lawyerId": 1,
     "clientId": 2,
@@ -517,7 +517,7 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": [
+  "result": [
     {
       "id": 1,
       "lawyerId": 1,
@@ -567,7 +567,7 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
+  "result": {
     "id": 1,
     "lawyerId": 1,
     "clientId": 2,
@@ -597,8 +597,8 @@ Request body example
 
 ```json
 {
-	"lawyerId": 1,
-	"clientId": 2,
+  "lawyerId": 1,
+  "clientId": 2,
   "status": "active"|"fulfilled"|"failed",
   "budget": 228,
   "start_date": "13-09-2023",
@@ -610,7 +610,7 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
+  "result": {
     "id": 1,
     "lawyerId": 1,
     "clientId": 2,
