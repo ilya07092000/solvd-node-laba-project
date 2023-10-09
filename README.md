@@ -75,7 +75,7 @@ Request body example
 	"lastName": "lastName",
 	"email": "email@email.com",
 	"password": "password123",
-	"role": "lawyer | client",
+	"role": "lawyer | client | admin",
 	"city": "Kyiv"
 }
 ```
@@ -89,7 +89,7 @@ Expected response `201 Created`
 		"email": "email@email.com",
 		"firstName": "firstName",
 		"lastName": "lastName",
-		"role": "lawyer | client",
+		"role": "lawyer | client | admin",
 		"city": "Kyiv"
 	}
 }
@@ -128,7 +128,7 @@ Expected response `200 OK`
 		"firstName": "firstName",
 		"lastName": "lastName",
 		"city": "Kyiv",
-		"role": "lawyer | client",
+		"role": "lawyer | client | admin",
 		"tokens": {
 			"refresh": "231dsf123asfds",
 			"access": "sdfwqreew3"
@@ -188,7 +188,7 @@ Expected response `200 OK`
 		"firstName": "firstName",
 		"lastName": "lastName",
 		"city": "Kyiv",
-		"role": "lawyer | client",
+		"role": "lawyer | client | admin",
 		"tokens": {
 			"refresh": "231dsf123asfds",
 			"access": "sdfwqreew3"
@@ -225,7 +225,7 @@ Expected response `200 OK`
 			"firstName": "firstName",
 			"lastName": "lastName",
 			"email": "email@email.com",
-			"role": "lawyer | client",
+			"role": "lawyer | client | admin",
 			"city": "Kyiv"
 		},
 		{
@@ -233,7 +233,7 @@ Expected response `200 OK`
 			"firstName": "firstName",
 			"lastName": "lastName",
 			"email": "email2@email.com",
-			"role": "lawyer | client",
+			"role": "lawyer | client | admin",
 			"city": "Lviv"
 		}
 	]
@@ -263,7 +263,7 @@ Expected response `200 OK`
 		"firstName": "firstName",
 		"lastName": "lastName",
 		"email": "email@email.com",
-		"role": "lawyer | client",
+		"role": "lawyer | client | admin",
 		"city": "Kyiv"
 	}
 }
