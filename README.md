@@ -58,12 +58,12 @@ Request body example
 
 ```json
 {
-  "firstName": "firstName",
-  "lastName": "lastName",
-  "email": "email@email.com",
-  "password": "password123",
-  "role": "lawyer" | "client",
-  "city": "Kyiv",
+	"firstName": "firstName",
+	"lastName": "lastName",
+	"email": "email@email.com",
+	"password": "password123",
+	"role": "lawyer | client",
+	"city": "Kyiv"
 }
 ```
 
@@ -71,14 +71,14 @@ Expected response `201 Created`
 
 ```json
 {
-  "result": {
-    "id": "1",
-    "email": "email@email.com",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "role": "lawyer" | "client",
-    "city": "Kyiv",
-  }
+	"result": {
+		"id": "1",
+		"email": "email@email.com",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"role": "lawyer | client",
+		"city": "Kyiv"
+	}
 }
 ```
 
@@ -109,18 +109,18 @@ Expected response `200 OK`
 
 ```json
 {
-  "result": {
-    "id": "1",
-    "email": "email@email.com",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "city": "Kyiv",
-    "role": "lawyer" | "client",
-      "tokens": {
-        "refresh": "231dsf123asfds",
-        "access": "sdfwqreew3",
-    },
-  }
+	"result": {
+		"id": "1",
+		"email": "email@email.com",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"city": "Kyiv",
+		"role": "lawyer | client",
+		"tokens": {
+			"refresh": "231dsf123asfds",
+			"access": "sdfwqreew3"
+		}
+	}
 }
 ```
 
@@ -167,23 +167,23 @@ Expected response `200 OK`
 ```json
 {
 	"result": [
-      {
-        "id": "1",
-        "firstName": "firstName",
-        "lastName": "lastName",
-        "email": "email@email.com",
-        "role": "lawyer" | "client",
-        "city": "Kyiv",
-      },
-      {
-        "id": "2",
-        "firstName": "firstName",
-        "lastName": "lastName",
-        "email": "email2@email.com",
-        "role": "lawyer" | "client",
-        "city": "Lviv",
-      }
-  ]
+		{
+			"id": "1",
+			"firstName": "firstName",
+			"lastName": "lastName",
+			"email": "email@email.com",
+			"role": "lawyer | client",
+			"city": "Kyiv"
+		},
+		{
+			"id": "2",
+			"firstName": "firstName",
+			"lastName": "lastName",
+			"email": "email2@email.com",
+			"role": "lawyer | client",
+			"city": "Lviv"
+		}
+	]
 }
 ```
 
@@ -205,14 +205,14 @@ Expected response `200 OK`
 
 ```json
 {
-  "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "role": "lawyer" | "client",
-    "city": "Kyiv",
-  }
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"role": "lawyer | client",
+		"city": "Kyiv"
+	}
 }
 ```
 
@@ -474,12 +474,12 @@ Request body example
 
 ```json
 {
-  "lawyerId": 1,
-  "clientId": 2,
-  "status": "active"|"fulfilled"|"failed",
-  "budget": 228,
-  "start_date": "13-09-2023",
-  "end_date": "15-09-2023",
+	"lawyerId": 1,
+	"clientId": 2,
+	"status": "active | fulfilled | failed | creating",
+	"budget": 228,
+	"start_date": "13-09-2023",
+	"end_date": "15-09-2023"
 }
 ```
 
@@ -487,15 +487,15 @@ Expected response `201 Created`
 
 ```json
 {
-  "result": {
-    "id": 1,
-    "lawyerId": 1,
-    "clientId": 2,
-    "status": "active"|"fulfilled"|"failed"|"creating",
-    "budget": 228,
-    "start_date": "13-09-2023",
-    "end_date": "15-09-2023",
-  }
+	"result": {
+		"id": 1,
+		"lawyerId": 1,
+		"clientId": 2,
+		"status": "active | fulfilled | failed | creating",
+		"budget": 228,
+		"start_date": "13-09-2023",
+		"end_date": "15-09-2023"
+	}
 }
 ```
 
@@ -517,35 +517,35 @@ Expected response `200 OK`
 
 ```json
 {
-  "result": [
-    {
-      "id": 1,
-      "lawyerId": 1,
-      "clientId": 2,
-      "status": "active"|"fulfilled"|"failed"|"creating",
-      "budget": 228,
-      "start_date": "13-09-2023",
-      "end_date": "15-09-2023",
-    },
-    {
-      "id": 2,
-      "lawyerId": 1,
-      "clientId": 2,
-      "status": "active"|"fulfilled"|"failed"|"creating",
-      "budget": 228,
-      "start_date": "13-09-2023",
-      "end_date": "15-09-2023",
-    },
-    {
-      "id": 3,
-      "lawyerId": 1,
-      "clientId": 2,
-      "status": "active"|"fulfilled"|"failed"|"creating",
-      "budget": 228,
-      "start_date": "13-09-2023",
-      "end_date": "15-09-2023",
-    }
-  ]
+	"result": [
+		{
+			"id": 1,
+			"lawyerId": 1,
+			"clientId": 2,
+			"status": "active | fulfilled | failed | creating",
+			"budget": 228,
+			"start_date": "13-09-2023",
+			"end_date": "15-09-2023"
+		},
+		{
+			"id": 2,
+			"lawyerId": 1,
+			"clientId": 2,
+			"status": "active | fulfilled | failed | creating",
+			"budget": 228,
+			"start_date": "13-09-2023",
+			"end_date": "15-09-2023"
+		},
+		{
+			"id": 3,
+			"lawyerId": 1,
+			"clientId": 2,
+			"status": "active | fulfilled | failed | creating",
+			"budget": 228,
+			"start_date": "13-09-2023",
+			"end_date": "15-09-2023"
+		}
+	]
 }
 ```
 
@@ -567,15 +567,15 @@ Expected response `200 OK`
 
 ```json
 {
-  "result": {
-    "id": 1,
-    "lawyerId": 1,
-    "clientId": 2,
-    "status": "active"|"fulfilled"|"failed"|"creating",
-    "budget": 228,
-    "start_date": "13-09-2023",
-    "end_date": "15-09-2023",
-  }
+	"result": {
+		"id": 1,
+		"lawyerId": 1,
+		"clientId": 2,
+		"status": "active | fulfilled | failed | creating",
+		"budget": 228,
+		"start_date": "13-09-2023",
+		"end_date": "15-09-2023"
+	}
 }
 ```
 
@@ -597,12 +597,12 @@ Request body example
 
 ```json
 {
-  "lawyerId": 1,
-  "clientId": 2,
-  "status": "active"|"fulfilled"|"failed",
-  "budget": 228,
-  "start_date": "13-09-2023",
-  "end_date": "22-09-2023",
+	"lawyerId": 1,
+	"clientId": 2,
+	"status": "active | fulfilled | failed | creating",
+	"budget": 228,
+	"start_date": "13-09-2023",
+	"end_date": "22-09-2023"
 }
 ```
 
@@ -610,15 +610,15 @@ Expected response `200 OK`
 
 ```json
 {
-  "result": {
-    "id": 1,
-    "lawyerId": 1,
-    "clientId": 2,
-    "status": "active"|"fulfilled"|"failed"|"creating",
-    "budget": 228,
-    "start_date": "13-09-2023",
-    "end_date": "22-09-2023",
-  }
+	"result": {
+		"id": 1,
+		"lawyerId": 1,
+		"clientId": 2,
+		"status": "active | fulfilled | failed | creating",
+		"budget": 228,
+		"start_date": "13-09-2023",
+		"end_date": "22-09-2023"
+	}
 }
 ```
 
