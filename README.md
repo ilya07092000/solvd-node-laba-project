@@ -266,6 +266,140 @@ Expected errors `401 Unathorized`
 }
 ```
 
+### Create User
+
+`POST /users`
+
+Request body example
+
+```json
+{
+	"firstName": "firstName",
+	"lastName": "lastName",
+	"email": "email@email.com",
+	"password": "password123",
+	"role": "lawyer",
+	"age": "44",
+	"occupation": "Business",
+	"price": "228",
+	"experience": "10 years",
+	"city": "Kyiv",
+	"available": true
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"password": "password123",
+		"role": "lawyer",
+		"age": "44",
+		"occupation": "Business",
+		"price": "228",
+		"experience": "10 years",
+		"city": "Kyiv",
+		"available": true
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Edit User By Id
+
+`PUT /users/:id`
+
+Request body example
+
+```json
+{
+	"price": "228",
+	"experience": "10 years",
+	"city": "Kyiv",
+	"available": true
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"password": "password123",
+		"role": "lawyer",
+		"age": "44",
+		"occupation": "Business",
+		"price": "228",
+		"experience": "10 years",
+		"city": "Kyiv",
+		"available": true
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Delete User By Id
+
+`DELETE /users/:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"password": "password123",
+		"role": "lawyer",
+		"age": "44",
+		"occupation": "Business",
+		"price": "228",
+		"experience": "10 years",
+		"city": "Kyiv",
+		"available": true
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
 ## `/lawyers`
 
 Endpoint to work with lawyers
@@ -310,6 +444,59 @@ Expected errors `401 Unathorized`
 ### Get Lawyer By Id
 
 `get /lawyers/:id` - get lawyer by id
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"password": "password123",
+		"role": "lawyer",
+		"age": "44",
+		"occupation": "Business",
+		"price": "228",
+		"experience": "10 years",
+		"city": "Kyiv",
+		"available": true
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Create Lawyer
+
+`POST /lawyers`
+
+Request body example
+
+```json
+{
+	"firstName": "firstName",
+	"lastName": "lastName",
+	"email": "email@email.com",
+	"password": "password123",
+	"role": "lawyer",
+	"age": "44",
+	"occupation": "Business",
+	"price": "228",
+	"experience": "10 years",
+	"city": "Kyiv",
+	"available": true
+}
+```
 
 Expected response `200 OK`
 
@@ -389,6 +576,41 @@ Expected errors `401 Unathorized`
 }
 ```
 
+### Delete Lawer By Id
+
+`DELETE /lawers/:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"password": "password123",
+		"role": "lawyer",
+		"age": "44",
+		"occupation": "Business",
+		"price": "228",
+		"experience": "10 years",
+		"city": "Kyiv",
+		"available": true
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
 ## `/clients`
 
 Endpoint to work with clients
@@ -437,6 +659,49 @@ Expected errors `401 Unathorized`
 ### Get Client By Id
 
 `GET /clients/:id` - get client by id with all info
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"role": "client",
+		"city": "Kyiv",
+		"budget": 228
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Create Client
+
+`POST /clients`
+
+Request body example
+
+```json
+{
+	"firstName": "firstName",
+	"lastName": "lastName",
+	"email": "email@email.com",
+	"role": "client",
+	"city": "Kyiv",
+	"budget": 228
+}
+```
 
 Expected response `200 OK`
 
@@ -545,6 +810,36 @@ Expected errors message `400 Bad Request`
 {
 	"error": {
 		"message": "Lawyer with such id does not exist"
+	}
+}
+```
+
+### Delete Client By Id
+
+`DELETE /clients/:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"firstName": "firstName",
+		"lastName": "lastName",
+		"email": "email@email.com",
+		"role": "client",
+		"city": "Kyiv",
+		"budget": 228
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
 	}
 }
 ```
@@ -668,6 +963,79 @@ Expected errors message `400 Bad Request`
 {
 	"error": {
 		"message": "Case with such id does not exist"
+	}
+}
+```
+
+### Create A Case
+
+`POST /clients`
+
+Request body example
+
+```json
+{
+	"lawyerId": 1,
+	"clientId": 2,
+	"status": "active | fulfilled | failed | creating",
+	"budget": 228,
+	"start_date": "13-09-2023",
+	"end_date": "22-09-2023"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": 1,
+		"lawyerId": 1,
+		"clientId": 2,
+		"status": "active | fulfilled | failed | creating",
+		"budget": 228,
+		"start_date": "13-09-2023",
+		"end_date": "22-09-2023"
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Delete Case By Id
+
+`DELETE /cases/:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": 1,
+		"lawyerId": 1,
+		"clientId": 2,
+		"status": "active | fulfilled | failed | creating",
+		"budget": 228,
+		"start_date": "13-09-2023",
+		"end_date": "22-09-2023"
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
 	}
 }
 ```
