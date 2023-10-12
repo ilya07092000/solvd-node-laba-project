@@ -13,6 +13,7 @@
   - [Cases](#cases)
   - [Admins](#admins)
   - [Roles](#roles)
+  - [Reviews](#reviews)
 
 ---
 
@@ -1272,7 +1273,7 @@ Expected errors `401 Unathorized`
 
 ## `/roles`
 
-Endpoint to work with users
+Endpoint to work with roles
 
 ### Get All Roles
 
@@ -1332,7 +1333,7 @@ Expected errors `401 Unathorized`
 
 ### Create Role
 
-`POST /role`
+`POST /roles`
 
 Request body example
 
@@ -1407,6 +1408,185 @@ Expected response `200 OK`
 	"result": {
 		"id": "1",
 		"type": "admin | client | lawyer"
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+## `/reviews`
+
+Endpoint to work with reviews
+
+### Get All Reviews
+
+`GET /reviews` - get all reviews
+
+Expected response `200 OK`
+
+```json
+{
+	"result": [
+		{
+			"id": "1",
+			"cliendId": "1",
+			"lawyerId": "1",
+			"caseId": "1",
+			"rate": "[1-5]",
+			"message": "Very cool lawyer"
+		},
+		{
+			"id": "2",
+			"cliendId": "12",
+			"lawyerId": "113",
+			"caseId": "89",
+			"rate": "[1-5]",
+			"message": "Very cool lawyer"
+		}
+	]
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Get Review By Id
+
+`GET /reviews/:id` - get review by id
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"cliendId": "1",
+		"lawyerId": "1",
+		"caseId": "1",
+		"rate": "[1-5]",
+		"message": "Very cool lawyer"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "Review with id {id} does not exist"
+	}
+}
+```
+
+### Create Review
+
+`POST /reviews`
+
+Request body example
+
+```json
+{
+	"cliendId": "1",
+	"lawyerId": "1",
+	"caseId": "1",
+	"rate": "[1-5]",
+	"message": "Very cool lawyer"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"cliendId": "1",
+		"lawyerId": "1",
+		"caseId": "1",
+		"rate": "[1-5]",
+		"message": "Very cool lawyer"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "Case with id {caseId} does not exist"
+	}
+}
+```
+
+### Edit Review By Id
+
+`PUT /reviews/:id`
+
+Request body example
+
+```json
+{
+	"message": "Lawyer is very bad"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"cliendId": "1",
+		"lawyerId": "1",
+		"caseId": "1",
+		"rate": "[1-5]",
+		"message": "Lawyer is very bad"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "Message with id {id} does not exist"
+	}
+}
+```
+
+### Delete Review By Id
+
+`DELETE /reviews/:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"cliendId": "1",
+		"lawyerId": "1",
+		"caseId": "1",
+		"rate": "[1-5]",
+		"message": "Very cool lawyer"
 	}
 }
 ```
