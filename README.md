@@ -15,6 +15,7 @@
   - [Roles](#roles)
   - [Reviews](#reviews)
   - [Licenses](#licenses)
+  - [Verifications](#verifications)
 
 ---
 
@@ -1860,6 +1861,186 @@ Expected response `200 OK`
 		"status": "rejected",
 		"date": "10-20-2023",
 		"notes": "License is not genuine"
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+## `/verifications`
+
+Endpoint to work with verifications
+
+### Get All Verifications
+
+`GET /verifications` - get all verifications
+
+Expected response `200 OK`
+
+```json
+{
+	"result": [
+		{
+			"id": "10",
+			"licenseId": "1",
+			"verifierId": "20",
+			"status": "verified | rejected | processing",
+			"date": "10-20-2023",
+			"notes": "License is genuine"
+		},
+
+		{
+			"id": "12",
+			"licenseId": "2",
+			"verifierId": "30",
+			"status": "verified | rejected | processing",
+			"date": "11-20-2023",
+			"notes": "License is not genuine"
+		}
+	]
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Get Verification By Id
+
+`GET /verifications/:id` - get verification by id
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "10",
+		"licenseId": "1",
+		"verifierId": "20",
+		"status": "verified | rejected | processing",
+		"date": "10-20-2023",
+		"notes": "License is genuine"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "Verification with id {id} does not exist"
+	}
+}
+```
+
+### Create verification
+
+`POST /verifications`
+
+Request body example
+
+```json
+{
+	"licenseId": "1",
+	"verifierId": "20",
+	"status": "verified | rejected | processing",
+	"date": "10-20-2023",
+	"notes": "License is genuine"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "10",
+		"licenseId": "1",
+		"verifierId": "20",
+		"status": "verified | rejected | processing",
+		"date": "10-20-2023",
+		"notes": "License is genuine"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "License with id {licenseId} does not exist"
+	}
+}
+```
+
+### Edit Verification By Id
+
+`PUT /verifications/:id`
+
+Request body example
+
+```json
+{
+	"notes": "License is genuine"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "10",
+		"licenseId": "1",
+		"verifierId": "20",
+		"status": "verified | rejected | processing",
+		"date": "10-20-2023",
+		"notes": "License is genuine"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "Verification with id {id} does not exist"
+	}
+}
+```
+
+### Delete Verification By Id
+
+`DELETE /verifications/:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "10",
+		"licenseId": "1",
+		"verifierId": "20",
+		"status": "verified | rejected | processing",
+		"date": "10-20-2023",
+		"notes": "License is genuine"
 	}
 }
 ```
