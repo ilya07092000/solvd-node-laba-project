@@ -14,6 +14,7 @@
   - [Admins](#admins)
   - [Roles](#roles)
   - [Reviews](#reviews)
+  - [Licenses](#licenses)
 
 ---
 
@@ -1587,6 +1588,278 @@ Expected response `200 OK`
 		"caseId": "1",
 		"rate": "[1-5]",
 		"message": "Very cool lawyer"
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+## `/licenses`
+
+Endpoint to work with licenses
+
+### Get All Licenses
+
+`GET /licenses` - get all licenses
+
+Expected response `200 OK`
+
+```json
+{
+	"result": [
+		{
+			"id": "1",
+			"lawyer_id": "228",
+			"info": "lawyer license bla bla bla",
+			"verification": {
+				"id": "10",
+				"verifierId": "20",
+				"status": "verified | rejected | processing",
+				"date": "10-20-2023",
+				"notes": "License is genuine"
+			}
+		},
+		{
+			"id": "2",
+			"lawyer_id": "2",
+			"info": "lawyer license bla bla bla",
+			"verification": {
+				"id": "10",
+				"verifierId": "20",
+				"status": "verified | rejected | processing",
+				"date": "10-20-2023",
+				"notes": "License is genuine"
+			}
+		}
+	]
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Get License By Id
+
+`GET /licenses/:id` - get license by id
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"lawyer_id": "228",
+		"info": "lawyer license bla bla bla",
+		"verification": {
+			"id": "10",
+			"verifierId": "20",
+			"status": "verified | rejected | processing",
+			"date": "10-20-2023",
+			"notes": "License is genuine"
+		}
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "License with id {id} does not exist"
+	}
+}
+```
+
+### Create License
+
+`POST /licenses`
+
+Request body example
+
+```json
+{
+	"id": "1",
+	"lawyer_id": "228",
+	"info": "lawyer license bla bla bla"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"lawyer_id": "228",
+		"info": "lawyer license bla bla bla"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "Lawyer with id {caseId} does not exist"
+	}
+}
+```
+
+### Edit License By Id
+
+`PUT /licenses/:id`
+
+Request body example
+
+```json
+{
+	"info": "lawyer license bla bla bla which I received in 2010"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"lawyer_id": "228",
+		"info": "lawyer license bla bla bla which I received in 2010",
+		"verification": {
+			"id": "10",
+			"verifierId": "20",
+			"status": "verified | rejected | processing",
+			"date": "10-20-2023",
+			"notes": "License is genuine"
+		}
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "License with id {id} does not exist"
+	}
+}
+```
+
+### Delete License By Id
+
+`DELETE /licenses/:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"lawyer_id": "228",
+		"info": "lawyer license bla bla bla",
+		"verification": {
+			"id": "10",
+			"verifierId": "20",
+			"status": "verified | rejected | processing",
+			"date": "10-20-2023",
+			"notes": "License is genuine"
+		}
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Verify License By Id
+
+`PUT /licenses/:id/verify`
+
+Request body example
+
+```json
+{
+	"notes": "License is genuine"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"id": "1",
+	"lawyer_id": "228",
+	"info": "lawyer license bla bla bla",
+	"verification": {
+		"id": "10",
+		"verifierId": "20",
+		"status": "verified",
+		"date": "10-20-2023",
+		"notes": "License is genuine"
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Reject License By Id
+
+`PUT /licenses/:id/reject`
+
+Request body example
+
+```json
+{
+	"notes": "License is not genuine"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"id": "1",
+	"lawyer_id": "228",
+	"info": "lawyer license bla bla bla",
+	"verification": {
+		"id": "10",
+		"verifierId": "20",
+		"status": "rejected",
+		"date": "10-20-2023",
+		"notes": "License is not genuine"
 	}
 }
 ```
