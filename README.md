@@ -12,6 +12,7 @@
   - [Clients](#clients)
   - [Cases](#cases)
   - [Admins](#admins)
+  - [Roles](#roles)
 
 ---
 
@@ -1255,6 +1256,157 @@ Expected response `200 OK`
 		"role": "admin",
 		"city": "Kyiv",
 		"isActive": true
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+## `/roles`
+
+Endpoint to work with users
+
+### Get All Roles
+
+`GET /roles` - get all roles
+
+Expected response `200 OK`
+
+```json
+{
+	"result": [
+		{
+			"id": "1",
+			"type": "admin | client | lawyer"
+		},
+		{
+			"id": "1",
+			"type": "admin | client | lawyer"
+		}
+	]
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Get Role By Id
+
+`GET /roles/:id` - get role by id
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"type": "admin | client | lawyer"
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Create Role
+
+`POST /role`
+
+Request body example
+
+```json
+{
+	"type": "admin | client | lawyer"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"type": "admin | client | lawyer"
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Edit Role By Id
+
+`PUT /roles/:id`
+
+Request body example
+
+```json
+{
+	"type": "admin | client | lawyer"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"type": "admin | client | lawyer"
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Delete Role By Id
+
+`DELETE /roles/:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"type": "admin | client | lawyer"
 	}
 }
 ```
