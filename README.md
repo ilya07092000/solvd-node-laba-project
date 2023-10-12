@@ -827,8 +827,8 @@ Request body example
 	"clientId": 2,
 	"status": "active | fulfilled | failed | creating",
 	"budget": 228,
-	"start_date": "13-09-2023",
-	"end_date": "15-09-2023"
+	"startDate": "13-09-2023",
+	"endDate": "15-09-2023"
 }
 ```
 
@@ -842,8 +842,8 @@ Expected response `201 Created`
 		"clientId": 2,
 		"status": "active | fulfilled | failed | creating",
 		"budget": 228,
-		"start_date": "13-09-2023",
-		"end_date": "15-09-2023"
+		"startDate": "13-09-2023",
+		"endDate": "15-09-2023"
 	}
 }
 ```
@@ -903,8 +903,8 @@ Expected response `200 OK`
 			"clientId": 2,
 			"status": "active | fulfilled | failed | creating",
 			"budget": 228,
-			"start_date": "13-09-2023",
-			"end_date": "15-09-2023"
+			"startDate": "13-09-2023",
+			"endDate": "15-09-2023"
 		},
 		{
 			"id": 2,
@@ -912,8 +912,8 @@ Expected response `200 OK`
 			"clientId": 2,
 			"status": "active | fulfilled | failed | creating",
 			"budget": 228,
-			"start_date": "13-09-2023",
-			"end_date": "15-09-2023"
+			"startDate": "13-09-2023",
+			"endDate": "15-09-2023"
 		},
 		{
 			"id": 3,
@@ -921,8 +921,8 @@ Expected response `200 OK`
 			"clientId": 2,
 			"status": "active | fulfilled | failed | creating",
 			"budget": 228,
-			"start_date": "13-09-2023",
-			"end_date": "15-09-2023"
+			"startDate": "13-09-2023",
+			"endDate": "15-09-2023"
 		}
 	]
 }
@@ -952,8 +952,8 @@ Expected response `200 OK`
 		"clientId": 2,
 		"status": "active | fulfilled | failed | creating",
 		"budget": 228,
-		"start_date": "13-09-2023",
-		"end_date": "15-09-2023"
+		"startDate": "13-09-2023",
+		"endDate": "15-09-2023"
 	}
 }
 ```
@@ -980,8 +980,8 @@ Request body example
 	"clientId": 2,
 	"status": "active | fulfilled | failed | creating",
 	"budget": 228,
-	"start_date": "13-09-2023",
-	"end_date": "22-09-2023"
+	"startDate": "13-09-2023",
+	"endDate": "22-09-2023"
 }
 ```
 
@@ -995,8 +995,8 @@ Expected response `200 OK`
 		"clientId": 2,
 		"status": "active | fulfilled | failed | creating",
 		"budget": 228,
-		"start_date": "13-09-2023",
-		"end_date": "22-09-2023"
+		"startDate": "13-09-2023",
+		"endDate": "22-09-2023"
 	}
 }
 ```
@@ -1023,8 +1023,8 @@ Request body example
 	"clientId": 2,
 	"status": "active | fulfilled | failed | creating",
 	"budget": 228,
-	"start_date": "13-09-2023",
-	"end_date": "22-09-2023"
+	"startDate": "13-09-2023",
+	"endDate": "22-09-2023"
 }
 ```
 
@@ -1038,8 +1038,8 @@ Expected response `200 OK`
 		"clientId": 2,
 		"status": "active | fulfilled | failed | creating",
 		"budget": 228,
-		"start_date": "13-09-2023",
-		"end_date": "22-09-2023"
+		"startDate": "13-09-2023",
+		"endDate": "22-09-2023"
 	}
 }
 ```
@@ -1068,8 +1068,8 @@ Expected response `200 OK`
 		"clientId": 2,
 		"status": "active | fulfilled | failed | creating",
 		"budget": 228,
-		"start_date": "13-09-2023",
-		"end_date": "22-09-2023"
+		"startDate": "13-09-2023",
+		"endDate": "22-09-2023"
 	}
 }
 ```
