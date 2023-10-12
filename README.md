@@ -7,16 +7,73 @@
 - [Authentication](#authentication)
 - [End Points](#end-points)
   - [Auth](#auth)
+    - [Registration](#registration)
+    - [Login](#login)
+    - [Logout](#logout)
   - [Users](#users)
+    - [Get All](#get-all-users)
+    - [Get By Id](#get-user-by-id)
+    - [Create User](#create-user)
+    - [Edit User By Id](#edit-user-by-id)
+    - [Delete User By Id](#delete-user-by-id)
   - [Lawyers](#clients)
+    - [Get All](#get-lawyers)
+    - [Get By Id](#get-lawyer-by-id)
+    - [Create Lawyer](#create-lawyer)
+    - [Edit Lawyer By Id](#update-lawyer-info)
+    - [Delete Lawyer By Id](#delete-lawyer-by-id)
   - [Clients](#clients)
+    - [Get All](#get-all-clients)
+    - [Get By Id](#get-client-by-id)
+    - [Create Client](#create-client)
+    - [Edit Client By Id](#update-client-info)
+    - [Delete Client By Id](#delete-client-by-id)
   - [Cases](#cases)
+    - [Get All](#get-all-cases)
+    - [Get By Id](#get-case-by-id)
+    - [Create Case](#create-a-case)
+    - [Edit Case By Id](#edit-a-case)
+    - [Delete Case By Id](#delete-case-by-id)
   - [Admins](#admins)
+    - [Get All](#get-all-admins)
+    - [Get By Id](#get-admin-by-id)
+    - [Create Admin](#create-admin)
+    - [Edit Admin By Id](#edit-admin-by-id)
+    - [Delete Admin By Id](#delete-admin-by-id)
   - [Roles](#roles)
+    - [Get All](#get-all-roles)
+    - [Get By Id](#get-role-by-id)
+    - [Create Role](#create-role)
+    - [Edit Role By Id](#edit-role-by-id)
+    - [Delete Role By Id](#delete-role-by-id)
   - [Reviews](#reviews)
+    - [Get All](#get-all-reviews)
+    - [Get By Id](#get-review-by-id)
+    - [Create Review](#create-review)
+    - [Edit Review By Id](#edit-review-by-id)
+    - [Delete Review By Id](#delete-review-by-id)
   - [Licenses](#licenses)
+    - [Get All](#get-all-licenses)
+    - [Get By Id](#get-license-by-id)
+    - [Create License](#create-license)
+    - [Edit License By Id](#edit-license-by-id)
+    - [Delete License By Id](#delete-license-by-id)
+    - [Verify License By Id](#verify-license-by-id)
+    - [Reject License By Id](#reject-license-by-id)
   - [Verifications](#verifications)
+    - [Get All](#get-all-verifications)
+    - [Get By Id](#get-verification-by-id)
+    - [Create Verification](#create-verification)
+    - [Edit Verification By Id](#edit-verification-by-id)
+    - [Delete Verification By Id](#delete-verification-by-id)
   - [Conflicts](#conflicts)
+    - [Get All](#get-all-conflicts)
+    - [Get By Id](#get-conflict-by-id)
+    - [Create Conflict](#create-conflict)
+    - [Edit Conflict By Id](#edit-conflict-by-id)
+    - [Delete Conflict By Id](#delete-conflict-by-id)
+    - [Fulfill Conflict By Id](#fulfill-conflict-by-id)
+    - [Reject Conflict By Id](#reject-conflict-by-id)
 
 ---
 
@@ -151,6 +208,8 @@ Expected errors `400 Bad Request`
 	}
 }
 ```
+
+### Logout
 
 `POST /auth/logout`
 Request Example
@@ -594,7 +653,7 @@ Expected errors `401 Unathorized`
 }
 ```
 
-### Delete Lawer By Id
+### Delete Lawyer By Id
 
 `DELETE /lawers/:id`
 
