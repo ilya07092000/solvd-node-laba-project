@@ -16,6 +16,7 @@
   - [Reviews](#reviews)
   - [Licenses](#licenses)
   - [Verifications](#verifications)
+  - [Conflicts](#conflicts)
 
 ---
 
@@ -2051,6 +2052,256 @@ Expected errors `401 Unathorized`
 {
 	"error": {
 		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+## `/conflicts`
+
+Endpoint to work with conflicts
+
+### Get All Conflicts
+
+`GET /conflicts` - get all conflicts
+
+Expected response `200 OK`
+
+```json
+{
+	"result": [
+		{
+			"id": "1",
+			"adminId": "1",
+			"clientId": "1",
+			"lawyerId": "1",
+			"caseId": "1",
+			"reason": "Lawyer stole my money",
+			"status": "proccessing | fulfilled | rejected"
+		},
+		{
+			"id": "2",
+			"adminId": "2",
+			"clientId": "2",
+			"lawyerId": "2",
+			"caseId": "2",
+			"reason": "Lawyer is very bad",
+			"status": "proccessing | fulfilled | rejected"
+		}
+	]
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Get Conflict By Id
+
+`GET /conflicts/:id` - get conflict by id
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"adminId": "1",
+		"clientId": "1",
+		"lawyerId": "1",
+		"caseId": "1",
+		"reason": "Lawyer stole my money",
+		"status": "proccessing | fulfilled | rejected"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "Conflict with id {id} does not exist"
+	}
+}
+```
+
+### Create conflict
+
+`POST /conflicts`
+
+Request body example
+
+```json
+{
+	"adminId": "1",
+	"clientId": "1",
+	"lawyerId": "1",
+	"caseId": "1",
+	"reason": "Lawyer stole my money",
+	"status": "proccessing | fulfilled | rejected"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"adminId": "1",
+		"clientId": "1",
+		"lawyerId": "1",
+		"caseId": "1",
+		"reason": "Lawyer stole my money",
+		"status": "proccessing | fulfilled | rejected"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "Client with id {clientId} does not exist"
+	}
+}
+```
+
+### Edit Conflict By Id
+
+`PUT /conflicts/:id`
+
+Request body example
+
+```json
+{
+	"reason": "Lawyer stole my time"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"adminId": "1",
+		"clientId": "1",
+		"lawyerId": "1",
+		"caseId": "1",
+		"reason": "Lawyer stole my time",
+		"status": "proccessing | fulfilled | rejected"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "Conflict with id {id} does not exist"
+	}
+}
+```
+
+### Delete Conflict By Id
+
+`DELETE /conflicts/:id`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"adminId": "1",
+		"clientId": "1",
+		"lawyerId": "1",
+		"caseId": "1",
+		"reason": "Lawyer stole my money",
+		"status": "proccessing | fulfilled | rejected"
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Fulfill Conflict By Id
+
+`PUT /conflicts/:id/fulfill`
+
+Request body example
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"adminId": "1",
+		"clientId": "1",
+		"lawyerId": "1",
+		"caseId": "1",
+		"reason": "Lawyer stole my time",
+		"status": "fulfilled"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "Conflict with id {id} does not exist"
+	}
+}
+```
+
+### Reject Conflict By Id
+
+`PUT /conflicts/:id/fulfill`
+
+Request body example
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": "1",
+		"adminId": "1",
+		"clientId": "1",
+		"lawyerId": "1",
+		"caseId": "1",
+		"reason": "Lawyer stole my time",
+		"status": "rejected"
+	}
+}
+```
+
+Expected errors `400 Bad request`
+
+```json
+{
+	"error": {
+		"message": "Conflict with id {id} does not exist"
 	}
 }
 ```
