@@ -36,6 +36,7 @@
     - [Delete Case By Id](#delete-case-by-id)
     - [Fulfill case](#fulfill-a-case)
     - [Reject case](#reject-a-case-a-case)
+    - [Admit](#admit-a-case)
   - [Admins](#admins)
     - [Get All](#get-all-admins)
     - [Get By Id](#get-admin-by-id)
@@ -81,7 +82,7 @@
 
 ## Description
 
-This app is a Lawyer Matching Service platform which allows match clients and lawyers. As a client you can create your own accound and hire(create a case) a layer based on filter parameters as budget, avialability, lawer type.
+This app is a Lawyer Matching Service platform which allows match clients and lawyers. As a client you can create your own accound and hire(create a case) a layer based on filter parameters as budget, avialability, lawyer type.
 As a lawyer you can create your own account, fill information about yourself, like price, occupation (eg. Business, Criminal, Family), age, experience, location, etc.
 
 ## Base url
@@ -657,7 +658,7 @@ Expected errors `401 Unathorized`
 
 ### Delete Lawyer By Id
 
-`DELETE /lawers/:id`
+`DELETE /lawyers/:id`
 
 Expected response `200 OK`
 
@@ -1119,6 +1120,38 @@ Expected response `200 OK`
 		"lawyerId": 1,
 		"clientId": 2,
 		"status": "rejected",
+		"budget": 228,
+		"startDate": "13-09-2023",
+		"endDate": "22-09-2023"
+	}
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+	"error": {
+		"message": "You are not allowed to perform this action"
+	}
+}
+```
+
+### Admit A Case
+
+#### Lawyer can admit (take part in) this case
+
+`PUT /cases/:id/admit`
+
+Expected response `200 OK`
+
+```json
+{
+	"result": {
+		"id": 1,
+		"lawyerId": 1,
+		"clientId": 2,
+		"status": "active",
 		"budget": 228,
 		"startDate": "13-09-2023",
 		"endDate": "22-09-2023"
