@@ -1,8 +1,8 @@
 abstract class BasicDBConnection {
   private _connection;
 
-  constructor() {
-    this._connection = null;
+  constructor(conn) {
+    this._connection = conn;
   }
 
   public abstract makeConnection(creds: any);
