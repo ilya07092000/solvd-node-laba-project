@@ -44,26 +44,54 @@ class AuthService {
     };
   }
 
-  async refresh({ refreshToken }) {
-    const tokenInfo = await this.tokenService.validateRefreshToken({
-      refreshToken,
+  async refresh({ refreshToken, accessToken }) {
+    const refreshTokenInfo = await this.tokenService.validateToken({
+      token: refreshToken,
+      type: 'refresh',
+    });
+    const accessTokenInfo = await this.tokenService.validateToken({
+      token: accessToken,
+      type: 'access',
     });
 
-    if (!tokenInfo.isValid || !tokenInfo.token) {
-      throw new HttpException(400, 'Token is not valid');
+    if (!refreshTokenInfo.isValid || !accessTokenInfo.isValid) {
+      throw new HttpException(400, 'Refresh or access is not valid');
     }
+
+    await tokenService.deleteToken({ token: refreshToken });
+    await tokenService.deleteToken({ token: accessToken });
 
     const tokens = tokenService.generateTokens();
     await tokenService.saveToken({ userId: 1, token: tokens.accessToken });
     await tokenService.saveToken({ userId: 1, token: tokens.refreshToken });
 
     return {
-      userId: tokenInfo.token.userId,
+      userId: refreshTokenInfo.userId,
       tokens: {
         access: tokens.accessToken.token,
         refresh: tokens.refreshToken.token,
       },
     };
+  }
+
+  async logout({ refreshToken, accessToken }) {
+    const refreshTokenInfo = await this.tokenService.validateToken({
+      token: refreshToken,
+      type: 'refresh',
+    });
+    const accessTokenInfo = await this.tokenService.validateToken({
+      token: accessToken,
+      type: 'access',
+    });
+
+    if (!refreshTokenInfo.isValid || !accessTokenInfo.isValid) {
+      throw new HttpException(400, 'Refresh or access token is not valid');
+    }
+
+    await tokenService.deleteToken({ token: refreshToken });
+    await tokenService.deleteToken({ token: accessToken });
+
+    return;
   }
 }
 

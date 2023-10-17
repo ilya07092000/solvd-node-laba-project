@@ -19,7 +19,7 @@ class AuthController {
       }
 
       const result = await authService.registration(body);
-      return res.status(200).json({ result: result });
+      return res.status(201).json({ result: result });
     } catch (e) {
       return next(e);
     }
@@ -54,7 +54,7 @@ class AuthController {
     try {
       const body = req.body;
       const mandatoryFields = checkMandatoryFields({
-        fields: ['refreshToken'],
+        fields: ['refreshToken', 'accessToken'],
         obj: body,
       });
 
@@ -67,8 +67,35 @@ class AuthController {
 
       const result = await authService.refresh({
         refreshToken: body.refreshToken,
+        accessToken: body.accessToken,
       });
       return res.status(200).json({ result: result });
+    } catch (e) {
+      return next(e);
+    }
+  }
+
+  async logout(req, res, next) {
+    try {
+      const body = req.body;
+      const mandatoryFields = checkMandatoryFields({
+        fields: ['refreshToken', 'accessToken'],
+        obj: body,
+      });
+
+      if (mandatoryFields.length) {
+        throw new ValidationException(
+          400,
+          `${mandatoryFields.join(',')} fields are required`,
+        );
+      }
+
+      await authService.logout({
+        refreshToken: body.refreshToken,
+        accessToken: body.accessToken,
+      });
+
+      return res.status(200).end();
     } catch (e) {
       return next(e);
     }

@@ -10,6 +10,7 @@
     - [Registration](#registration)
     - [Login](#login)
     - [Logout](#logout)
+    - [Refresh Token](#refresh-token)
   - [Users](#users)
     - [Get All](#get-all-users)
     - [Get By Id](#get-user-by-id)
@@ -102,9 +103,9 @@ http://localhost:3000/api/v1/
 
 ```json
 {
-	"error": {
-		"message": "Something went wrong"
-	}
+  "error": {
+    "message": "Something went wrong"
+  }
 }
 ```
 
@@ -136,12 +137,12 @@ Request body example
 
 ```json
 {
-	"firstName": "firstName",
-	"lastName": "lastName",
-	"email": "email@email.com",
-	"password": "password123",
-	"role": "lawyer | client | admin",
-	"city": "Kyiv"
+  "firstName": "firstName",
+  "lastName": "lastName",
+  "email": "email@email.com",
+  "password": "password123",
+  "role": "lawyer | client | admin",
+  "city": "Kyiv"
 }
 ```
 
@@ -149,14 +150,14 @@ Expected response `201 Created`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"email": "email@email.com",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"role": "lawyer | client | admin",
-		"city": "Kyiv"
-	}
+  "result": {
+    "id": "1",
+    "email": "email@email.com",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "role": "lawyer | client | admin",
+    "city": "Kyiv"
+  }
 }
 ```
 
@@ -164,9 +165,9 @@ Expected errors `400 Bad Request`
 
 ```json
 {
-	"error": {
-		"message": "User with this email was registered before"
-	}
+  "error": {
+    "message": "User with this email was registered before"
+  }
 }
 ```
 
@@ -178,8 +179,8 @@ Request body example
 
 ```json
 {
-	"email": "email@email.com",
-	"password": "password123"
+  "email": "email@email.com",
+  "password": "password123"
 }
 ```
 
@@ -187,18 +188,18 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"email": "email@email.com",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"city": "Kyiv",
-		"role": "lawyer | client | admin",
-		"tokens": {
-			"refresh": "231dsf123asfds",
-			"access": "sdfwqreew3"
-		}
-	}
+  "result": {
+    "id": "1",
+    "email": "email@email.com",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "city": "Kyiv",
+    "role": "lawyer | client | admin",
+    "tokens": {
+      "refresh": "231dsf123asfds",
+      "access": "sdfwqreew3"
+    }
+  }
 }
 ```
 
@@ -206,9 +207,9 @@ Expected errors `400 Bad Request`
 
 ```json
 {
-	"error": {
-		"message": "wrong email or password"
-	}
+  "error": {
+    "message": "wrong email or password"
+  }
 }
 ```
 
@@ -217,9 +218,13 @@ Expected errors `400 Bad Request`
 `POST /auth/logout`
 Request Example
 
-```
-POST /logout
-Authorizations: bearer {access-token}
+Request body example
+
+```json
+{
+  "acessToken": "123213",
+  "refreshToken": "sdffs123dsf"
+}
 ```
 
 Expected response `200 OK`
@@ -228,11 +233,13 @@ Expected errors `400 Bad Request`
 
 ```json
 {
-	"error": {
-		"message": "Sesion Does not Exist"
-	}
+  "error": {
+    "message": "Sesion Does not Exist"
+  }
 }
 ```
+
+### Refresh Token
 
 `POST /auth/refresh-token`
 Request Example
@@ -241,7 +248,8 @@ Request body example
 
 ```json
 {
-	"refreshToken": "sdffs123dsf"
+  "acessToken": "123213",
+  "refreshToken": "sdffs123dsf"
 }
 ```
 
@@ -249,18 +257,18 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"email": "email@email.com",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"city": "Kyiv",
-		"role": "lawyer | client | admin",
-		"tokens": {
-			"refresh": "231dsf123asfds",
-			"access": "sdfwqreew3"
-		}
-	}
+  "result": {
+    "id": "1",
+    "email": "email@email.com",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "city": "Kyiv",
+    "role": "lawyer | client | admin",
+    "tokens": {
+      "refresh": "231dsf123asfds",
+      "access": "sdfwqreew3"
+    }
+  }
 }
 ```
 
@@ -268,9 +276,9 @@ Expected errors `400 Bad Request`
 
 ```json
 {
-	"error": {
-		"message": "Token is not valid"
-	}
+  "error": {
+    "message": "Token is not valid"
+  }
 }
 ```
 
@@ -286,24 +294,24 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": [
-		{
-			"id": "1",
-			"firstName": "firstName",
-			"lastName": "lastName",
-			"email": "email@email.com",
-			"role": "lawyer | client | admin",
-			"city": "Kyiv"
-		},
-		{
-			"id": "2",
-			"firstName": "firstName",
-			"lastName": "lastName",
-			"email": "email2@email.com",
-			"role": "lawyer | client | admin",
-			"city": "Lviv"
-		}
-	]
+  "result": [
+    {
+      "id": "1",
+      "firstName": "firstName",
+      "lastName": "lastName",
+      "email": "email@email.com",
+      "role": "lawyer | client | admin",
+      "city": "Kyiv"
+    },
+    {
+      "id": "2",
+      "firstName": "firstName",
+      "lastName": "lastName",
+      "email": "email2@email.com",
+      "role": "lawyer | client | admin",
+      "city": "Lviv"
+    }
+  ]
 }
 ```
 
@@ -311,9 +319,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -325,14 +333,14 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"role": "lawyer | client | admin",
-		"city": "Kyiv"
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "role": "lawyer | client | admin",
+    "city": "Kyiv"
+  }
 }
 ```
 
@@ -340,9 +348,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -354,17 +362,17 @@ Request body example
 
 ```json
 {
-	"firstName": "firstName",
-	"lastName": "lastName",
-	"email": "email@email.com",
-	"password": "password123",
-	"role": "lawyer",
-	"age": "44",
-	"occupation": "Business",
-	"price": "228",
-	"experience": "10 years",
-	"city": "Kyiv",
-	"available": true
+  "firstName": "firstName",
+  "lastName": "lastName",
+  "email": "email@email.com",
+  "password": "password123",
+  "role": "lawyer",
+  "age": "44",
+  "occupation": "Business",
+  "price": "228",
+  "experience": "10 years",
+  "city": "Kyiv",
+  "available": true
 }
 ```
 
@@ -372,20 +380,20 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"password": "password123",
-		"role": "lawyer",
-		"age": "44",
-		"occupation": "Business",
-		"price": "228",
-		"experience": "10 years",
-		"city": "Kyiv",
-		"available": true
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "password": "password123",
+    "role": "lawyer",
+    "age": "44",
+    "occupation": "Business",
+    "price": "228",
+    "experience": "10 years",
+    "city": "Kyiv",
+    "available": true
+  }
 }
 ```
 
@@ -393,9 +401,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -407,10 +415,10 @@ Request body example
 
 ```json
 {
-	"price": "228",
-	"experience": "10 years",
-	"city": "Kyiv",
-	"available": true
+  "price": "228",
+  "experience": "10 years",
+  "city": "Kyiv",
+  "available": true
 }
 ```
 
@@ -418,20 +426,20 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"password": "password123",
-		"role": "lawyer",
-		"age": "44",
-		"occupation": "Business",
-		"price": "228",
-		"experience": "10 years",
-		"city": "Kyiv",
-		"available": true
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "password": "password123",
+    "role": "lawyer",
+    "age": "44",
+    "occupation": "Business",
+    "price": "228",
+    "experience": "10 years",
+    "city": "Kyiv",
+    "available": true
+  }
 }
 ```
 
@@ -439,9 +447,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -453,20 +461,20 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"password": "password123",
-		"role": "lawyer",
-		"age": "44",
-		"occupation": "Business",
-		"price": "228",
-		"experience": "10 years",
-		"city": "Kyiv",
-		"available": true
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "password": "password123",
+    "role": "lawyer",
+    "age": "44",
+    "occupation": "Business",
+    "price": "228",
+    "experience": "10 years",
+    "city": "Kyiv",
+    "available": true
+  }
 }
 ```
 
@@ -474,9 +482,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -492,22 +500,22 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": [
-		{
-			"id": "1",
-			"firstName": "firstName",
-			"lastName": "lastName",
-			"email": "email@email.com",
-			"password": "password123",
-			"role": "lawyer",
-			"age": "44",
-			"occupation": "Business",
-			"price": "228",
-			"experience": "10 years",
-			"city": "Kyiv",
-			"available": true
-		}
-	]
+  "result": [
+    {
+      "id": "1",
+      "firstName": "firstName",
+      "lastName": "lastName",
+      "email": "email@email.com",
+      "password": "password123",
+      "role": "lawyer",
+      "age": "44",
+      "occupation": "Business",
+      "price": "228",
+      "experience": "10 years",
+      "city": "Kyiv",
+      "available": true
+    }
+  ]
 }
 ```
 
@@ -515,9 +523,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -529,20 +537,20 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"password": "password123",
-		"role": "lawyer",
-		"age": "44",
-		"occupation": "Business",
-		"price": "228",
-		"experience": "10 years",
-		"city": "Kyiv",
-		"available": true
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "password": "password123",
+    "role": "lawyer",
+    "age": "44",
+    "occupation": "Business",
+    "price": "228",
+    "experience": "10 years",
+    "city": "Kyiv",
+    "available": true
+  }
 }
 ```
 
@@ -550,9 +558,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -564,17 +572,17 @@ Request body example
 
 ```json
 {
-	"firstName": "firstName",
-	"lastName": "lastName",
-	"email": "email@email.com",
-	"password": "password123",
-	"role": "lawyer",
-	"age": "44",
-	"occupation": "Business",
-	"price": "228",
-	"experience": "10 years",
-	"city": "Kyiv",
-	"available": true
+  "firstName": "firstName",
+  "lastName": "lastName",
+  "email": "email@email.com",
+  "password": "password123",
+  "role": "lawyer",
+  "age": "44",
+  "occupation": "Business",
+  "price": "228",
+  "experience": "10 years",
+  "city": "Kyiv",
+  "available": true
 }
 ```
 
@@ -582,20 +590,20 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"password": "password123",
-		"role": "lawyer",
-		"age": "44",
-		"occupation": "Business",
-		"price": "228",
-		"experience": "10 years",
-		"city": "Kyiv",
-		"available": true
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "password": "password123",
+    "role": "lawyer",
+    "age": "44",
+    "occupation": "Business",
+    "price": "228",
+    "experience": "10 years",
+    "city": "Kyiv",
+    "available": true
+  }
 }
 ```
 
@@ -603,9 +611,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -617,11 +625,11 @@ Request body example
 
 ```json
 {
-	"age": "44",
-	"occupation": "Business",
-	"price": "228",
-	"experience": "10 years",
-	"available": false
+  "age": "44",
+  "occupation": "Business",
+  "price": "228",
+  "experience": "10 years",
+  "available": false
 }
 ```
 
@@ -629,20 +637,20 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"password": "password123",
-		"role": "lawyer",
-		"age": "44",
-		"occupation": "Business",
-		"price": "228",
-		"experience": "10 years",
-		"city": "Kyiv",
-		"available": false
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "password": "password123",
+    "role": "lawyer",
+    "age": "44",
+    "occupation": "Business",
+    "price": "228",
+    "experience": "10 years",
+    "city": "Kyiv",
+    "available": false
+  }
 }
 ```
 
@@ -650,9 +658,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -664,20 +672,20 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"password": "password123",
-		"role": "lawyer",
-		"age": "44",
-		"occupation": "Business",
-		"price": "228",
-		"experience": "10 years",
-		"city": "Kyiv",
-		"available": true
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "password": "password123",
+    "role": "lawyer",
+    "age": "44",
+    "occupation": "Business",
+    "price": "228",
+    "experience": "10 years",
+    "city": "Kyiv",
+    "available": true
+  }
 }
 ```
 
@@ -685,9 +693,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -703,26 +711,26 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": [
-		{
-			"id": "1",
-			"firstName": "firstName",
-			"lastName": "lastName",
-			"email": "email@email.com",
-			"role": "client",
-			"city": "Kyiv",
-			"budget": 228
-		},
-		{
-			"id": "2",
-			"firstName": "firstName",
-			"lastName": "lastName",
-			"email": "email2@email.com",
-			"role": "client",
-			"city": "Lviv",
-			"budget": 228
-		}
-	]
+  "result": [
+    {
+      "id": "1",
+      "firstName": "firstName",
+      "lastName": "lastName",
+      "email": "email@email.com",
+      "role": "client",
+      "city": "Kyiv",
+      "budget": 228
+    },
+    {
+      "id": "2",
+      "firstName": "firstName",
+      "lastName": "lastName",
+      "email": "email2@email.com",
+      "role": "client",
+      "city": "Lviv",
+      "budget": 228
+    }
+  ]
 }
 ```
 
@@ -730,9 +738,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -744,15 +752,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"role": "client",
-		"city": "Kyiv",
-		"budget": 228
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "role": "client",
+    "city": "Kyiv",
+    "budget": 228
+  }
 }
 ```
 
@@ -760,9 +768,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -774,12 +782,12 @@ Request body example
 
 ```json
 {
-	"firstName": "firstName",
-	"lastName": "lastName",
-	"email": "email@email.com",
-	"role": "client",
-	"city": "Kyiv",
-	"budget": 228
+  "firstName": "firstName",
+  "lastName": "lastName",
+  "email": "email@email.com",
+  "role": "client",
+  "city": "Kyiv",
+  "budget": 228
 }
 ```
 
@@ -787,15 +795,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"role": "client",
-		"city": "Kyiv",
-		"budget": 228
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "role": "client",
+    "city": "Kyiv",
+    "budget": 228
+  }
 }
 ```
 
@@ -803,9 +811,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -817,7 +825,7 @@ Request body example
 
 ```json
 {
-	"budget": 228
+  "budget": 228
 }
 ```
 
@@ -825,15 +833,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"role": "client",
-		"city": "Kyiv",
-		"budget": 228
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "role": "client",
+    "city": "Kyiv",
+    "budget": 228
+  }
 }
 ```
 
@@ -841,9 +849,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -855,15 +863,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"role": "client",
-		"city": "Kyiv",
-		"budget": 228
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "role": "client",
+    "city": "Kyiv",
+    "budget": 228
+  }
 }
 ```
 
@@ -871,9 +879,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -889,12 +897,12 @@ Request body example
 
 ```json
 {
-	"lawyerId": 1,
-	"clientId": 2,
-	"status": "active | fulfilled | failed | creating",
-	"budget": 228,
-	"startDate": "13-09-2023",
-	"endDate": "15-09-2023"
+  "lawyerId": 1,
+  "clientId": 2,
+  "status": "active | fulfilled | failed | creating",
+  "budget": 228,
+  "startDate": "13-09-2023",
+  "endDate": "15-09-2023"
 }
 ```
 
@@ -902,15 +910,15 @@ Expected response `201 Created`
 
 ```json
 {
-	"result": {
-		"id": 1,
-		"lawyerId": 1,
-		"clientId": 2,
-		"status": "active | fulfilled | failed | creating",
-		"budget": 228,
-		"startDate": "13-09-2023",
-		"endDate": "15-09-2023"
-	}
+  "result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "active | fulfilled | failed | creating",
+    "budget": 228,
+    "startDate": "13-09-2023",
+    "endDate": "15-09-2023"
+  }
 }
 ```
 
@@ -918,9 +926,9 @@ Expected errors message `400 Bad Request`
 
 ```json
 {
-	"error": {
-		"message": "Lawyer with such id does not exist"
-	}
+  "error": {
+    "message": "Lawyer with such id does not exist"
+  }
 }
 ```
 
@@ -932,15 +940,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"role": "client",
-		"city": "Kyiv",
-		"budget": 228
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "role": "client",
+    "city": "Kyiv",
+    "budget": 228
+  }
 }
 ```
 
@@ -948,9 +956,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -962,35 +970,35 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": [
-		{
-			"id": 1,
-			"lawyerId": 1,
-			"clientId": 2,
-			"status": "active | fulfilled | failed | creating",
-			"budget": 228,
-			"startDate": "13-09-2023",
-			"endDate": "15-09-2023"
-		},
-		{
-			"id": 2,
-			"lawyerId": 1,
-			"clientId": 2,
-			"status": "active | fulfilled | failed | creating",
-			"budget": 228,
-			"startDate": "13-09-2023",
-			"endDate": "15-09-2023"
-		},
-		{
-			"id": 3,
-			"lawyerId": 1,
-			"clientId": 2,
-			"status": "active | fulfilled | failed | creating",
-			"budget": 228,
-			"startDate": "13-09-2023",
-			"endDate": "15-09-2023"
-		}
-	]
+  "result": [
+    {
+      "id": 1,
+      "lawyerId": 1,
+      "clientId": 2,
+      "status": "active | fulfilled | failed | creating",
+      "budget": 228,
+      "startDate": "13-09-2023",
+      "endDate": "15-09-2023"
+    },
+    {
+      "id": 2,
+      "lawyerId": 1,
+      "clientId": 2,
+      "status": "active | fulfilled | failed | creating",
+      "budget": 228,
+      "startDate": "13-09-2023",
+      "endDate": "15-09-2023"
+    },
+    {
+      "id": 3,
+      "lawyerId": 1,
+      "clientId": 2,
+      "status": "active | fulfilled | failed | creating",
+      "budget": 228,
+      "startDate": "13-09-2023",
+      "endDate": "15-09-2023"
+    }
+  ]
 }
 ```
 
@@ -998,9 +1006,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1012,15 +1020,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": 1,
-		"lawyerId": 1,
-		"clientId": 2,
-		"status": "active | fulfilled | failed | creating",
-		"budget": 228,
-		"startDate": "13-09-2023",
-		"endDate": "15-09-2023"
-	}
+  "result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "active | fulfilled | failed | creating",
+    "budget": 228,
+    "startDate": "13-09-2023",
+    "endDate": "15-09-2023"
+  }
 }
 ```
 
@@ -1028,9 +1036,9 @@ Expected errors message `400 Bad Request`
 
 ```json
 {
-	"error": {
-		"message": "Case with such id does not exist"
-	}
+  "error": {
+    "message": "Case with such id does not exist"
+  }
 }
 ```
 
@@ -1042,12 +1050,12 @@ Request body example
 
 ```json
 {
-	"lawyerId": 1,
-	"clientId": 2,
-	"status": "active | fulfilled | failed | creating",
-	"budget": 228,
-	"startDate": "13-09-2023",
-	"endDate": "22-09-2023"
+  "lawyerId": 1,
+  "clientId": 2,
+  "status": "active | fulfilled | failed | creating",
+  "budget": 228,
+  "startDate": "13-09-2023",
+  "endDate": "22-09-2023"
 }
 ```
 
@@ -1055,15 +1063,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": 1,
-		"lawyerId": 1,
-		"clientId": 2,
-		"status": "active | fulfilled | failed | creating",
-		"budget": 228,
-		"startDate": "13-09-2023",
-		"endDate": "22-09-2023"
-	}
+  "result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "active | fulfilled | failed | creating",
+    "budget": 228,
+    "startDate": "13-09-2023",
+    "endDate": "22-09-2023"
+  }
 }
 ```
 
@@ -1071,9 +1079,9 @@ Expected errors message `400 Bad Request`
 
 ```json
 {
-	"error": {
-		"message": "Case with such id does not exist"
-	}
+  "error": {
+    "message": "Case with such id does not exist"
+  }
 }
 ```
 
@@ -1085,15 +1093,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": 1,
-		"lawyerId": 1,
-		"clientId": 2,
-		"status": "fulfilled",
-		"budget": 228,
-		"startDate": "13-09-2023",
-		"endDate": "22-09-2023"
-	}
+  "result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "fulfilled",
+    "budget": 228,
+    "startDate": "13-09-2023",
+    "endDate": "22-09-2023"
+  }
 }
 ```
 
@@ -1101,9 +1109,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1115,15 +1123,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": 1,
-		"lawyerId": 1,
-		"clientId": 2,
-		"status": "rejected",
-		"budget": 228,
-		"startDate": "13-09-2023",
-		"endDate": "22-09-2023"
-	}
+  "result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "rejected",
+    "budget": 228,
+    "startDate": "13-09-2023",
+    "endDate": "22-09-2023"
+  }
 }
 ```
 
@@ -1131,9 +1139,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1147,15 +1155,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": 1,
-		"lawyerId": 1,
-		"clientId": 2,
-		"status": "active",
-		"budget": 228,
-		"startDate": "13-09-2023",
-		"endDate": "22-09-2023"
-	}
+  "result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "active",
+    "budget": 228,
+    "startDate": "13-09-2023",
+    "endDate": "22-09-2023"
+  }
 }
 ```
 
@@ -1163,9 +1171,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1177,12 +1185,12 @@ Request body example
 
 ```json
 {
-	"lawyerId": 1,
-	"clientId": 2,
-	"status": "active | fulfilled | failed | creating",
-	"budget": 228,
-	"startDate": "13-09-2023",
-	"endDate": "22-09-2023"
+  "lawyerId": 1,
+  "clientId": 2,
+  "status": "active | fulfilled | failed | creating",
+  "budget": 228,
+  "startDate": "13-09-2023",
+  "endDate": "22-09-2023"
 }
 ```
 
@@ -1190,15 +1198,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": 1,
-		"lawyerId": 1,
-		"clientId": 2,
-		"status": "active | fulfilled | failed | creating",
-		"budget": 228,
-		"startDate": "13-09-2023",
-		"endDate": "22-09-2023"
-	}
+  "result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "active | fulfilled | failed | creating",
+    "budget": 228,
+    "startDate": "13-09-2023",
+    "endDate": "22-09-2023"
+  }
 }
 ```
 
@@ -1206,9 +1214,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1220,15 +1228,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": 1,
-		"lawyerId": 1,
-		"clientId": 2,
-		"status": "active | fulfilled | failed | creating",
-		"budget": 228,
-		"startDate": "13-09-2023",
-		"endDate": "22-09-2023"
-	}
+  "result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "active | fulfilled | failed | creating",
+    "budget": 228,
+    "startDate": "13-09-2023",
+    "endDate": "22-09-2023"
+  }
 }
 ```
 
@@ -1236,9 +1244,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1254,26 +1262,26 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": [
-		{
-			"id": "1",
-			"firstName": "firstName",
-			"lastName": "lastName",
-			"email": "email@email.com",
-			"role": "admin",
-			"city": "Kyiv",
-			"isActive": true
-		},
-		{
-			"id": "2",
-			"firstName": "firstName",
-			"lastName": "lastName",
-			"email": "email2@email.com",
-			"role": "admin",
-			"city": "Kyiv",
-			"isActive": false
-		}
-	]
+  "result": [
+    {
+      "id": "1",
+      "firstName": "firstName",
+      "lastName": "lastName",
+      "email": "email@email.com",
+      "role": "admin",
+      "city": "Kyiv",
+      "isActive": true
+    },
+    {
+      "id": "2",
+      "firstName": "firstName",
+      "lastName": "lastName",
+      "email": "email2@email.com",
+      "role": "admin",
+      "city": "Kyiv",
+      "isActive": false
+    }
+  ]
 }
 ```
 
@@ -1281,9 +1289,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1295,15 +1303,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"role": "admin",
-		"city": "Kyiv",
-		"isActive": true
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "role": "admin",
+    "city": "Kyiv",
+    "isActive": true
+  }
 }
 ```
 
@@ -1311,9 +1319,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1325,12 +1333,12 @@ Request body example
 
 ```json
 {
-	"firstName": "firstName",
-	"lastName": "lastName",
-	"email": "email@email.com",
-	"role": "admin",
-	"city": "Kyiv",
-	"isActive": true
+  "firstName": "firstName",
+  "lastName": "lastName",
+  "email": "email@email.com",
+  "role": "admin",
+  "city": "Kyiv",
+  "isActive": true
 }
 ```
 
@@ -1338,15 +1346,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"role": "admin",
-		"city": "Kyiv",
-		"isActive": true
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "role": "admin",
+    "city": "Kyiv",
+    "isActive": true
+  }
 }
 ```
 
@@ -1354,9 +1362,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1368,7 +1376,7 @@ Request body example
 
 ```json
 {
-	"isActive": false
+  "isActive": false
 }
 ```
 
@@ -1376,15 +1384,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"role": "admin",
-		"city": "Kyiv",
-		"isActive": false
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "role": "admin",
+    "city": "Kyiv",
+    "isActive": false
+  }
 }
 ```
 
@@ -1392,9 +1400,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1406,15 +1414,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"firstName": "firstName",
-		"lastName": "lastName",
-		"email": "email@email.com",
-		"role": "admin",
-		"city": "Kyiv",
-		"isActive": true
-	}
+  "result": {
+    "id": "1",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@email.com",
+    "role": "admin",
+    "city": "Kyiv",
+    "isActive": true
+  }
 }
 ```
 
@@ -1422,9 +1430,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1440,16 +1448,16 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": [
-		{
-			"id": "1",
-			"type": "admin | client | lawyer"
-		},
-		{
-			"id": "1",
-			"type": "admin | client | lawyer"
-		}
-	]
+  "result": [
+    {
+      "id": "1",
+      "type": "admin | client | lawyer"
+    },
+    {
+      "id": "1",
+      "type": "admin | client | lawyer"
+    }
+  ]
 }
 ```
 
@@ -1457,9 +1465,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1471,10 +1479,10 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"type": "admin | client | lawyer"
-	}
+  "result": {
+    "id": "1",
+    "type": "admin | client | lawyer"
+  }
 }
 ```
 
@@ -1482,9 +1490,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1496,7 +1504,7 @@ Request body example
 
 ```json
 {
-	"type": "admin | client | lawyer"
+  "type": "admin | client | lawyer"
 }
 ```
 
@@ -1504,10 +1512,10 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"type": "admin | client | lawyer"
-	}
+  "result": {
+    "id": "1",
+    "type": "admin | client | lawyer"
+  }
 }
 ```
 
@@ -1515,9 +1523,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1529,7 +1537,7 @@ Request body example
 
 ```json
 {
-	"type": "admin | client | lawyer"
+  "type": "admin | client | lawyer"
 }
 ```
 
@@ -1537,10 +1545,10 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"type": "admin | client | lawyer"
-	}
+  "result": {
+    "id": "1",
+    "type": "admin | client | lawyer"
+  }
 }
 ```
 
@@ -1548,9 +1556,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1562,10 +1570,10 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"type": "admin | client | lawyer"
-	}
+  "result": {
+    "id": "1",
+    "type": "admin | client | lawyer"
+  }
 }
 ```
 
@@ -1573,9 +1581,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1591,24 +1599,24 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": [
-		{
-			"id": "1",
-			"cliendId": "1",
-			"lawyerId": "1",
-			"caseId": "1",
-			"rate": "[1-5]",
-			"message": "Very cool lawyer"
-		},
-		{
-			"id": "2",
-			"cliendId": "12",
-			"lawyerId": "113",
-			"caseId": "89",
-			"rate": "[1-5]",
-			"message": "Very cool lawyer"
-		}
-	]
+  "result": [
+    {
+      "id": "1",
+      "cliendId": "1",
+      "lawyerId": "1",
+      "caseId": "1",
+      "rate": "[1-5]",
+      "message": "Very cool lawyer"
+    },
+    {
+      "id": "2",
+      "cliendId": "12",
+      "lawyerId": "113",
+      "caseId": "89",
+      "rate": "[1-5]",
+      "message": "Very cool lawyer"
+    }
+  ]
 }
 ```
 
@@ -1616,9 +1624,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1630,14 +1638,14 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"cliendId": "1",
-		"lawyerId": "1",
-		"caseId": "1",
-		"rate": "[1-5]",
-		"message": "Very cool lawyer"
-	}
+  "result": {
+    "id": "1",
+    "cliendId": "1",
+    "lawyerId": "1",
+    "caseId": "1",
+    "rate": "[1-5]",
+    "message": "Very cool lawyer"
+  }
 }
 ```
 
@@ -1645,9 +1653,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "Review with id {id} does not exist"
-	}
+  "error": {
+    "message": "Review with id {id} does not exist"
+  }
 }
 ```
 
@@ -1659,11 +1667,11 @@ Request body example
 
 ```json
 {
-	"cliendId": "1",
-	"lawyerId": "1",
-	"caseId": "1",
-	"rate": "[1-5]",
-	"message": "Very cool lawyer"
+  "cliendId": "1",
+  "lawyerId": "1",
+  "caseId": "1",
+  "rate": "[1-5]",
+  "message": "Very cool lawyer"
 }
 ```
 
@@ -1671,14 +1679,14 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"cliendId": "1",
-		"lawyerId": "1",
-		"caseId": "1",
-		"rate": "[1-5]",
-		"message": "Very cool lawyer"
-	}
+  "result": {
+    "id": "1",
+    "cliendId": "1",
+    "lawyerId": "1",
+    "caseId": "1",
+    "rate": "[1-5]",
+    "message": "Very cool lawyer"
+  }
 }
 ```
 
@@ -1686,9 +1694,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "Case with id {caseId} does not exist"
-	}
+  "error": {
+    "message": "Case with id {caseId} does not exist"
+  }
 }
 ```
 
@@ -1700,7 +1708,7 @@ Request body example
 
 ```json
 {
-	"message": "Lawyer is very bad"
+  "message": "Lawyer is very bad"
 }
 ```
 
@@ -1708,14 +1716,14 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"cliendId": "1",
-		"lawyerId": "1",
-		"caseId": "1",
-		"rate": "[1-5]",
-		"message": "Lawyer is very bad"
-	}
+  "result": {
+    "id": "1",
+    "cliendId": "1",
+    "lawyerId": "1",
+    "caseId": "1",
+    "rate": "[1-5]",
+    "message": "Lawyer is very bad"
+  }
 }
 ```
 
@@ -1723,9 +1731,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "Message with id {id} does not exist"
-	}
+  "error": {
+    "message": "Message with id {id} does not exist"
+  }
 }
 ```
 
@@ -1737,14 +1745,14 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"cliendId": "1",
-		"lawyerId": "1",
-		"caseId": "1",
-		"rate": "[1-5]",
-		"message": "Very cool lawyer"
-	}
+  "result": {
+    "id": "1",
+    "cliendId": "1",
+    "lawyerId": "1",
+    "caseId": "1",
+    "rate": "[1-5]",
+    "message": "Very cool lawyer"
+  }
 }
 ```
 
@@ -1752,9 +1760,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1770,32 +1778,32 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": [
-		{
-			"id": "1",
-			"lawyer_id": "228",
-			"info": "lawyer license bla bla bla",
-			"verification": {
-				"id": "10",
-				"verifierId": "20",
-				"status": "verified | rejected | processing",
-				"date": "10-20-2023",
-				"notes": "License is genuine"
-			}
-		},
-		{
-			"id": "2",
-			"lawyer_id": "2",
-			"info": "lawyer license bla bla bla",
-			"verification": {
-				"id": "10",
-				"verifierId": "20",
-				"status": "verified | rejected | processing",
-				"date": "10-20-2023",
-				"notes": "License is genuine"
-			}
-		}
-	]
+  "result": [
+    {
+      "id": "1",
+      "lawyer_id": "228",
+      "info": "lawyer license bla bla bla",
+      "verification": {
+        "id": "10",
+        "verifierId": "20",
+        "status": "verified | rejected | processing",
+        "date": "10-20-2023",
+        "notes": "License is genuine"
+      }
+    },
+    {
+      "id": "2",
+      "lawyer_id": "2",
+      "info": "lawyer license bla bla bla",
+      "verification": {
+        "id": "10",
+        "verifierId": "20",
+        "status": "verified | rejected | processing",
+        "date": "10-20-2023",
+        "notes": "License is genuine"
+      }
+    }
+  ]
 }
 ```
 
@@ -1803,9 +1811,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1817,18 +1825,18 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"lawyer_id": "228",
-		"info": "lawyer license bla bla bla",
-		"verification": {
-			"id": "10",
-			"verifierId": "20",
-			"status": "verified | rejected | processing",
-			"date": "10-20-2023",
-			"notes": "License is genuine"
-		}
-	}
+  "result": {
+    "id": "1",
+    "lawyer_id": "228",
+    "info": "lawyer license bla bla bla",
+    "verification": {
+      "id": "10",
+      "verifierId": "20",
+      "status": "verified | rejected | processing",
+      "date": "10-20-2023",
+      "notes": "License is genuine"
+    }
+  }
 }
 ```
 
@@ -1836,9 +1844,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "License with id {id} does not exist"
-	}
+  "error": {
+    "message": "License with id {id} does not exist"
+  }
 }
 ```
 
@@ -1850,9 +1858,9 @@ Request body example
 
 ```json
 {
-	"id": "1",
-	"lawyer_id": "228",
-	"info": "lawyer license bla bla bla"
+  "id": "1",
+  "lawyer_id": "228",
+  "info": "lawyer license bla bla bla"
 }
 ```
 
@@ -1860,11 +1868,11 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"lawyer_id": "228",
-		"info": "lawyer license bla bla bla"
-	}
+  "result": {
+    "id": "1",
+    "lawyer_id": "228",
+    "info": "lawyer license bla bla bla"
+  }
 }
 ```
 
@@ -1872,9 +1880,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "Lawyer with id {caseId} does not exist"
-	}
+  "error": {
+    "message": "Lawyer with id {caseId} does not exist"
+  }
 }
 ```
 
@@ -1886,7 +1894,7 @@ Request body example
 
 ```json
 {
-	"info": "lawyer license bla bla bla which I received in 2010"
+  "info": "lawyer license bla bla bla which I received in 2010"
 }
 ```
 
@@ -1894,18 +1902,18 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"lawyer_id": "228",
-		"info": "lawyer license bla bla bla which I received in 2010",
-		"verification": {
-			"id": "10",
-			"verifierId": "20",
-			"status": "verified | rejected | processing",
-			"date": "10-20-2023",
-			"notes": "License is genuine"
-		}
-	}
+  "result": {
+    "id": "1",
+    "lawyer_id": "228",
+    "info": "lawyer license bla bla bla which I received in 2010",
+    "verification": {
+      "id": "10",
+      "verifierId": "20",
+      "status": "verified | rejected | processing",
+      "date": "10-20-2023",
+      "notes": "License is genuine"
+    }
+  }
 }
 ```
 
@@ -1913,9 +1921,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "License with id {id} does not exist"
-	}
+  "error": {
+    "message": "License with id {id} does not exist"
+  }
 }
 ```
 
@@ -1927,18 +1935,18 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"lawyer_id": "228",
-		"info": "lawyer license bla bla bla",
-		"verification": {
-			"id": "10",
-			"verifierId": "20",
-			"status": "verified | rejected | processing",
-			"date": "10-20-2023",
-			"notes": "License is genuine"
-		}
-	}
+  "result": {
+    "id": "1",
+    "lawyer_id": "228",
+    "info": "lawyer license bla bla bla",
+    "verification": {
+      "id": "10",
+      "verifierId": "20",
+      "status": "verified | rejected | processing",
+      "date": "10-20-2023",
+      "notes": "License is genuine"
+    }
+  }
 }
 ```
 
@@ -1946,9 +1954,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1960,7 +1968,7 @@ Request body example
 
 ```json
 {
-	"notes": "License is genuine"
+  "notes": "License is genuine"
 }
 ```
 
@@ -1968,16 +1976,16 @@ Expected response `200 OK`
 
 ```json
 {
-	"id": "1",
-	"lawyer_id": "228",
-	"info": "lawyer license bla bla bla",
-	"verification": {
-		"id": "10",
-		"verifierId": "20",
-		"status": "verified",
-		"date": "10-20-2023",
-		"notes": "License is genuine"
-	}
+  "id": "1",
+  "lawyer_id": "228",
+  "info": "lawyer license bla bla bla",
+  "verification": {
+    "id": "10",
+    "verifierId": "20",
+    "status": "verified",
+    "date": "10-20-2023",
+    "notes": "License is genuine"
+  }
 }
 ```
 
@@ -1985,9 +1993,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -1999,7 +2007,7 @@ Request body example
 
 ```json
 {
-	"notes": "License is not genuine"
+  "notes": "License is not genuine"
 }
 ```
 
@@ -2007,16 +2015,16 @@ Expected response `200 OK`
 
 ```json
 {
-	"id": "1",
-	"lawyer_id": "228",
-	"info": "lawyer license bla bla bla",
-	"verification": {
-		"id": "10",
-		"verifierId": "20",
-		"status": "rejected",
-		"date": "10-20-2023",
-		"notes": "License is not genuine"
-	}
+  "id": "1",
+  "lawyer_id": "228",
+  "info": "lawyer license bla bla bla",
+  "verification": {
+    "id": "10",
+    "verifierId": "20",
+    "status": "rejected",
+    "date": "10-20-2023",
+    "notes": "License is not genuine"
+  }
 }
 ```
 
@@ -2024,9 +2032,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -2042,25 +2050,25 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": [
-		{
-			"id": "10",
-			"licenseId": "1",
-			"verifierId": "20",
-			"status": "verified | rejected | processing",
-			"date": "10-20-2023",
-			"notes": "License is genuine"
-		},
+  "result": [
+    {
+      "id": "10",
+      "licenseId": "1",
+      "verifierId": "20",
+      "status": "verified | rejected | processing",
+      "date": "10-20-2023",
+      "notes": "License is genuine"
+    },
 
-		{
-			"id": "12",
-			"licenseId": "2",
-			"verifierId": "30",
-			"status": "verified | rejected | processing",
-			"date": "11-20-2023",
-			"notes": "License is not genuine"
-		}
-	]
+    {
+      "id": "12",
+      "licenseId": "2",
+      "verifierId": "30",
+      "status": "verified | rejected | processing",
+      "date": "11-20-2023",
+      "notes": "License is not genuine"
+    }
+  ]
 }
 ```
 
@@ -2068,9 +2076,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -2082,14 +2090,14 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "10",
-		"licenseId": "1",
-		"verifierId": "20",
-		"status": "verified | rejected | processing",
-		"date": "10-20-2023",
-		"notes": "License is genuine"
-	}
+  "result": {
+    "id": "10",
+    "licenseId": "1",
+    "verifierId": "20",
+    "status": "verified | rejected | processing",
+    "date": "10-20-2023",
+    "notes": "License is genuine"
+  }
 }
 ```
 
@@ -2097,9 +2105,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "Verification with id {id} does not exist"
-	}
+  "error": {
+    "message": "Verification with id {id} does not exist"
+  }
 }
 ```
 
@@ -2111,11 +2119,11 @@ Request body example
 
 ```json
 {
-	"licenseId": "1",
-	"verifierId": "20",
-	"status": "verified | rejected | processing",
-	"date": "10-20-2023",
-	"notes": "License is genuine"
+  "licenseId": "1",
+  "verifierId": "20",
+  "status": "verified | rejected | processing",
+  "date": "10-20-2023",
+  "notes": "License is genuine"
 }
 ```
 
@@ -2123,14 +2131,14 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "10",
-		"licenseId": "1",
-		"verifierId": "20",
-		"status": "verified | rejected | processing",
-		"date": "10-20-2023",
-		"notes": "License is genuine"
-	}
+  "result": {
+    "id": "10",
+    "licenseId": "1",
+    "verifierId": "20",
+    "status": "verified | rejected | processing",
+    "date": "10-20-2023",
+    "notes": "License is genuine"
+  }
 }
 ```
 
@@ -2138,9 +2146,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "License with id {licenseId} does not exist"
-	}
+  "error": {
+    "message": "License with id {licenseId} does not exist"
+  }
 }
 ```
 
@@ -2152,7 +2160,7 @@ Request body example
 
 ```json
 {
-	"notes": "License is genuine"
+  "notes": "License is genuine"
 }
 ```
 
@@ -2160,14 +2168,14 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "10",
-		"licenseId": "1",
-		"verifierId": "20",
-		"status": "verified | rejected | processing",
-		"date": "10-20-2023",
-		"notes": "License is genuine"
-	}
+  "result": {
+    "id": "10",
+    "licenseId": "1",
+    "verifierId": "20",
+    "status": "verified | rejected | processing",
+    "date": "10-20-2023",
+    "notes": "License is genuine"
+  }
 }
 ```
 
@@ -2175,9 +2183,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "Verification with id {id} does not exist"
-	}
+  "error": {
+    "message": "Verification with id {id} does not exist"
+  }
 }
 ```
 
@@ -2189,14 +2197,14 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "10",
-		"licenseId": "1",
-		"verifierId": "20",
-		"status": "verified | rejected | processing",
-		"date": "10-20-2023",
-		"notes": "License is genuine"
-	}
+  "result": {
+    "id": "10",
+    "licenseId": "1",
+    "verifierId": "20",
+    "status": "verified | rejected | processing",
+    "date": "10-20-2023",
+    "notes": "License is genuine"
+  }
 }
 ```
 
@@ -2204,9 +2212,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -2222,26 +2230,26 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": [
-		{
-			"id": "1",
-			"adminId": "1",
-			"clientId": "1",
-			"lawyerId": "1",
-			"caseId": "1",
-			"reason": "Lawyer stole my money",
-			"status": "proccessing | fulfilled | rejected"
-		},
-		{
-			"id": "2",
-			"adminId": "2",
-			"clientId": "2",
-			"lawyerId": "2",
-			"caseId": "2",
-			"reason": "Lawyer is very bad",
-			"status": "proccessing | fulfilled | rejected"
-		}
-	]
+  "result": [
+    {
+      "id": "1",
+      "adminId": "1",
+      "clientId": "1",
+      "lawyerId": "1",
+      "caseId": "1",
+      "reason": "Lawyer stole my money",
+      "status": "proccessing | fulfilled | rejected"
+    },
+    {
+      "id": "2",
+      "adminId": "2",
+      "clientId": "2",
+      "lawyerId": "2",
+      "caseId": "2",
+      "reason": "Lawyer is very bad",
+      "status": "proccessing | fulfilled | rejected"
+    }
+  ]
 }
 ```
 
@@ -2249,9 +2257,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -2263,15 +2271,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"adminId": "1",
-		"clientId": "1",
-		"lawyerId": "1",
-		"caseId": "1",
-		"reason": "Lawyer stole my money",
-		"status": "proccessing | fulfilled | rejected"
-	}
+  "result": {
+    "id": "1",
+    "adminId": "1",
+    "clientId": "1",
+    "lawyerId": "1",
+    "caseId": "1",
+    "reason": "Lawyer stole my money",
+    "status": "proccessing | fulfilled | rejected"
+  }
 }
 ```
 
@@ -2279,9 +2287,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "Conflict with id {id} does not exist"
-	}
+  "error": {
+    "message": "Conflict with id {id} does not exist"
+  }
 }
 ```
 
@@ -2293,12 +2301,12 @@ Request body example
 
 ```json
 {
-	"adminId": "1",
-	"clientId": "1",
-	"lawyerId": "1",
-	"caseId": "1",
-	"reason": "Lawyer stole my money",
-	"status": "proccessing | fulfilled | rejected"
+  "adminId": "1",
+  "clientId": "1",
+  "lawyerId": "1",
+  "caseId": "1",
+  "reason": "Lawyer stole my money",
+  "status": "proccessing | fulfilled | rejected"
 }
 ```
 
@@ -2306,15 +2314,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"adminId": "1",
-		"clientId": "1",
-		"lawyerId": "1",
-		"caseId": "1",
-		"reason": "Lawyer stole my money",
-		"status": "proccessing | fulfilled | rejected"
-	}
+  "result": {
+    "id": "1",
+    "adminId": "1",
+    "clientId": "1",
+    "lawyerId": "1",
+    "caseId": "1",
+    "reason": "Lawyer stole my money",
+    "status": "proccessing | fulfilled | rejected"
+  }
 }
 ```
 
@@ -2322,9 +2330,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "Client with id {clientId} does not exist"
-	}
+  "error": {
+    "message": "Client with id {clientId} does not exist"
+  }
 }
 ```
 
@@ -2336,7 +2344,7 @@ Request body example
 
 ```json
 {
-	"reason": "Lawyer stole my time"
+  "reason": "Lawyer stole my time"
 }
 ```
 
@@ -2344,15 +2352,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"adminId": "1",
-		"clientId": "1",
-		"lawyerId": "1",
-		"caseId": "1",
-		"reason": "Lawyer stole my time",
-		"status": "proccessing | fulfilled | rejected"
-	}
+  "result": {
+    "id": "1",
+    "adminId": "1",
+    "clientId": "1",
+    "lawyerId": "1",
+    "caseId": "1",
+    "reason": "Lawyer stole my time",
+    "status": "proccessing | fulfilled | rejected"
+  }
 }
 ```
 
@@ -2360,9 +2368,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "Conflict with id {id} does not exist"
-	}
+  "error": {
+    "message": "Conflict with id {id} does not exist"
+  }
 }
 ```
 
@@ -2374,15 +2382,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"adminId": "1",
-		"clientId": "1",
-		"lawyerId": "1",
-		"caseId": "1",
-		"reason": "Lawyer stole my money",
-		"status": "proccessing | fulfilled | rejected"
-	}
+  "result": {
+    "id": "1",
+    "adminId": "1",
+    "clientId": "1",
+    "lawyerId": "1",
+    "caseId": "1",
+    "reason": "Lawyer stole my money",
+    "status": "proccessing | fulfilled | rejected"
+  }
 }
 ```
 
@@ -2390,9 +2398,9 @@ Expected errors `401 Unathorized`
 
 ```json
 {
-	"error": {
-		"message": "You are not allowed to perform this action"
-	}
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
 }
 ```
 
@@ -2406,15 +2414,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"adminId": "1",
-		"clientId": "1",
-		"lawyerId": "1",
-		"caseId": "1",
-		"reason": "Lawyer stole my time",
-		"status": "fulfilled"
-	}
+  "result": {
+    "id": "1",
+    "adminId": "1",
+    "clientId": "1",
+    "lawyerId": "1",
+    "caseId": "1",
+    "reason": "Lawyer stole my time",
+    "status": "fulfilled"
+  }
 }
 ```
 
@@ -2422,9 +2430,9 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "Conflict with id {id} does not exist"
-	}
+  "error": {
+    "message": "Conflict with id {id} does not exist"
+  }
 }
 ```
 
@@ -2438,15 +2446,15 @@ Expected response `200 OK`
 
 ```json
 {
-	"result": {
-		"id": "1",
-		"adminId": "1",
-		"clientId": "1",
-		"lawyerId": "1",
-		"caseId": "1",
-		"reason": "Lawyer stole my time",
-		"status": "rejected"
-	}
+  "result": {
+    "id": "1",
+    "adminId": "1",
+    "clientId": "1",
+    "lawyerId": "1",
+    "caseId": "1",
+    "reason": "Lawyer stole my time",
+    "status": "rejected"
+  }
 }
 ```
 
@@ -2454,8 +2462,8 @@ Expected errors `400 Bad request`
 
 ```json
 {
-	"error": {
-		"message": "Conflict with id {id} does not exist"
-	}
+  "error": {
+    "message": "Conflict with id {id} does not exist"
+  }
 }
 ```

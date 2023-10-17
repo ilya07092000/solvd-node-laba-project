@@ -16,6 +16,10 @@ class TokenRepository {
   get({ token }: { token: string }): Promise<IToken & { userId: number }> {
     return this.connection.hGetAll(token);
   }
+
+  delete({ token }: { token: string }) {
+    return this.connection.hIncrBy(token, 'active', -1);
+  }
 }
 
 const tokenRepository = new TokenRepository(redisConnectionInstance.connection);

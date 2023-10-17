@@ -29,6 +29,7 @@ class TokenService {
       type: 'access',
       token: this.getToken(),
       expirationTimeStamp,
+      active: 1,
     };
   }
 
@@ -40,6 +41,7 @@ class TokenService {
       type: 'refresh',
       token: this.getToken(),
       expirationTimeStamp,
+      active: 1,
     };
   }
 
@@ -54,30 +56,34 @@ class TokenService {
     return this.repository.save({ token, userId });
   }
 
-  public async validateRefreshToken({ refreshToken }): Promise<{
-    token: IToken & { userId: number };
-    isValid: boolean;
-  }> {
-    const token = await this.repository.get({ token: refreshToken });
-    return {
-      token,
-      isValid:
-        +token.expirationTimeStamp > +Date.now() || token.type === 'refresh',
-    };
+  public getTokenInfo({ token }: { token: string }) {
+    return this.repository.get({ token });
   }
 
-  // public async refreshTokens({ refreshToken }) {
-  //   const token = await this.repository.get({ token: refreshToken });
+  public deleteToken({ token }: { token: string }) {
+    return this.repository.delete({ token });
+  }
 
-  //   if (+token.expirationTimeStamp < +Date.now() || token.type !== 'refresh') {
-  //     throw new HttpException(400, 'Token is not valid');
-  //   }
-  //   const tokens = this.generateTokens();
-  //   await this.saveToken({ userId: token.userId, token: tokens.refreshToken });
-  //   await this.saveToken({ userId: token.userId, token: tokens.accessToken });
+  public async validateToken({
+    token,
+    type,
+  }: {
+    token: string;
+    type: IToken['type'];
+  }): Promise<IToken & { isValid: boolean; userId: number }> {
+    const tokenInfo = await this.repository.get({ token: token });
+    let isValid =
+      tokenInfo && +tokenInfo.active === 1 && tokenInfo.type === type;
 
-  //   return tokens;
-  // }
+    if (type === 'refresh' && isValid) {
+      isValid = tokenInfo.expirationTimeStamp > +Date.now();
+    }
+
+    return {
+      isValid,
+      ...tokenInfo,
+    };
+  }
 }
 
 const tokenService = new TokenService(tokenRepository);
