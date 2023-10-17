@@ -1,5 +1,6 @@
 import { createClient } from 'redis';
 import BasicDBConnection from '../../infrastructure/contracts/BasicDBConnection';
+import config from '@src/config';
 
 class RedisConnection extends BasicDBConnection {
   public async makeConnection() {
@@ -11,5 +12,5 @@ class RedisConnection extends BasicDBConnection {
   }
 }
 
-const redisConnectionInstance = new RedisConnection(createClient());
+const redisConnectionInstance = new RedisConnection(createClient(config.redis));
 export { redisConnectionInstance, RedisConnection };
