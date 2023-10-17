@@ -22,7 +22,7 @@ class AuthService {
     };
   }
 
-  async login({ login, password }) {
+  async login({ email, password }) {
     const isCorrectPassword = await bcrypt.compare(
       password,
       process.env.PASSWORD,
@@ -36,7 +36,8 @@ class AuthService {
     await tokenService.saveToken({ userId: 1, token: tokens.refreshToken });
 
     return {
-      login,
+      userId: 1,
+      email,
       tokens: {
         access: tokens.accessToken.token,
         refresh: tokens.refreshToken.token,

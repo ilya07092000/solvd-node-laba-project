@@ -19,7 +19,7 @@ class AuthController {
       }
 
       const result = await authService.registration(body);
-      return res.status(201).json({ result: result });
+      return res.status(201).json({ result });
     } catch (e) {
       return next(e);
     }
@@ -41,10 +41,10 @@ class AuthController {
       }
 
       const result = await authService.login({
-        login: body.login,
+        email: body.email,
         password: body.password,
       });
-      return res.status(200).json({ result: result });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
@@ -69,7 +69,7 @@ class AuthController {
         refreshToken: body.refreshToken,
         accessToken: body.accessToken,
       });
-      return res.status(200).json({ result: result });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
