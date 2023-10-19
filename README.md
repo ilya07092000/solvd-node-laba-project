@@ -1602,18 +1602,16 @@ Expected response `200 OK`
   "result": [
     {
       "id": "1",
-      "cliendId": "1",
-      "lawyerId": "1",
       "caseId": "1",
       "rate": "[1-5]",
+      "creator": "admin | client",
       "message": "Very cool lawyer"
     },
     {
       "id": "2",
-      "cliendId": "12",
-      "lawyerId": "113",
-      "caseId": "89",
+      "caseId": "2",
       "rate": "[1-5]",
+      "creator": "admin | client",
       "message": "Very cool lawyer"
     }
   ]
@@ -1640,10 +1638,9 @@ Expected response `200 OK`
 {
   "result": {
     "id": "1",
-    "cliendId": "1",
-    "lawyerId": "1",
     "caseId": "1",
     "rate": "[1-5]",
+    "creator": "admin | client",
     "message": "Very cool lawyer"
   }
 }
@@ -1667,10 +1664,9 @@ Request body example
 
 ```json
 {
-  "cliendId": "1",
-  "lawyerId": "1",
   "caseId": "1",
   "rate": "[1-5]",
+  "creator": "admin | client",
   "message": "Very cool lawyer"
 }
 ```
@@ -1681,10 +1677,9 @@ Expected response `200 OK`
 {
   "result": {
     "id": "1",
-    "cliendId": "1",
-    "lawyerId": "1",
     "caseId": "1",
     "rate": "[1-5]",
+    "creator": "admin | client",
     "message": "Very cool lawyer"
   }
 }
@@ -1718,11 +1713,10 @@ Expected response `200 OK`
 {
   "result": {
     "id": "1",
-    "cliendId": "1",
-    "lawyerId": "1",
     "caseId": "1",
     "rate": "[1-5]",
-    "message": "Lawyer is very bad"
+    "creator": "admin | client",
+    "message": "Very cool lawyer"
   }
 }
 ```
@@ -1747,10 +1741,9 @@ Expected response `200 OK`
 {
   "result": {
     "id": "1",
-    "cliendId": "1",
-    "lawyerId": "1",
     "caseId": "1",
     "rate": "[1-5]",
+    "creator": "admin | client",
     "message": "Very cool lawyer"
   }
 }
@@ -2234,20 +2227,16 @@ Expected response `200 OK`
     {
       "id": "1",
       "adminId": "1",
-      "clientId": "1",
-      "lawyerId": "1",
       "caseId": "1",
       "reason": "Lawyer stole my money",
-      "status": "proccessing | fulfilled | rejected"
+      "status": "processing | fulfilled | rejected"
     },
     {
       "id": "2",
       "adminId": "2",
-      "clientId": "2",
-      "lawyerId": "2",
       "caseId": "2",
       "reason": "Lawyer is very bad",
-      "status": "proccessing | fulfilled | rejected"
+      "status": "processing | fulfilled | rejected"
     }
   ]
 }
@@ -2274,11 +2263,9 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "clientId": "1",
-    "lawyerId": "1",
     "caseId": "1",
     "reason": "Lawyer stole my money",
-    "status": "proccessing | fulfilled | rejected"
+    "status": "processing | fulfilled | rejected"
   }
 }
 ```
@@ -2302,11 +2289,9 @@ Request body example
 ```json
 {
   "adminId": "1",
-  "clientId": "1",
-  "lawyerId": "1",
   "caseId": "1",
   "reason": "Lawyer stole my money",
-  "status": "proccessing | fulfilled | rejected"
+  "status": "processing | fulfilled | rejected"
 }
 ```
 
@@ -2317,11 +2302,9 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "clientId": "1",
-    "lawyerId": "1",
     "caseId": "1",
     "reason": "Lawyer stole my money",
-    "status": "proccessing | fulfilled | rejected"
+    "status": "processing | fulfilled | rejected"
   }
 }
 ```
@@ -2331,7 +2314,7 @@ Expected errors `400 Bad request`
 ```json
 {
   "error": {
-    "message": "Client with id {clientId} does not exist"
+    "message": "Conflict with id {id} does not exist"
   }
 }
 ```
@@ -2355,11 +2338,9 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "clientId": "1",
-    "lawyerId": "1",
     "caseId": "1",
     "reason": "Lawyer stole my time",
-    "status": "proccessing | fulfilled | rejected"
+    "status": "processing | fulfilled | rejected"
   }
 }
 ```
@@ -2385,11 +2366,9 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "clientId": "1",
-    "lawyerId": "1",
     "caseId": "1",
     "reason": "Lawyer stole my money",
-    "status": "proccessing | fulfilled | rejected"
+    "status": "processing | fulfilled | rejected"
   }
 }
 ```
@@ -2417,8 +2396,6 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "clientId": "1",
-    "lawyerId": "1",
     "caseId": "1",
     "reason": "Lawyer stole my time",
     "status": "fulfilled"
@@ -2449,8 +2426,6 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "clientId": "1",
-    "lawyerId": "1",
     "caseId": "1",
     "reason": "Lawyer stole my time",
     "status": "rejected"
