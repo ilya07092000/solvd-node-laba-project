@@ -17,8 +17,9 @@ class TokenRepository {
     return this.connection.hGetAll(token);
   }
 
-  delete({ token }: { token: string }) {
-    return this.connection.hIncrBy(token, 'active', -1);
+  async delete({ token }: { token: string }): Promise<void> {
+    await this.connection.hIncrBy(token, 'active', -1);
+    return;
   }
 }
 
