@@ -1,4 +1,4 @@
-import { checkMandatoryFields } from '@src/helpers/validation';
+import { checkMandatoryFields, validateObject } from '@src/helpers/validation';
 import ValidationException from '@src/infrastructure/exceptions/validationException';
 import authService from '@src/services/auth.service';
 
@@ -6,16 +6,37 @@ class AuthController {
   async registration(req, res, next) {
     try {
       const body = req.body;
-      const mandatoryFields = checkMandatoryFields({
-        fields: ['firstName', 'lastName', 'email', 'password', 'role', 'city'],
-        obj: body,
+      const errors = validateObject(body, {
+        email: {
+          required: true,
+          type: 'email',
+        },
+        password: {
+          type: 'string',
+          required: true,
+          minLength: 6,
+        },
+        firstName: {
+          type: 'string',
+          required: true,
+        },
+        lastName: {
+          type: 'string',
+          required: true,
+        },
+        role: {
+          required: true,
+          type: 'string',
+          includes: ['client', 'lawyer'],
+        },
+        city: {
+          required: true,
+          type: 'string',
+        },
       });
 
-      if (mandatoryFields.length) {
-        throw new ValidationException(
-          400,
-          `${mandatoryFields.join(',')} fields are required`,
-        );
+      if (errors.length) {
+        throw new ValidationException(400, JSON.stringify(errors));
       }
 
       const result = await authService.registration(body);
@@ -28,16 +49,20 @@ class AuthController {
   async login(req, res, next) {
     try {
       const body = req.body;
-      const mandatoryFields = checkMandatoryFields({
-        fields: ['email', 'password'],
-        obj: body,
+
+      const errors = validateObject(body, {
+        email: {
+          required: true,
+          type: 'email',
+        },
+        password: {
+          type: 'string',
+          required: true,
+        },
       });
 
-      if (mandatoryFields.length) {
-        throw new ValidationException(
-          400,
-          `${mandatoryFields.join(',')} fields are required`,
-        );
+      if (errors.length) {
+        throw new ValidationException(400, JSON.stringify(errors));
       }
 
       const result = await authService.login({
@@ -53,16 +78,19 @@ class AuthController {
   async refreshToken(req, res, next) {
     try {
       const body = req.body;
-      const mandatoryFields = checkMandatoryFields({
-        fields: ['refreshToken', 'accessToken'],
-        obj: body,
+      const errors = validateObject(body, {
+        refreshToken: {
+          required: true,
+          type: 'string',
+        },
+        accessToken: {
+          type: 'string',
+          required: true,
+        },
       });
 
-      if (mandatoryFields.length) {
-        throw new ValidationException(
-          400,
-          `${mandatoryFields.join(',')} fields are required`,
-        );
+      if (errors.length) {
+        throw new ValidationException(400, JSON.stringify(errors));
       }
 
       const result = await authService.refresh({
@@ -78,16 +106,19 @@ class AuthController {
   async logout(req, res, next) {
     try {
       const body = req.body;
-      const mandatoryFields = checkMandatoryFields({
-        fields: ['refreshToken', 'accessToken'],
-        obj: body,
+      const errors = validateObject(body, {
+        refreshToken: {
+          required: true,
+          type: 'string',
+        },
+        accessToken: {
+          type: 'string',
+          required: true,
+        },
       });
 
-      if (mandatoryFields.length) {
-        throw new ValidationException(
-          400,
-          `${mandatoryFields.join(',')} fields are required`,
-        );
+      if (errors.length) {
+        throw new ValidationException(400, JSON.stringify(errors));
       }
 
       await authService.logout({

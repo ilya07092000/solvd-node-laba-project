@@ -56,7 +56,7 @@ class AuthService {
     });
 
     if (!refreshTokenInfo.isValid || !accessTokenInfo.isValid) {
-      throw new HttpException(400, 'Refresh or access is not valid');
+      throw new HttpException(400, 'Refresh or access token is not valid');
     }
 
     await tokenService.deleteToken({ token: refreshToken });

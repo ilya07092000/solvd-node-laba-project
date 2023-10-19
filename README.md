@@ -141,7 +141,7 @@ Request body example
   "lastName": "lastName",
   "email": "email@email.com",
   "password": "password123",
-  "role": "lawyer | client | admin",
+  "role": "lawyer | client",
   "city": "Kyiv"
 }
 ```
@@ -155,7 +155,7 @@ Expected response `201 Created`
     "email": "email@email.com",
     "firstName": "firstName",
     "lastName": "lastName",
-    "role": "lawyer | client | admin",
+    "role": "lawyer | client",
     "city": "Kyiv"
   }
 }
