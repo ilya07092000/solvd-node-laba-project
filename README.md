@@ -1013,11 +1013,7 @@ Request body example
 ```json
 {
   "lawyerId": 1,
-  "clientId": 2,
-  "status": "active | fulfilled | failed | creating",
-  "budget": 228,
-  "startDate": "13-09-2023",
-  "endDate": "22-09-2023"
+  "budget": 228
 }
 ```
 
@@ -1149,10 +1145,7 @@ Request body example
 {
   "lawyerId": 1,
   "clientId": 2,
-  "status": "active | fulfilled | failed | creating",
-  "budget": 228,
-  "startDate": "13-09-2023",
-  "endDate": "22-09-2023"
+  "budget": 228
 }
 ```
 
@@ -1164,7 +1157,7 @@ Expected response `200 OK`
     "id": 1,
     "lawyerId": 1,
     "clientId": 2,
-    "status": "active | fulfilled | failed | creating",
+    "status": "creating",
     "budget": 228,
     "startDate": "13-09-2023",
     "endDate": "22-09-2023"
