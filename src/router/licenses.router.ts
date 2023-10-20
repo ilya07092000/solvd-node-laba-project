@@ -8,5 +8,7 @@ router.get('/:id', licensesController.getById);
 router.post('/', licensesController.create);
 router.put('/:id', licensesController.update);
 router.delete('/:id', licensesController.deleteById);
+router.put('/:id/verify', licensesController.verify);
+router.put('/:id/reject', licensesController.reject);
 
 export default router;

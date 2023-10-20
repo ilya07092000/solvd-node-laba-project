@@ -74,6 +74,46 @@ class LicensesController {
       return next(e);
     }
   }
+
+  verify(req, res, next) {
+    try {
+      const body = req.body;
+      const errors = validateObject(body, {
+        notes: {
+          required: true,
+          type: 'string',
+        },
+      });
+
+      if (errors.length) {
+        throw new ValidationException(400, JSON.stringify(errors));
+      }
+
+      return res.status(200).json({ result: {} });
+    } catch (e) {
+      return next(e);
+    }
+  }
+
+  reject(req, res, next) {
+    try {
+      const body = req.body;
+      const errors = validateObject(body, {
+        notes: {
+          required: true,
+          type: 'string',
+        },
+      });
+
+      if (errors.length) {
+        throw new ValidationException(400, JSON.stringify(errors));
+      }
+
+      return res.status(200).json({ result: {} });
+    } catch (e) {
+      return next(e);
+    }
+  }
 }
 
 export default new LicensesController();
