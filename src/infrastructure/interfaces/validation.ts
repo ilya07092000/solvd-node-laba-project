@@ -2,7 +2,11 @@ interface IValidationSchema {
   [key: string]: ValidationSchemaTypes;
 }
 
-type ValidationSchemaTypes = IStringSchema | IEmailSchema | INumberSchema;
+type ValidationSchemaTypes =
+  | IStringSchema
+  | IEmailSchema
+  | INumberSchema
+  | IBooleanSchema;
 
 interface IBasicSchema<T> {
   type: T;
@@ -22,10 +26,13 @@ interface INumberSchema extends IBasicSchema<'number'> {
   maxValue?: number;
 }
 
+interface IBooleanSchema extends IBasicSchema<'boolean'> {}
+
 export {
   IValidationSchema,
   IEmailSchema,
   INumberSchema,
   IStringSchema,
   ValidationSchemaTypes,
+  IBooleanSchema,
 };

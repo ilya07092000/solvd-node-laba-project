@@ -380,7 +380,6 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "password": "password123",
     "role": "lawyer",
     "city": "Kyiv"
   }
@@ -405,10 +404,7 @@ Request body example
 
 ```json
 {
-  "price": "228",
-  "experience": "10 years",
-  "city": "Kyiv",
-  "available": true
+  "city": "Kyiv"
 }
 ```
 
@@ -421,7 +417,6 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "password": "password123",
     "role": "lawyer",
     "city": "Kyiv"
   }
@@ -451,7 +446,6 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "password": "password123",
     "role": "lawyer",
     "city": "Kyiv"
   }
@@ -486,10 +480,9 @@ Expected response `200 OK`
       "firstName": "firstName",
       "lastName": "lastName",
       "email": "email@email.com",
-      "password": "password123",
       "role": "lawyer",
       "occupation": "Business",
-      "price": "228",
+      "price": 228,
       "experience": "10 years",
       "city": "Kyiv",
       "available": true
@@ -521,10 +514,9 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "password": "password123",
     "role": "lawyer",
     "occupation": "Business",
-    "price": "228",
+    "price": 228,
     "experience": "10 years",
     "city": "Kyiv",
     "available": true
@@ -556,7 +548,7 @@ Request body example
   "password": "password123",
   "role": "lawyer",
   "occupation": "Business",
-  "price": "228",
+  "price": 228,
   "experience": "10 years",
   "city": "Kyiv",
   "available": true
@@ -572,10 +564,9 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "password": "password123",
     "role": "lawyer",
     "occupation": "Business",
-    "price": "228",
+    "price": 228,
     "experience": "10 years",
     "city": "Kyiv",
     "available": true
@@ -602,7 +593,7 @@ Request body example
 ```json
 {
   "occupation": "Business",
-  "price": "228",
+  "price": 228,
   "experience": "10 years",
   "available": false
 }
@@ -617,10 +608,9 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "password": "password123",
     "role": "lawyer",
     "occupation": "Business",
-    "price": "228",
+    "price": 228,
     "experience": "10 years",
     "city": "Kyiv",
     "available": false
@@ -651,10 +641,9 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "password": "password123",
     "role": "lawyer",
     "occupation": "Business",
-    "price": "228",
+    "price": 228,
     "experience": "10 years",
     "city": "Kyiv",
     "available": true

@@ -1,4 +1,5 @@
 import {
+  IBooleanSchema,
   INumberSchema,
   IStringSchema,
   IValidationSchema,
@@ -32,6 +33,7 @@ const validateByType = (value: any, schema: ValidationSchemaTypes) => {
     string: stringChecker,
     email: emailChecker,
     number: numberChecker,
+    boolean: booleanChecker,
   };
 
   const validator = validators[schema.type];
@@ -40,6 +42,11 @@ const validateByType = (value: any, schema: ValidationSchemaTypes) => {
   }
 
   return typeof value === schema.type;
+};
+
+const booleanChecker = (value: any, schema: IBooleanSchema) => {
+  if (value === true || value === false) return;
+  return 'value should be boolean';
 };
 
 const stringChecker = (value: any, schema: IStringSchema) => {
@@ -51,11 +58,14 @@ const stringChecker = (value: any, schema: IStringSchema) => {
     return 'string type should be used for this field';
   }
 
-  if (schema.maxLength && value.length >= schema.maxLength) {
+  if (
+    typeof schema.maxLength === 'number' &&
+    value.length >= schema.maxLength
+  ) {
     return `max length is ${schema.maxLength} symbols`;
   }
 
-  if (schema.minLength && value.length < schema.minLength) {
+  if (typeof schema.minLength === 'number' && value.length < schema.minLength) {
     return `min length is ${schema.minLength} symbols`;
   }
 
@@ -73,12 +83,12 @@ const numberChecker = (value: any, schema: INumberSchema) => {
     return 'value is required';
   }
 
-  if (schema.maxValue && value >= schema.maxValue) {
+  if (typeof schema.maxValue === 'number' && value >= schema.maxValue) {
     return `max value is ${schema.maxValue}`;
   }
 
-  if (schema.minValue && value < schema.minValue) {
-    return `min value is ${schema.maxValue}`;
+  if (typeof schema.minValue === 'number' && value < schema.minValue) {
+    return `min value is ${schema.minValue}`;
   }
 };
 
@@ -98,9 +108,9 @@ const validateObject = (obj: object, schema: IValidationSchema): string[] => {
     const valueForValidation = obj[key];
     // skip validation for not required fields if value does not exist
     if (!(valueForValidation === undefined && !schemaForValidation.required)) {
-      const validationError = validateByType(obj[key], schema[key]);
+      const validationError = validateByType(obj[key], schemaForValidation);
       if (validationError) {
-        result.push(`${key} ${validationError}`);
+        result.push(`${key}: ${validationError}`);
       }
     }
     return result;
