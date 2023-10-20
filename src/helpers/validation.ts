@@ -94,9 +94,14 @@ const emailChecker = (value: any, schema: IStringSchema) => {
 
 const validateObject = (obj: object, schema: IValidationSchema): string[] => {
   const errors = Object.keys(schema).reduce((result, key: string) => {
-    const validationError = validateByType(obj[key], schema[key]);
-    if (validationError) {
-      result.push(`${key} ${validationError}`);
+    const schemaForValidation = schema[key];
+    const valueForValidation = obj[key];
+    // skip validation for not required fields if value does not exist
+    if (!(valueForValidation === undefined && !schemaForValidation.required)) {
+      const validationError = validateByType(obj[key], schema[key]);
+      if (validationError) {
+        result.push(`${key} ${validationError}`);
+      }
     }
     return result;
   }, []);
