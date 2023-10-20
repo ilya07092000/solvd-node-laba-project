@@ -367,12 +367,7 @@ Request body example
   "email": "email@email.com",
   "password": "password123",
   "role": "lawyer",
-  "age": "44",
-  "occupation": "Business",
-  "price": "228",
-  "experience": "10 years",
-  "city": "Kyiv",
-  "available": true
+  "city": "Kyiv"
 }
 ```
 
@@ -387,12 +382,7 @@ Expected response `200 OK`
     "email": "email@email.com",
     "password": "password123",
     "role": "lawyer",
-    "age": "44",
-    "occupation": "Business",
-    "price": "228",
-    "experience": "10 years",
-    "city": "Kyiv",
-    "available": true
+    "city": "Kyiv"
   }
 }
 ```
@@ -433,12 +423,7 @@ Expected response `200 OK`
     "email": "email@email.com",
     "password": "password123",
     "role": "lawyer",
-    "age": "44",
-    "occupation": "Business",
-    "price": "228",
-    "experience": "10 years",
-    "city": "Kyiv",
-    "available": true
+    "city": "Kyiv"
   }
 }
 ```
@@ -468,12 +453,7 @@ Expected response `200 OK`
     "email": "email@email.com",
     "password": "password123",
     "role": "lawyer",
-    "age": "44",
-    "occupation": "Business",
-    "price": "228",
-    "experience": "10 years",
-    "city": "Kyiv",
-    "available": true
+    "city": "Kyiv"
   }
 }
 ```
@@ -508,7 +488,6 @@ Expected response `200 OK`
       "email": "email@email.com",
       "password": "password123",
       "role": "lawyer",
-      "age": "44",
       "occupation": "Business",
       "price": "228",
       "experience": "10 years",
@@ -544,7 +523,6 @@ Expected response `200 OK`
     "email": "email@email.com",
     "password": "password123",
     "role": "lawyer",
-    "age": "44",
     "occupation": "Business",
     "price": "228",
     "experience": "10 years",
@@ -577,7 +555,6 @@ Request body example
   "email": "email@email.com",
   "password": "password123",
   "role": "lawyer",
-  "age": "44",
   "occupation": "Business",
   "price": "228",
   "experience": "10 years",
@@ -597,7 +574,6 @@ Expected response `200 OK`
     "email": "email@email.com",
     "password": "password123",
     "role": "lawyer",
-    "age": "44",
     "occupation": "Business",
     "price": "228",
     "experience": "10 years",
@@ -625,7 +601,6 @@ Request body example
 
 ```json
 {
-  "age": "44",
   "occupation": "Business",
   "price": "228",
   "experience": "10 years",
@@ -644,7 +619,6 @@ Expected response `200 OK`
     "email": "email@email.com",
     "password": "password123",
     "role": "lawyer",
-    "age": "44",
     "occupation": "Business",
     "price": "228",
     "experience": "10 years",
@@ -679,7 +653,6 @@ Expected response `200 OK`
     "email": "email@email.com",
     "password": "password123",
     "role": "lawyer",
-    "age": "44",
     "occupation": "Business",
     "price": "228",
     "experience": "10 years",
