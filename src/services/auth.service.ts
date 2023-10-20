@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 class AuthService {
   private tokenService: TokenService;
 
-  constructor(tokenService) {
+  constructor(tokenService: TokenService) {
     this.tokenService = tokenService;
   }
 
