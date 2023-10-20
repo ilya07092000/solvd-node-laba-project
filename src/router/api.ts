@@ -9,6 +9,7 @@ import casesRouter from './cases.router';
 import adminsRouter from './admins.router';
 import rolesRouter from './roles.router';
 import reviewsRouter from './reviews.router';
+import licensesRouter from './licenses.router';
 
 router.use('/auth', authRouter);
 router.use('/users', usersRouter);
@@ -18,5 +19,6 @@ router.use('/cases', casesRouter);
 router.use('/admins', adminsRouter);
 router.use('/roles', rolesRouter);
 router.use('/reviews', reviewsRouter);
+router.use('/licenses', licensesRouter);
 
 export default router;
