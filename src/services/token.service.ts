@@ -67,15 +67,17 @@ class TokenService {
   public async validateToken({
     token,
     type,
+    checkExpiration = true,
   }: {
     token: string;
     type: IToken['type'];
+    checkExpiration?: boolean;
   }): Promise<IToken & { isValid: boolean; userId: number }> {
     const tokenInfo = await this.repository.get({ token: token });
     let isValid =
       tokenInfo && +tokenInfo.active === 1 && tokenInfo.type === type;
 
-    if (type === 'refresh' && isValid) {
+    if (checkExpiration && isValid) {
       isValid = tokenInfo.expirationTimeStamp > +Date.now();
     }
 

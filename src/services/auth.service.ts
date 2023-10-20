@@ -53,6 +53,7 @@ class AuthService {
     const accessTokenInfo = await this.tokenService.validateToken({
       token: accessToken,
       type: 'access',
+      checkExpiration: false /** for refreshing access token can be expired */,
     });
 
     if (!refreshTokenInfo.isValid || !accessTokenInfo.isValid) {
