@@ -58,10 +58,7 @@ const stringChecker = (value: any, schema: IStringSchema) => {
     return 'string type should be used for this field';
   }
 
-  if (
-    typeof schema.maxLength === 'number' &&
-    value.length >= schema.maxLength
-  ) {
+  if (typeof schema.maxLength === 'number' && value.length > schema.maxLength) {
     return `max length is ${schema.maxLength} symbols`;
   }
 
@@ -83,7 +80,7 @@ const numberChecker = (value: any, schema: INumberSchema) => {
     return 'value is required';
   }
 
-  if (typeof schema.maxValue === 'number' && value >= schema.maxValue) {
+  if (typeof schema.maxValue === 'number' && value > schema.maxValue) {
     return `max value is ${schema.maxValue}`;
   }
 
