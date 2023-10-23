@@ -2,11 +2,11 @@ version: '3'
 
 services:
   db:
+    image: postgres
     environment:
-      POSTGRES_USER: user
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: postgres
-    image: postgres
     ports:
       - '5432:5432'
 
@@ -30,7 +30,7 @@ services:
       context: .
     command: ['./wait-for-it/wait-for-it.sh', 'db:5432', '--', 'yarn', 'db']
     environment:
-      DB_USER: user
+      DB_USER: postgres
       DB_PORT: 5432
       DB_DATABASE: postgres
       DB_PASSWORD: pass

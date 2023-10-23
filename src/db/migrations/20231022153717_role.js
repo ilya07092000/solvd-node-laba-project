@@ -14,7 +14,7 @@ exports.up = async function (knex) {
   await knex.raw(`
     CREATE TABLE IF NOT EXISTS public.role (
       id SERIAL PRIMARY KEY,
-      type role_type
+      type role_type UNIQUE
   )`);
 };
 
