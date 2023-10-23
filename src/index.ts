@@ -3,6 +3,7 @@ import { config } from 'dotenv';
 import api from './router/api';
 import { redisConnectionInstance } from './db/redis/connection';
 import errorHandlerMiddleWare from './middlewares/errorHandler.middleware';
+import { postgresConnectionInstance } from './db/postgres/connection';
 
 config();
 const app = express();
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
 
 async function booststrap() {
   await redisConnectionInstance.makeConnection();
+  await postgresConnectionInstance.makeConnection();
 
   app.listen(process.env.PORT, () =>
     console.log(`Running on port ${process.env.PORT}`),

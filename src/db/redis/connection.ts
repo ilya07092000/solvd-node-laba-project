@@ -8,6 +8,7 @@ class RedisConnection extends BasicDBConnection {
       console.log('Redis Client Error', err),
     );
     await this.connection.connect();
+    console.log('Redis Connected');
     return true;
   }
 }
