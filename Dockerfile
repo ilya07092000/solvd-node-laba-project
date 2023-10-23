@@ -14,3 +14,4 @@ RUN yarn
 EXPOSE 3000
 
 CMD [ "yarn", "start" ]
+RUN git clone https://github.com/vishnubob/wait-for-it.git

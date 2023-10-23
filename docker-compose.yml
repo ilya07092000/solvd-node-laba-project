@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  db:
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: postgres
+    image: postgres
+    ports:
+      - '5432:5432'
+
   redis:
     image: 'redis:alpine'
     ports:
@@ -10,6 +19,24 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
+    depends_on:
+      - db
     env_file: .env
     ports:
       - '3000:3000'
+
+  migration:
+    build:
+      context: .
+    command: ['./wait-for-it/wait-for-it.sh', 'db:5432', '--', 'yarn', 'db']
+    environment:
+      DB_USER: user
+      DB_PORT: 5432
+      DB_DATABASE: postgres
+      DB_PASSWORD: pass
+      DB_HOST: db
+      NODE_ENV: production
+    links:
+      - db
+    depends_on:
+      - db
