@@ -1,3 +1,6 @@
+import { config } from 'dotenv';
+config();
+
 const configObject = {
   development: {
     redis: {},
