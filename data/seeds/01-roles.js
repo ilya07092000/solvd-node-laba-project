@@ -4,10 +4,17 @@
  */
 exports.seed = async function (knex) {
   await knex.raw(`
-    INSERT INTO public.role (type) 
-    VALUES
-      ('admin'),
-      ('lawyer'),
-      ('client')
+    DO
+    $do$
+    BEGIN
+      IF NOT EXISTS (SELECT FROM role) THEN
+        INSERT INTO public.role (type)
+        VALUES
+          ('admin'),
+          ('lawyer'),
+          ('client');
+      END IF;
+    END
+    $do$
   `);
 };
