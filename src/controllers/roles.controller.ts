@@ -1,25 +1,28 @@
 import { validateObject } from '@src/helpers/validation';
 import RoleTypes from '@src/infrastructure/enums/roles';
 import ValidationException from '@src/infrastructure/exceptions/validationException';
+import { roleService } from '@src/services/role.service';
 
 class RolesController {
-  getAll(req, res, next) {
+  async getAll(req, res, next) {
     try {
-      return res.status(200).json({ result: [] });
+      const result = await roleService.getAll();
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  getById(req, res, next) {
+  async getById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
+      const result = await roleService.getById({ id: req.params.id });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  create(req, res, next) {
+  async create(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
@@ -34,18 +37,20 @@ class RolesController {
         throw new ValidationException(400, JSON.stringify(errors));
       }
 
-      return res.status(201).json({ result: {} });
+      const result = await roleService.create({ type: body.type });
+
+      return res.status(201).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  update(req, res, next) {
+  async update(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
         type: {
-          required: false,
+          required: true,
           type: 'string',
           includes: [RoleTypes.ADMIN, RoleTypes.CLIENT, RoleTypes.LAWYER],
         },
@@ -55,15 +60,21 @@ class RolesController {
         throw new ValidationException(400, JSON.stringify(errors));
       }
 
-      return res.status(200).json({ result: {} });
+      const result = await roleService.update({
+        id: req.params.id,
+        type: body.type,
+      });
+
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  deleteById(req, res, next) {
+  async deleteById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
+      const result = await roleService.deleteById({ id: req.params.id });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }

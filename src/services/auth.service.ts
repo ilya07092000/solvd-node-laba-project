@@ -2,28 +2,68 @@ import HttpException from '@src/infrastructure/exceptions/httpException';
 import { tokenService, TokenService } from '@src/services/token.service';
 import { userService, UserService } from './user.service';
 import bcrypt from 'bcrypt';
-import { CreateUserDto, UserDto } from '@src/dto/user';
+import { UserDto } from '@src/dto/user';
+import RoleTypes from '@src/infrastructure/enums/roles';
+import { LawyerService, lawyerService } from './lawyer.service';
+import { CreateLawyerDto } from '@src/dto/lawyer';
+import { postgresConnectionInstance } from '@src/db/postgres/connection';
+import { roleService, RoleService } from './role.service';
 
 class AuthService {
   private tokenService: TokenService;
   private userService: UserService;
+  private lawyerService: LawyerService;
+  private roleService: RoleService;
 
-  constructor(tokenService: TokenService, userService: UserService) {
+  constructor(
+    tokenService: TokenService,
+    userService: UserService,
+    lawyerService: LawyerService,
+    roleService: RoleService,
+  ) {
     this.tokenService = tokenService;
     this.userService = userService;
+    this.lawyerService = lawyerService;
+    this.roleService = roleService;
+  }
+
+  async getHashedPassword({ password }: { password: string }): Promise<string> {
+    const hashedPassword = await bcrypt.hash(
+      password,
+      +process.env.SALT_ROUNDS,
+    );
+    return hashedPassword;
   }
 
   async registration(data: UserDto & { password: string }) {
-    const hashedPassword = await bcrypt.hash(
-      data.password,
-      +process.env.SALT_ROUNDS,
-    );
-    const user = await this.userService.create({
-      ...data,
-      password: hashedPassword,
-    });
+    try {
+      const hashedPassword = await this.getHashedPassword({
+        password: data.password,
+      });
+      const roleInfo = await this.roleService.getById({ id: data.roleId });
+      if (!roleInfo || roleInfo.type === RoleTypes.ADMIN) {
+        throw new HttpException(400, 'Role Does Not Exist');
+      }
 
-    return user;
+      await postgresConnectionInstance.connection.query('BEGIN');
+
+      const user = await this.userService.create({
+        ...data,
+        password: hashedPassword,
+      });
+
+      if (roleInfo.type === RoleTypes.LAWYER) {
+        await this.lawyerService.create(
+          new CreateLawyerDto({ userId: user.id, available: false }),
+        );
+      }
+
+      await postgresConnectionInstance.connection.query('COMMIT');
+      return user;
+    } catch (e) {
+      await postgresConnectionInstance.connection.query('ROLLBACK');
+      throw e;
+    }
   }
 
   async login({ email, password }: { email: string; password: string }) {
@@ -116,5 +156,10 @@ class AuthService {
   }
 }
 
-const authService = new AuthService(tokenService, userService);
-export default authService;
+const authService = new AuthService(
+  tokenService,
+  userService,
+  lawyerService,
+  roleService,
+);
+export { authService, AuthService };

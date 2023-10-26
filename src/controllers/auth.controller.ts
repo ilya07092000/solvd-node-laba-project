@@ -1,6 +1,6 @@
-import { checkMandatoryFields, validateObject } from '@src/helpers/validation';
+import { validateObject } from '@src/helpers/validation';
 import ValidationException from '@src/infrastructure/exceptions/validationException';
-import authService from '@src/services/auth.service';
+import { authService } from '@src/services/auth.service';
 
 class AuthController {
   async registration(req, res, next) {
@@ -24,10 +24,10 @@ class AuthController {
           type: 'string',
           required: true,
         },
-        role: {
+        roleId: {
           required: true,
-          type: 'string',
-          includes: ['client', 'lawyer'],
+          type: 'number',
+          minValue: 0,
         },
         city: {
           required: true,

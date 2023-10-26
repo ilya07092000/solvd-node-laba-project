@@ -1,24 +1,28 @@
 import { validateObject } from '@src/helpers/validation';
 import ValidationException from '@src/infrastructure/exceptions/validationException';
+import { userService } from '@src/services/user.service';
 
 class UsersConroller {
-  getAll(req, res, next) {
+  async getAll(req, res, next) {
     try {
-      return res.status(200).json({ result: [] });
+      const result = await userService.getAll();
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  getById(req, res, next) {
+  async getById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
+      const id = req.params.id;
+      const result = await userService.getById({ id });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  create(req, res, next) {
+  async create(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
@@ -39,10 +43,10 @@ class UsersConroller {
           type: 'string',
           required: true,
         },
-        role: {
+        roleId: {
           required: true,
-          type: 'string',
-          includes: ['client', 'lawyer'],
+          type: 'number',
+          minValue: 0,
         },
         city: {
           required: true,
@@ -53,16 +57,18 @@ class UsersConroller {
       if (errors.length) {
         throw new ValidationException(400, JSON.stringify(errors));
       }
+      const result = await userService.create(body);
 
-      return res.status(201).json({ result: {} });
+      return res.status(201).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  update(req, res, next) {
+  async update(req, res, next) {
     try {
       const body = req.body;
+      const id = req.params.id;
       const errors = validateObject(body, {
         email: {
           required: false,
@@ -81,10 +87,10 @@ class UsersConroller {
           type: 'string',
           required: false,
         },
-        role: {
-          required: false,
-          type: 'string',
-          includes: ['client', 'lawyer'],
+        roleId: {
+          required: true,
+          type: 'number',
+          minValue: 0,
         },
         city: {
           required: false,
@@ -96,15 +102,23 @@ class UsersConroller {
         throw new ValidationException(400, JSON.stringify(errors));
       }
 
-      return res.status(200).json({ result: {} });
+      const result = await userService.update(id, body);
+
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  deleteById(req, res, next) {
+  async deleteById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
+      const id = req.params.id;
+      const result = await userService.deleteById({
+        id: +id,
+        currUserId: req?.userInfo?.id || null,
+      });
+
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }

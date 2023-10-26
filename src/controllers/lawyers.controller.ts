@@ -1,52 +1,33 @@
 import { validateObject } from '@src/helpers/validation';
 import ValidationException from '@src/infrastructure/exceptions/validationException';
+import { lawyerService } from '@src/services/lawyer.service';
 
 class LawyersController {
-  getAll(req, res, next) {
+  async getAll(req, res, next) {
     try {
-      return res.status(200).json({ result: [] });
+      const result = await lawyerService.getAll();
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  getById(req, res, next) {
+  async getById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
+      const result = await lawyerService.getById({ id: req.params.id });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  create(req, res, next) {
+  async create(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
-        email: {
+        userId: {
           required: true,
-          type: 'email',
-        },
-        password: {
-          type: 'string',
-          required: true,
-          minLength: 6,
-        },
-        firstName: {
-          type: 'string',
-          required: true,
-        },
-        lastName: {
-          type: 'string',
-          required: true,
-        },
-        role: {
-          required: true,
-          type: 'string',
-          includes: ['lawyer'],
-        },
-        city: {
-          required: true,
-          type: 'string',
+          type: 'number',
         },
         occupation: {
           required: false,
@@ -71,7 +52,8 @@ class LawyersController {
         throw new ValidationException(400, JSON.stringify(errors));
       }
 
-      return res.status(201).json({ result: {} });
+      const result = await lawyerService.create(body);
+      return res.status(201).json({ result });
     } catch (e) {
       return next(e);
     }
@@ -81,31 +63,9 @@ class LawyersController {
     try {
       const body = req.body;
       const errors = validateObject(body, {
-        email: {
+        userId: {
           required: false,
-          type: 'email',
-        },
-        password: {
-          type: 'string',
-          required: false,
-          minLength: 6,
-        },
-        firstName: {
-          type: 'string',
-          required: false,
-        },
-        lastName: {
-          type: 'string',
-          required: false,
-        },
-        role: {
-          required: false,
-          type: 'string',
-          includes: ['client', 'lawyer'],
-        },
-        city: {
-          required: false,
-          type: 'string',
+          type: 'number',
         },
         occupation: {
           required: false,
@@ -136,9 +96,15 @@ class LawyersController {
     }
   }
 
-  deleteById(req, res, next) {
+  async deleteById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
+      const id = req.params.id;
+      const result = await lawyerService.deleteById({
+        id: +id,
+        currUserId: req?.userInfo?.id || null,
+      });
+
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }

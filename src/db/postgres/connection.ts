@@ -1,4 +1,3 @@
-import { createClient } from 'redis';
 import BasicDBConnection from '../../infrastructure/contracts/BasicDBConnection';
 import config from '@src/config';
 const { Pool } = require('pg');
