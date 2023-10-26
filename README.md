@@ -141,7 +141,7 @@ Request body example
   "lastName": "lastName",
   "email": "email@email.com",
   "password": "password123",
-  "role": "lawyer | client",
+  "roleId": 8,
   "city": "Kyiv"
 }
 ```
@@ -155,7 +155,7 @@ Expected response `201 Created`
     "email": "email@email.com",
     "firstName": "firstName",
     "lastName": "lastName",
-    "role": "lawyer | client",
+    "roleId": 8,
     "city": "Kyiv"
   }
 }
@@ -194,7 +194,7 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "city": "Kyiv",
-    "role": "lawyer | client | admin",
+    "roleId": 8,
     "tokens": {
       "refresh": "231dsf123asfds",
       "access": "sdfwqreew3"
@@ -258,15 +258,10 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "email": "email@email.com",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "city": "Kyiv",
-    "role": "lawyer | client | admin",
+    "userId": "63",
     "tokens": {
-      "refresh": "231dsf123asfds",
-      "access": "sdfwqreew3"
+      "access": "1698326309285",
+      "refresh": "1698326309356"
     }
   }
 }
@@ -277,7 +272,7 @@ Expected errors `400 Bad Request`
 ```json
 {
   "error": {
-    "message": "Token is not valid"
+    "message": "Refresh or access token is not valid"
   }
 }
 ```
@@ -300,7 +295,7 @@ Expected response `200 OK`
       "firstName": "firstName",
       "lastName": "lastName",
       "email": "email@email.com",
-      "role": "lawyer | client | admin",
+      "roleId": 8,
       "city": "Kyiv"
     },
     {
@@ -308,7 +303,7 @@ Expected response `200 OK`
       "firstName": "firstName",
       "lastName": "lastName",
       "email": "email2@email.com",
-      "role": "lawyer | client | admin",
+      "roleId": 8,
       "city": "Lviv"
     }
   ]
@@ -338,7 +333,7 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "role": "lawyer | client | admin",
+    "roleId": 8,
     "city": "Kyiv"
   }
 }
@@ -366,7 +361,7 @@ Request body example
   "lastName": "lastName",
   "email": "email@email.com",
   "password": "password123",
-  "role": "lawyer",
+  "roleId": 8,
   "city": "Kyiv"
 }
 ```
@@ -380,7 +375,7 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "role": "lawyer",
+    "roleId": 8,
     "city": "Kyiv"
   }
 }
@@ -417,7 +412,7 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "role": "lawyer",
+    "roleId": 8,
     "city": "Kyiv"
   }
 }
@@ -446,7 +441,7 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "role": "lawyer",
+    "roleId": 8,
     "city": "Kyiv"
   }
 }
@@ -480,7 +475,7 @@ Expected response `200 OK`
       "firstName": "firstName",
       "lastName": "lastName",
       "email": "email@email.com",
-      "role": "lawyer",
+      "roleId": 8,
       "occupation": "Business",
       "price": 228,
       "experience": "10 years",
@@ -514,7 +509,7 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "role": "lawyer",
+    "roleId": 8,
     "occupation": "Business",
     "price": 228,
     "experience": "10 years",
@@ -546,7 +541,6 @@ Request body example
   "lastName": "lastName",
   "email": "email@email.com",
   "password": "password123",
-  "role": "lawyer",
   "occupation": "Business",
   "price": 228,
   "experience": "10 years",
@@ -564,7 +558,7 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "role": "lawyer",
+    "roleId": 8,
     "occupation": "Business",
     "price": 228,
     "experience": "10 years",
@@ -608,7 +602,7 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "role": "lawyer",
+    "roleId": 8,
     "occupation": "Business",
     "price": 228,
     "experience": "10 years",
@@ -641,7 +635,7 @@ Expected response `200 OK`
     "firstName": "firstName",
     "lastName": "lastName",
     "email": "email@email.com",
-    "role": "lawyer",
+    "roleId": 8,
     "occupation": "Business",
     "price": 228,
     "experience": "10 years",
