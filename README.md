@@ -1213,21 +1213,13 @@ Expected response `200 OK`
 {
   "result": [
     {
-      "id": "1",
-      "firstName": "firstName",
-      "lastName": "lastName",
-      "email": "email@email.com",
-      "role": "admin",
-      "city": "Kyiv",
+      "id": 1,
+      "userId": 1,
       "isActive": true
     },
     {
-      "id": "2",
-      "firstName": "firstName",
-      "lastName": "lastName",
-      "email": "email2@email.com",
-      "role": "admin",
-      "city": "Kyiv",
+      "id": 2,
+      "userId": 3,
       "isActive": false
     }
   ]
@@ -1253,12 +1245,8 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "role": "admin",
-    "city": "Kyiv",
+    "id": 1,
+    "userId": 1,
     "isActive": true
   }
 }
@@ -1282,27 +1270,18 @@ Request body example
 
 ```json
 {
-  "firstName": "firstName",
-  "lastName": "lastName",
-  "email": "email@email.com",
-  "role": "admin",
-  "city": "Kyiv",
-  "isActive": true
+  "userId": 1
 }
 ```
 
-Expected response `200 OK`
+Expected response `201 Created`
 
 ```json
 {
   "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "role": "admin",
-    "city": "Kyiv",
-    "isActive": true
+    "id": 1,
+    "userId": 1,
+    "isActive": false
   }
 }
 ```
@@ -1335,11 +1314,7 @@ Expected response `200 OK`
 {
   "result": {
     "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "role": "admin",
-    "city": "Kyiv",
+    "userId": 1,
     "isActive": false
   }
 }
@@ -1364,12 +1339,8 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "role": "admin",
-    "city": "Kyiv",
+    "id": 1,
+    "userId": 1,
     "isActive": true
   }
 }
