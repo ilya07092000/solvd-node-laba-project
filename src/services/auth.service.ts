@@ -41,11 +41,19 @@ class AuthService {
       const hashedPassword = await this.passwordService.getHashedPassword({
         password: data.password,
       });
+
+      /**
+       * check whether role id exists in roles table
+       * exception: can not register admin role by registration process
+       */
       const roleInfo = await this.roleService.getById({ id: data.roleId });
       if (!roleInfo || roleInfo.type === RoleTypes.ADMIN) {
         throw new HttpException(400, 'Role Does Not Exist');
       }
 
+      /**
+       * begin transaction
+       */
       await postgresConnectionInstance.connection.query('BEGIN');
 
       const user = await this.userService.create({
@@ -53,6 +61,10 @@ class AuthService {
         password: hashedPassword,
       });
 
+      /**
+       * depends on role type which we get by id from db,
+       * create lawyer or client
+       */
       if (roleInfo.type === RoleTypes.LAWYER) {
         await this.lawyerService.create(
           new CreateLawyerDto({ userId: user.id, available: false }),
@@ -63,22 +75,33 @@ class AuthService {
         );
       }
 
+      /**
+       * commit transaction
+       */
       await postgresConnectionInstance.connection.query('COMMIT');
       return user;
     } catch (e) {
+      /**
+       * rollback transaction in case of error
+       */
       await postgresConnectionInstance.connection.query('ROLLBACK');
       throw e;
     }
   }
 
   async login({ email, password }: { email: string; password: string }) {
+    /**
+     * check whether user by this email exists in db
+     */
     const userInfo = await this.userService.getByEmail({ email });
     const userDto = userInfo.dto;
-
     if (!userDto.id) {
       throw new HttpException(400, 'Email or password is not correct');
     }
 
+    /**
+     * comparre password in passowrd service
+     */
     const isCorrectPassword = await this.passwordService.checkPassword({
       password,
       hash: userInfo.password,
@@ -87,6 +110,10 @@ class AuthService {
       throw new HttpException(400, 'Email or password is not correct');
     }
 
+    /**
+     * generate access and refresh token
+     * save them in db
+     */
     const tokens = tokenService.generateTokens();
     await tokenService.saveToken({
       userId: userDto.id,
@@ -107,6 +134,10 @@ class AuthService {
   }
 
   async refresh({ refreshToken, accessToken }) {
+    /**
+     * validate both access and refresh token
+     * exception - access token can be expired, so we do not validate expiration timestamp
+     */
     const refreshTokenInfo = await this.tokenService.validateToken({
       token: refreshToken,
       type: 'refresh',
@@ -116,14 +147,20 @@ class AuthService {
       type: 'access',
       checkExpiration: false /** for refreshing access token can be expired */,
     });
-
     if (!refreshTokenInfo.isValid || !accessTokenInfo.isValid) {
       throw new HttpException(400, 'Refresh or access token is not valid');
     }
 
+    /**
+     * delete tokens if they are valid
+     */
     await tokenService.deleteToken({ token: refreshToken });
     await tokenService.deleteToken({ token: accessToken });
 
+    /**
+     * generate new pair of tokens,
+     * save them in db
+     */
     const tokens = tokenService.generateTokens();
     await tokenService.saveToken({
       userId: accessTokenInfo.userId,
@@ -144,6 +181,10 @@ class AuthService {
   }
 
   async logout({ refreshToken, accessToken }) {
+    /**
+     * check whether tokens are valid
+     * exception - access token can be expired, so we do not validate expiration timestamp
+     */
     const refreshTokenInfo = await this.tokenService.validateToken({
       token: refreshToken,
       type: 'refresh',
@@ -151,12 +192,15 @@ class AuthService {
     const accessTokenInfo = await this.tokenService.validateToken({
       token: accessToken,
       type: 'access',
+      checkExpiration: false /** for logout access token can be expired */,
     });
-
     if (!refreshTokenInfo.isValid || !accessTokenInfo.isValid) {
       throw new HttpException(400, 'Refresh or access token is not valid');
     }
 
+    /**
+     * delete tokens if they are valid
+     */
     await tokenService.deleteToken({ token: refreshToken });
     await tokenService.deleteToken({ token: accessToken });
 
