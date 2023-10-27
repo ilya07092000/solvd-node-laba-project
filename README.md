@@ -645,22 +645,14 @@ Expected response `200 OK`
 {
   "result": [
     {
-      "id": "1",
-      "firstName": "firstName",
-      "lastName": "lastName",
-      "email": "email@email.com",
-      "role": "client",
-      "city": "Kyiv",
+      "id": 2,
+      "userId": 163,
       "budget": 228
     },
     {
-      "id": "2",
-      "firstName": "firstName",
-      "lastName": "lastName",
-      "email": "email2@email.com",
-      "role": "client",
-      "city": "Lviv",
-      "budget": 228
+      "id": 3,
+      "userId": 16,
+      "budget": 300
     }
   ]
 }
@@ -685,12 +677,8 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "role": "client",
-    "city": "Kyiv",
+    "id": 2,
+    "userId": 163,
     "budget": 228
   }
 }
@@ -714,11 +702,7 @@ Request body example
 
 ```json
 {
-  "firstName": "firstName",
-  "lastName": "lastName",
-  "email": "email@email.com",
-  "role": "client",
-  "city": "Kyiv",
+  "userId": 163,
   "budget": 228
 }
 ```
@@ -728,12 +712,8 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "role": "client",
-    "city": "Kyiv",
+    "id": 2,
+    "userId": 163,
     "budget": 228
   }
 }
@@ -766,12 +746,8 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "role": "client",
-    "city": "Kyiv",
+    "id": 2,
+    "userId": 163,
     "budget": 228
   }
 }
@@ -796,12 +772,8 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "role": "client",
-    "city": "Kyiv",
+    "id": 2,
+    "userId": 163,
     "budget": 228
   }
 }

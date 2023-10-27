@@ -8,23 +8,28 @@ import { LawyerService, lawyerService } from './lawyer.service';
 import { CreateLawyerDto } from '@src/dto/lawyer';
 import { postgresConnectionInstance } from '@src/db/postgres/connection';
 import { roleService, RoleService } from './role.service';
+import { clientService, ClientService } from './client.service';
+import { CreateClientDto } from '@src/dto/client';
 
 class AuthService {
   private tokenService: TokenService;
   private userService: UserService;
   private lawyerService: LawyerService;
   private roleService: RoleService;
+  private clientService: ClientService;
 
   constructor(
     tokenService: TokenService,
     userService: UserService,
     lawyerService: LawyerService,
     roleService: RoleService,
+    clientService: ClientService,
   ) {
     this.tokenService = tokenService;
     this.userService = userService;
     this.lawyerService = lawyerService;
     this.roleService = roleService;
+    this.clientService = clientService;
   }
 
   async getHashedPassword({ password }: { password: string }): Promise<string> {
@@ -55,6 +60,10 @@ class AuthService {
       if (roleInfo.type === RoleTypes.LAWYER) {
         await this.lawyerService.create(
           new CreateLawyerDto({ userId: user.id, available: false }),
+        );
+      } else if (roleInfo.type === RoleTypes.CLIENT) {
+        await this.clientService.create(
+          new CreateClientDto({ userId: user.id, budget: 0 }),
         );
       }
 
@@ -161,5 +170,6 @@ const authService = new AuthService(
   userService,
   lawyerService,
   roleService,
+  clientService,
 );
 export { authService, AuthService };
