@@ -471,15 +471,11 @@ Expected response `200 OK`
 {
   "result": [
     {
-      "id": "1",
-      "firstName": "firstName",
-      "lastName": "lastName",
-      "email": "email@email.com",
-      "roleId": 8,
+      "id": 1,
+      "userId": 2,
       "occupation": "Business",
       "price": 228,
       "experience": "10 years",
-      "city": "Kyiv",
       "available": true
     }
   ]
@@ -505,15 +501,11 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "roleId": 8,
+    "id": 1,
+    "userId": 2,
     "occupation": "Business",
     "price": 228,
     "experience": "10 years",
-    "city": "Kyiv",
     "available": true
   }
 }
@@ -537,14 +529,10 @@ Request body example
 
 ```json
 {
-  "firstName": "firstName",
-  "lastName": "lastName",
-  "email": "email@email.com",
-  "password": "password123",
+  "userId": 2,
   "occupation": "Business",
   "price": 228,
   "experience": "10 years",
-  "city": "Kyiv",
   "available": true
 }
 ```
@@ -554,15 +542,11 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "roleId": 8,
+    "id": 1,
+    "userId": 2,
     "occupation": "Business",
     "price": 228,
     "experience": "10 years",
-    "city": "Kyiv",
     "available": true
   }
 }
@@ -598,16 +582,12 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "roleId": 8,
+    "id": 1,
+    "userId": 2,
     "occupation": "Business",
     "price": 228,
     "experience": "10 years",
-    "city": "Kyiv",
-    "available": false
+    "available": true
   }
 }
 ```
@@ -631,15 +611,11 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "firstName": "firstName",
-    "lastName": "lastName",
-    "email": "email@email.com",
-    "roleId": 8,
+    "id": 1,
+    "userId": 2,
     "occupation": "Business",
     "price": 228,
     "experience": "10 years",
-    "city": "Kyiv",
     "available": true
   }
 }

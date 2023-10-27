@@ -74,6 +74,11 @@ class LawyerService {
     }
     return lawyerDto;
   }
+
+  async update({ id, data }: { id: number; data: Partial<CreateLawyerDto> }) {
+    await this.getById({ id });
+    return this.repository.updateById({ id, updatedLawyer: data });
+  }
 }
 
 const lawyerService = new LawyerService(

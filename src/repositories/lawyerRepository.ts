@@ -8,71 +8,86 @@ class LawyerRepository {
     this.connection = connection;
   }
 
-  async getAll() {
+  async getAll(): Promise<null | LawyerDto[]> {
     const req = await this.connection.query(
-      ` SELECT l.id, l.occupation, l.price, l.experience, l.available, u.first_name, u.last_name, u.email, u.city, u.role_id
-        FROM lawyer AS l
-        LEFT JOIN "user" AS u ON u.id = l.user_id
+      ` SELECT id, user_id, occupation, price, experience, available
+        FROM lawyer
       `,
     );
+
     const data = req.rows;
-    if (!data) {
-      return null;
-    }
 
-    return data;
+    return data
+      ? data.map(
+          (lawyer) =>
+            new LawyerDto({
+              ...lawyer,
+              userId: lawyer.user_id,
+            }),
+        )
+      : null;
   }
 
-  async getById({ id }: { id: number }) {
+  async getById({ id }: { id: number }): Promise<null | LawyerDto> {
     const req = await this.connection.query(
-      ` SELECT l.id, l.occupation, l.price, l.experience, l.available, u.first_name, u.last_name, u.email, u.city, u.role_id
-        FROM lawyer AS l
-        INNER JOIN "user" AS u ON u.id = l.user_id
-        WHERE l.id = $1
+      ` SELECT id, user_id, occupation, price, experience, available
+        FROM lawyer
+        WHERE id = $1
       `,
       [id],
     );
     const data = req.rows[0];
-    if (!data) {
-      return null;
-    }
 
-    return data;
+    return data
+      ? new LawyerDto({
+          ...data,
+          userId: data.user_id,
+        })
+      : null;
   }
 
-  async getByUserId({ id }: { id: number }) {
+  async getByUserId({ id }: { id: number }): Promise<null | LawyerDto> {
     const req = await this.connection.query(
-      ` SELECT l.id, l.occupation, l.price, l.experience, l.available, u.first_name, u.last_name, u.email, u.city, u.role_id
-        FROM lawyer AS l
-        INNER JOIN "user" AS u ON u.id = l.user_id
-        WHERE u.id = $1
+      ` SELECT id, user_id, occupation, price, experience, available
+        FROM lawyer
+        WHERE user_id = $1
       `,
       [id],
     );
-    const data = req.rows[0];
-    if (!data) {
-      return null;
-    }
 
-    return data;
+    const data = req.rows[0];
+
+    return data
+      ? new LawyerDto({
+          ...data,
+          userId: data.user_id,
+        })
+      : null;
   }
 
-  async create(data: CreateLawyerDto) {
+  async create(inputData: CreateLawyerDto) {
     const req = await this.connection.query(
       ` INSERT INTO lawyer (user_id,occupation,price,experience,available) 
         VALUES($1, $2, $3, $4, $5) 
-        RETURNING id
+        RETURNING *
       `,
       [
-        data.userId,
-        data.occupation,
-        data.price,
-        data.experience,
-        data.available,
+        inputData.userId,
+        inputData.occupation,
+        inputData.price,
+        inputData.experience,
+        inputData.available,
       ],
     );
-    const newLawyerDto = await this.getById({ id: req.rows[0].id });
-    return newLawyerDto;
+
+    const data = req.rows[0];
+
+    return data
+      ? new LawyerDto({
+          ...data,
+          userId: data.user_id,
+        })
+      : null;
   }
 
   async deleteById({ id }: { id: number }) {
@@ -80,12 +95,57 @@ class LawyerRepository {
       `DELETE FROM "lawyer" WHERE id = $1 RETURNING *`,
       [id],
     );
+
     const data = req.rows[0];
 
-    if (!data) {
-      return null;
-    }
-    return data;
+    return data
+      ? new LawyerDto({
+          ...data,
+          userId: data.user_id,
+        })
+      : null;
+  }
+
+  async updateById({
+    id,
+    updatedLawyer,
+  }: {
+    id: number;
+    updatedLawyer: Partial<CreateLawyerDto>;
+  }): Promise<null | LawyerDto> {
+    const currLawyer = await this.getById({ id });
+    const newLawyer = {
+      ...currLawyer,
+      ...updatedLawyer,
+    };
+
+    const req = await this.connection.query(
+      ` UPDATE lawyer 
+        SET available = $1,
+            experience = $2,
+            occupation = $3,
+            price = $4,
+            user_id = $5
+        WHERE id = $6
+        RETURNING *
+      `,
+      [
+        newLawyer.available,
+        newLawyer.experience,
+        newLawyer.occupation,
+        newLawyer.price,
+        newLawyer.userId,
+        id,
+      ],
+    );
+    const data = req.rows[0];
+
+    return data
+      ? new LawyerDto({
+          ...data,
+          userId: data.user_id,
+        })
+      : null;
   }
 }
 

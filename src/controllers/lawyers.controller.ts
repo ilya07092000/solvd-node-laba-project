@@ -59,7 +59,7 @@ class LawyersController {
     }
   }
 
-  update(req, res, next) {
+  async update(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
@@ -90,7 +90,12 @@ class LawyersController {
         throw new ValidationException(400, JSON.stringify(errors));
       }
 
-      return res.status(200).json({ result: {} });
+      const result = await lawyerService.update({
+        id: req.params.id,
+        data: body,
+      });
+
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
