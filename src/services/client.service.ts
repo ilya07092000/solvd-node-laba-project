@@ -60,6 +60,9 @@ class ClientService {
   }
 
   async deleteById({ id, currUserId }: { id: number; currUserId: number }) {
+    /**
+     * prevent deleting yourself
+     */
     if (id === currUserId) {
       throw new HttpException(400, 'You can not delete yourself!');
     }
