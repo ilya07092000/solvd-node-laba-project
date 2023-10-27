@@ -1,7 +1,6 @@
 import HttpException from '@src/infrastructure/exceptions/httpException';
 import { tokenService, TokenService } from '@src/services/token.service';
 import { userService, UserService } from './user.service';
-import bcrypt from 'bcrypt';
 import { UserDto } from '@src/dto/user';
 import RoleTypes from '@src/infrastructure/enums/roles';
 import { LawyerService, lawyerService } from './lawyer.service';
@@ -38,10 +37,6 @@ class AuthService {
 
   async registration(data: UserDto & { password: string }) {
     try {
-      const hashedPassword = await this.passwordService.getHashedPassword({
-        password: data.password,
-      });
-
       /**
        * check whether role id exists in roles table
        * exception: can not register admin role by registration process
@@ -56,10 +51,7 @@ class AuthService {
        */
       await postgresConnectionInstance.connection.query('BEGIN');
 
-      const user = await this.userService.create({
-        ...data,
-        password: hashedPassword,
-      });
+      const user = await this.userService.create(data);
 
       /**
        * depends on role type which we get by id from db,
@@ -94,10 +86,10 @@ class AuthService {
      * check whether user by this email exists in db
      */
     const userInfo = await this.userService.getByEmail({ email });
-    const userDto = userInfo.dto;
-    if (!userDto.id) {
+    if (!userInfo) {
       throw new HttpException(400, 'Email or password is not correct');
     }
+    const userDto = userInfo.dto;
 
     /**
      * comparre password in passowrd service

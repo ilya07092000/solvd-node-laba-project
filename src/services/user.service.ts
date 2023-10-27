@@ -31,6 +31,9 @@ class UserService {
   }
 
   async deleteById({ id, currUserId }: { id: number; currUserId: number }) {
+    /**
+     * prevent deleting yourself
+     */
     if (id === currUserId) {
       throw new HttpException(400, 'You can not delete yourself!');
     }
@@ -52,10 +55,18 @@ class UserService {
 
   async create(data: CreateUserDto): Promise<UserDto> {
     const newUser = { ...data };
+
+    /**
+     * check whether role exists
+     */
     const roleInfo = await this.roleService.getById({ id: data.roleId });
     if (!roleInfo) {
       throw new HttpException(400, 'Role Does Not Exist');
     }
+
+    /**
+     * hash password
+     */
     const hashedPassword = await this.passwordService.getHashedPassword({
       password: newUser.password,
     });
@@ -66,11 +77,18 @@ class UserService {
   async update(id: number, data: CreateUserDto) {
     const updatedUser = { ...data };
 
+    /**
+     * check whether user with this id exists
+     */
     const verifyUser = await this.getById({ id });
     if (!verifyUser) {
       throw new HttpException(404, 'User Does Not Exist');
     }
 
+    /**
+     * check whether we are trying to change user role
+     * and verify that this role exists in db
+     */
     if (updatedUser.roleId) {
       const roleInfo = await this.roleService.getById({ id: data.roleId });
       if (!roleInfo) {
@@ -78,6 +96,9 @@ class UserService {
       }
     }
 
+    /**
+     * hash password if user updated it
+     */
     if (updatedUser.password) {
       const hashedPassword = await this.passwordService.getHashedPassword({
         password: updatedUser.password,
