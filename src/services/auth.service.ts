@@ -10,6 +10,7 @@ import { postgresConnectionInstance } from '@src/db/postgres/connection';
 import { roleService, RoleService } from './role.service';
 import { clientService, ClientService } from './client.service';
 import { CreateClientDto } from '@src/dto/client';
+import { passwordService, PasswordService } from './password.service';
 
 class AuthService {
   private tokenService: TokenService;
@@ -17,6 +18,7 @@ class AuthService {
   private lawyerService: LawyerService;
   private roleService: RoleService;
   private clientService: ClientService;
+  private passwordService: PasswordService;
 
   constructor(
     tokenService: TokenService,
@@ -24,25 +26,19 @@ class AuthService {
     lawyerService: LawyerService,
     roleService: RoleService,
     clientService: ClientService,
+    passwordService: PasswordService,
   ) {
     this.tokenService = tokenService;
     this.userService = userService;
     this.lawyerService = lawyerService;
     this.roleService = roleService;
     this.clientService = clientService;
-  }
-
-  async getHashedPassword({ password }: { password: string }): Promise<string> {
-    const hashedPassword = await bcrypt.hash(
-      password,
-      +process.env.SALT_ROUNDS,
-    );
-    return hashedPassword;
+    this.passwordService = passwordService;
   }
 
   async registration(data: UserDto & { password: string }) {
     try {
-      const hashedPassword = await this.getHashedPassword({
+      const hashedPassword = await this.passwordService.getHashedPassword({
         password: data.password,
       });
       const roleInfo = await this.roleService.getById({ id: data.roleId });
@@ -83,7 +79,10 @@ class AuthService {
       throw new HttpException(400, 'Email or password is not correct');
     }
 
-    const isCorrectPassword = await bcrypt.compare(password, userInfo.password);
+    const isCorrectPassword = await this.passwordService.checkPassword({
+      password,
+      hash: userInfo.password,
+    });
     if (!isCorrectPassword) {
       throw new HttpException(400, 'Email or password is not correct');
     }
@@ -171,5 +170,6 @@ const authService = new AuthService(
   lawyerService,
   roleService,
   clientService,
+  passwordService,
 );
 export { authService, AuthService };

@@ -5,21 +5,21 @@ import {
 import { RoleService, roleService } from './role.service';
 import HttpException from '@src/infrastructure/exceptions/httpException';
 import { CreateUserDto, UserDto } from '@src/dto/user';
-import { AuthService, authService } from '@src/services/auth.service';
+import { PasswordService, passwordService } from './password.service';
 
 class UserService {
   private repository: UserRepository;
   private roleService: RoleService;
-  private authService: AuthService;
+  private passwordService: PasswordService;
 
   constructor(
     repository: UserRepository,
     roleService: RoleService,
-    authService: AuthService,
+    passwordService: PasswordService,
   ) {
     this.repository = repository;
     this.roleService = roleService;
-    this.authService = authService;
+    this.passwordService = passwordService;
   }
 
   getAll() {
@@ -51,11 +51,16 @@ class UserService {
   }
 
   async create(data: CreateUserDto): Promise<UserDto> {
+    const newUser = { ...data };
     const roleInfo = await this.roleService.getById({ id: data.roleId });
     if (!roleInfo) {
       throw new HttpException(400, 'Role Does Not Exist');
     }
-    return this.repository.create(data);
+    const hashedPassword = await this.passwordService.getHashedPassword({
+      password: newUser.password,
+    });
+    newUser.password = hashedPassword;
+    return this.repository.create(newUser);
   }
 
   async update(id: number, data: CreateUserDto) {
@@ -74,7 +79,7 @@ class UserService {
     }
 
     if (updatedUser.password) {
-      const hashedPassword = await this.authService.getHashedPassword({
+      const hashedPassword = await this.passwordService.getHashedPassword({
         password: updatedUser.password,
       });
       updatedUser.password = hashedPassword;
@@ -88,5 +93,9 @@ class UserService {
   }
 }
 
-const userService = new UserService(userRepository, roleService, authService);
+const userService = new UserService(
+  userRepository,
+  roleService,
+  passwordService,
+);
 export { userService, UserService };
