@@ -31,6 +31,8 @@
     - [Create Client](#create-client)
     - [Edit Client By Id](#update-client-info)
     - [Delete Client By Id](#delete-client-by-id)
+    - [Create Client's case](#create-clients-case)
+    - [Get Client's cases](#get-clients-cases)
   - [Cases](#cases)
     - [Get All](#get-all-cases)
     - [Get By Id](#get-case-by-id)
