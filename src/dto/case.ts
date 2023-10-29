@@ -7,8 +7,8 @@ class CaseDto {
   description: string;
   status: CaseStatus;
   budget: number;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
 
   constructor({
     id,
@@ -37,8 +37,8 @@ class CreateCaseDto {
   description: string;
   status?: CaseStatus;
   budget: number;
-  startDate?: string;
-  endDate?: string;
+  startDate?: Date;
+  endDate?: Date;
 
   constructor({
     lawyerId,

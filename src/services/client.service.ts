@@ -31,6 +31,10 @@ class ClientService {
     return this.repository.getById({ id });
   }
 
+  getByUserId({ id }: { id: number }) {
+    return this.repository.getByUserId({ id });
+  }
+
   async create(data: CreateClientDto) {
     try {
       /**
@@ -56,7 +60,9 @@ class ClientService {
       throw new HttpException(400, 'User is client already');
     }
 
-    return this.repository.create(new CreateClientDto({ budget: 0, ...data }));
+    return this.repository.create(
+      new CreateClientDto({ budget: 1000, ...data }),
+    );
   }
 
   async deleteById({ id, currUserId }: { id: number; currUserId: number }) {

@@ -63,7 +63,7 @@ class AuthService {
         );
       } else if (roleInfo.type === RoleTypes.CLIENT) {
         await this.clientService.create(
-          new CreateClientDto({ userId: user.id, budget: 0 }),
+          new CreateClientDto({ userId: user.id, budget: 1000 }),
         );
       }
 

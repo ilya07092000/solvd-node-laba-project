@@ -459,6 +459,90 @@ Expected errors `401 Unathorized`
 }
 ```
 
+### Create Client's case
+
+`POST /clients/cases`
+
+Request body example
+
+```json
+{
+  "lawyerId": 1,
+  "budget": 10,
+  "description": "some case"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+  "result": {
+    "id": 13,
+    "lawyerId": 1,
+    "clientId": 7,
+    "description": "some case",
+    "status": "creating",
+    "budget": 10,
+    "startDate": "2023-10-29T20:21:57.953Z",
+    "endDate": null
+  }
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
+}
+```
+
+### Get Client's cases
+
+`POST /clients/7/cases`
+
+Expected response `200 OK`
+
+```json
+{
+  "result": [
+    {
+      "id": 11,
+      "lawyerId": 1,
+      "clientId": 7,
+      "description": "some case",
+      "status": "creating",
+      "budget": 10,
+      "startDate": "2023-10-29T20:16:16.048Z",
+      "endDate": null
+    },
+    {
+      "id": 12,
+      "lawyerId": 1,
+      "clientId": 7,
+      "description": "some case",
+      "status": "creating",
+      "budget": 10,
+      "startDate": "2023-10-29T20:17:21.032Z",
+      "endDate": null
+    }
+  ]
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
+}
+```
+
 ## `/lawyers`
 
 Endpoint to work with lawyers

@@ -6,6 +6,7 @@ import {
 } from '@src/repositories/caseRepository';
 import { CaseDto, CreateCaseDto } from '@src/dto/case';
 import { ClientService, clientService } from './client.service';
+import CaseStatuses from '@src/infrastructure/enums/caseStatuses';
 
 class CaseService {
   private repository: CaseRepository;
@@ -49,17 +50,32 @@ class CaseService {
       }
 
       /**
+       * check if lawyer is available
+       */
+      if (!lawyer.available) {
+        throw new HttpException(400, 'Lawyer Is Not Available!');
+      }
+
+      /**
        * check whether client exists
        */
       const client = await this.clientService.getById({ id: data.clientId });
       if (!client) {
         throw new HttpException(400, 'Client Does Not Exist!');
       }
+
+      if (client.budget < data.budget) {
+        throw new HttpException(400, 'Client Does Not Have Enough Budget!');
+      }
     } catch (e) {
       throw e;
     }
 
-    return this.repository.create(data);
+    return this.repository.create({
+      ...data,
+      status: CaseStatuses.CREATING,
+      startDate: new Date(),
+    });
   }
 
   async deleteById({ id }: { id: number }) {

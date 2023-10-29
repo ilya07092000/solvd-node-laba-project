@@ -65,11 +65,7 @@ class CasesController {
       if (errors.length) {
         throw new ValidationException(400, JSON.stringify(errors));
       }
-      const result = await caseService.create({
-        status: CaseStatuses.CREATING,
-        startDate: new Date(),
-        ...body,
-      });
+      const result = await caseService.create(body);
 
       return res.status(201).json({ result });
     } catch (e) {
