@@ -1213,6 +1213,98 @@ Expected errors `401 Unathorized`
 }
 ```
 
+### Fulfill A Case
+
+`POST /cases/:id/fulfill`
+
+Expected response `200 OK`
+
+```json
+{
+  "result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "fulfilled",
+    "budget": 228,
+    "startDate": "13-09-2023",
+    "endDate": "22-09-2023"
+  }
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
+}
+```
+
+### Reject A Case
+
+`POST /cases/:id/reject`
+
+Expected response `200 OK`
+
+```json
+{
+  "result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "rejected",
+    "budget": 228,
+    "startDate": "13-09-2023",
+    "endDate": "22-09-2023"
+  }
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
+}
+```
+
+### Admit A Case
+
+#### Lawyer can admit (take part in) this case
+
+`POST /cases/:id/admit`
+
+Expected response `200 OK`
+
+```json
+{
+  "result": {
+    "id": 1,
+    "lawyerId": 1,
+    "clientId": 2,
+    "status": "active",
+    "budget": 228,
+    "startDate": "13-09-2023",
+    "endDate": "22-09-2023"
+  }
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
+}
+```
+
 ## `/admins`
 
 Endpoint to work with users

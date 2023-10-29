@@ -4,6 +4,7 @@ const router = Router();
 import casesController from '@src/controllers/cases.controller';
 import authMiddleware from '@src/middlewares/auth.middleware';
 import RoleTypes from '@src/infrastructure/enums/roles';
+import lawyerCasesController from '@src/controllers/lawyer-cases.controller';
 
 /**
  * FOR AUTH USERS
@@ -20,6 +21,25 @@ router.delete(
   '/:id',
   [authMiddleware([RoleTypes.ADMIN])],
   casesController.deleteById,
+);
+
+/**
+ * FOR LAWYERS
+ */
+router.post(
+  '/:id/fulfill',
+  [authMiddleware([RoleTypes.LAWYER])],
+  lawyerCasesController.fulfillCase,
+);
+router.post(
+  '/:id/admit',
+  [authMiddleware([RoleTypes.LAWYER])],
+  lawyerCasesController.admitCase,
+);
+router.post(
+  '/:id/reject',
+  [authMiddleware([RoleTypes.LAWYER])],
+  lawyerCasesController.rejectCase,
 );
 
 export default router;

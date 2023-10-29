@@ -27,8 +27,12 @@ class CaseService {
     return this.repository.getAll();
   }
 
-  getById({ id }: { id: number }) {
-    return this.repository.getById({ id });
+  async getById({ id }: { id: number }) {
+    const currCase = await this.repository.getById({ id });
+    if (!currCase) {
+      throw new HttpException(404, 'Case Does Not Exist!');
+    }
+    return currCase;
   }
 
   getByLawyerId({ id }: { id: number }) {
@@ -87,12 +91,57 @@ class CaseService {
   }
 
   async update({ id, caseInfo }: { id: number; caseInfo: Partial<CaseDto> }) {
-    const isExistingCase = await this.repository.getById({ id });
+    const isExistingCase = await this.getById({ id });
 
     if (!isExistingCase) {
       throw new HttpException(404, 'Case was not found');
     }
     return this.repository.update({ id, caseInfo });
+  }
+
+  async startCase({ id }) {
+    const currCase = await this.getById({ id });
+    if (currCase.status !== CaseStatuses.CREATING) {
+      throw new HttpException(
+        400,
+        'You can not start this case! It was already started or finished or rejected',
+      );
+    }
+
+    return this.repository.update({
+      id,
+      caseInfo: { status: CaseStatuses.ACTIVE },
+    });
+  }
+
+  async fulfillCase({ id }) {
+    const currCase = await this.getById({ id });
+    if (currCase.status !== CaseStatuses.ACTIVE) {
+      throw new HttpException(
+        400,
+        'You can not start this case! It was already finished or rejected',
+      );
+    }
+
+    return this.repository.update({
+      id,
+      caseInfo: { endDate: new Date(), status: CaseStatuses.FULFILLED },
+    });
+  }
+
+  async rejectCase({ id }) {
+    const currCase = await this.getById({ id });
+    if (currCase.status !== CaseStatuses.CREATING) {
+      throw new HttpException(
+        400,
+        'You can not start this case! It was already started or rejected or fulfilled',
+      );
+    }
+
+    return this.repository.update({
+      id,
+      caseInfo: { endDate: new Date(), status: CaseStatuses.FAILED },
+    });
   }
 }
 
