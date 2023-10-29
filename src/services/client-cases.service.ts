@@ -1,10 +1,7 @@
 import HttpException from '@src/infrastructure/exceptions/httpException';
-import { LawyerService, lawyerService } from './lawyer.service';
-import { LicenseService, licenseService } from './license.service';
 import { CaseService, caseService } from './case.service';
 import { CreateCaseDto } from '@src/dto/case';
 import { ClientService, clientService } from './client.service';
-import { UserService } from './user.service';
 
 class ClientCasesService {
   private caseService: CaseService;
