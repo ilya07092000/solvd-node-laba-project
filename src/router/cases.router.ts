@@ -8,8 +8,5 @@ router.get('/:id', casesController.getById);
 router.post('/', casesController.create);
 router.put('/:id', casesController.update);
 router.delete('/:id', casesController.deleteById);
-router.put('/:id/fulfill', casesController.fulfill);
-router.put('/:id/reject', casesController.reject);
-router.put('/:id/admit', casesController.admit);
 
 export default router;

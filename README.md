@@ -877,7 +877,7 @@ Request body example
   "clientId": 2,
   "status": "active | fulfilled | failed | creating",
   "budget": 228,
-  "startDate": "13-09-2023",
+  "startDate": "2023-10-29T19:10:35.896Z",
   "endDate": "15-09-2023"
 }
 ```
@@ -892,7 +892,7 @@ Expected response `201 Created`
     "clientId": 2,
     "status": "active | fulfilled | failed | creating",
     "budget": 228,
-    "startDate": "13-09-2023",
+    "startDate": "2023-10-29T19:10:35.896Z",
     "endDate": "15-09-2023"
   }
 }
@@ -953,7 +953,7 @@ Expected response `200 OK`
       "clientId": 2,
       "status": "active | fulfilled | failed | creating",
       "budget": 228,
-      "startDate": "13-09-2023",
+      "startDate": "2023-10-29T19:10:35.896Z",
       "endDate": "15-09-2023"
     },
     {
@@ -962,7 +962,7 @@ Expected response `200 OK`
       "clientId": 2,
       "status": "active | fulfilled | failed | creating",
       "budget": 228,
-      "startDate": "13-09-2023",
+      "startDate": "2023-10-29T19:10:35.896Z",
       "endDate": "15-09-2023"
     },
     {
@@ -971,7 +971,7 @@ Expected response `200 OK`
       "clientId": 2,
       "status": "active | fulfilled | failed | creating",
       "budget": 228,
-      "startDate": "13-09-2023",
+      "startDate": "2023-10-29T19:10:35.896Z",
       "endDate": "15-09-2023"
     }
   ]
@@ -1002,7 +1002,7 @@ Expected response `200 OK`
     "clientId": 2,
     "status": "active | fulfilled | failed | creating",
     "budget": 228,
-    "startDate": "13-09-2023",
+    "startDate": "2023-10-29T19:10:35.896Z",
     "endDate": "15-09-2023"
   }
 }
@@ -1041,8 +1041,8 @@ Expected response `200 OK`
     "clientId": 2,
     "status": "active | fulfilled | failed | creating",
     "budget": 228,
-    "startDate": "13-09-2023",
-    "endDate": "22-09-2023"
+    "startDate": "2023-10-29T19:10:35.896Z",
+    "endDate": "2023-10-29T19:10:35.896Z"
   }
 }
 ```
@@ -1053,98 +1053,6 @@ Expected errors message `400 Bad Request`
 {
   "error": {
     "message": "Case with such id does not exist"
-  }
-}
-```
-
-### Fulfill A Case
-
-`PUT /cases/:id/fulfill`
-
-Expected response `200 OK`
-
-```json
-{
-  "result": {
-    "id": 1,
-    "lawyerId": 1,
-    "clientId": 2,
-    "status": "fulfilled",
-    "budget": 228,
-    "startDate": "13-09-2023",
-    "endDate": "22-09-2023"
-  }
-}
-```
-
-Expected errors `401 Unathorized`
-
-```json
-{
-  "error": {
-    "message": "You are not allowed to perform this action"
-  }
-}
-```
-
-### Reject A Case
-
-`PUT /cases/:id/reject`
-
-Expected response `200 OK`
-
-```json
-{
-  "result": {
-    "id": 1,
-    "lawyerId": 1,
-    "clientId": 2,
-    "status": "rejected",
-    "budget": 228,
-    "startDate": "13-09-2023",
-    "endDate": "22-09-2023"
-  }
-}
-```
-
-Expected errors `401 Unathorized`
-
-```json
-{
-  "error": {
-    "message": "You are not allowed to perform this action"
-  }
-}
-```
-
-### Admit A Case
-
-#### Lawyer can admit (take part in) this case
-
-`PUT /cases/:id/admit`
-
-Expected response `200 OK`
-
-```json
-{
-  "result": {
-    "id": 1,
-    "lawyerId": 1,
-    "clientId": 2,
-    "status": "active",
-    "budget": 228,
-    "startDate": "13-09-2023",
-    "endDate": "22-09-2023"
-  }
-}
-```
-
-Expected errors `401 Unathorized`
-
-```json
-{
-  "error": {
-    "message": "You are not allowed to perform this action"
   }
 }
 ```
@@ -1173,8 +1081,8 @@ Expected response `200 OK`
     "clientId": 2,
     "status": "creating",
     "budget": 228,
-    "startDate": "13-09-2023",
-    "endDate": "22-09-2023"
+    "startDate": "2023-10-29T19:10:35.896Z",
+    "endDate": "2023-10-29T19:10:35.896Z"
   }
 }
 ```
@@ -1203,8 +1111,8 @@ Expected response `200 OK`
     "clientId": 2,
     "status": "active | fulfilled | failed | creating",
     "budget": 228,
-    "startDate": "13-09-2023",
-    "endDate": "22-09-2023"
+    "startDate": "2023-10-29T19:10:35.896Z",
+    "endDate": "2023-10-29T19:10:35.896Z"
   }
 }
 ```

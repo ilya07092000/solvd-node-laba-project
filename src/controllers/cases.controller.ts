@@ -1,24 +1,32 @@
 import { validateObject } from '@src/helpers/validation';
+import CaseStatuses from '@src/infrastructure/enums/caseStatuses';
+import HttpException from '@src/infrastructure/exceptions/httpException';
 import ValidationException from '@src/infrastructure/exceptions/validationException';
+import { caseService } from '@src/services/case.service';
 
 class CasesController {
-  getAll(req, res, next) {
+  async getAll(req, res, next) {
     try {
-      return res.status(200).json({ result: [] });
+      const result = await caseService.getAll();
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  getById(req, res, next) {
+  async getById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
+      const result = await caseService.getById({ id: req.params.id });
+      if (!result) {
+        throw new HttpException(404, 'Case was not found!');
+      }
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  create(req, res, next) {
+  async create(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
@@ -35,23 +43,49 @@ class CasesController {
           type: 'number',
           minValue: 1,
         },
+        description: {
+          required: true,
+          type: 'string',
+        },
+        status: {
+          required: false,
+          type: 'string',
+          includes: [...Object.values(CaseStatuses)],
+        },
+        startDate: {
+          required: false,
+          type: 'string',
+        },
+        endDate: {
+          required: false,
+          type: 'string',
+        },
       });
 
       if (errors.length) {
         throw new ValidationException(400, JSON.stringify(errors));
       }
+      const result = await caseService.create({
+        status: CaseStatuses.CREATING,
+        startDate: new Date(),
+        ...body,
+      });
 
-      return res.status(201).json({ result: {} });
+      return res.status(201).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  update(req, res, next) {
+  async update(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
         lawyerId: {
+          required: false,
+          type: 'number',
+        },
+        clientId: {
           required: false,
           type: 'number',
         },
@@ -60,45 +94,44 @@ class CasesController {
           type: 'number',
           minValue: 1,
         },
+        description: {
+          required: false,
+          type: 'string',
+        },
+        status: {
+          required: false,
+          type: 'string',
+          includes: [...Object.values(CaseStatuses)],
+        },
+        startDate: {
+          required: false,
+          type: 'string',
+        },
+        endDate: {
+          required: false,
+          type: 'string',
+        },
       });
 
       if (errors.length) {
         throw new ValidationException(400, JSON.stringify(errors));
       }
+      const result = await caseService.update({
+        id: req.params.id,
+        caseInfo: body,
+      });
 
-      return res.status(200).json({ result: {} });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  deleteById(req, res, next) {
+  async deleteById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
-    } catch (e) {
-      return next(e);
-    }
-  }
+      const result = await caseService.deleteById({ id: req.params.id });
 
-  fulfill(req, res, next) {
-    try {
-      return res.status(200).json({ result: {} });
-    } catch (e) {
-      return next(e);
-    }
-  }
-
-  reject(req, res, next) {
-    try {
-      return res.status(200).json({ result: {} });
-    } catch (e) {
-      return next(e);
-    }
-  }
-
-  admit(req, res, next) {
-    try {
-      return res.status(200).json({ result: {} });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }

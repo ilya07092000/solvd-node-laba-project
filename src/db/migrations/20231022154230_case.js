@@ -17,7 +17,7 @@ exports.up = async function (knex) {
       lawyer_id INT,
       client_id INT NOT NULL,
       description text NOT NULL,
-      status case_status DEFAULT 'creating',
+      status case_status DEFAULT 'creating' NOT NULL,
       budget INT NOT NULL,
       start_date TIMESTAMP WITH TIME ZONE,
       end_date TIMESTAMP WITH TIME ZONE,
