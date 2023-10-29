@@ -35,6 +35,14 @@ class LawyerService {
     return lawyer;
   }
 
+  async getByUserId({ id }: { id: number }) {
+    const lawyer = await this.repository.getByUserId({ id });
+    if (!lawyer) {
+      throw new HttpException(404, 'User Was Not Found');
+    }
+    return lawyer;
+  }
+
   async create(data: CreateLawyerDto) {
     try {
       /**

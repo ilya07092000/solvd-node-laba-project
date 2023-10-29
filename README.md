@@ -631,6 +631,76 @@ Expected errors `401 Unathorized`
 }
 ```
 
+### Create lawyer's license
+
+`POST /lawyers/licenses`
+
+Request body example
+
+```json
+{
+  "info": "my license"
+}
+```
+
+Expected response `200 OK`
+
+```json
+{
+  "result": {
+    "id": 6,
+    "lawyerId": 2,
+    "verificationId": null,
+    "info": "my license"
+  }
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
+}
+```
+
+### Get lawyer's licenses
+
+`GET /lawyers/:id/licenses`
+
+Expected response `200 OK`
+
+```json
+{
+  "result": [
+    {
+      "id": 2,
+      "lawyerId": 2,
+      "verificationId": null,
+      "info": "my license"
+    },
+    {
+      "id": 3,
+      "lawyerId": 2,
+      "verificationId": null,
+      "info": "my license"
+    }
+  ]
+}
+```
+
+Expected errors `401 Unathorized`
+
+```json
+{
+  "error": {
+    "message": "You are not allowed to perform this action"
+  }
+}
+```
+
 ## `/clients`
 
 Endpoint to work with clients
@@ -1641,28 +1711,16 @@ Expected response `200 OK`
 {
   "result": [
     {
-      "id": "1",
-      "lawyer_id": "228",
+      "id": 1,
+      "lawyerId": 228,
       "info": "lawyer license bla bla bla",
-      "verification": {
-        "id": "10",
-        "verifierId": "20",
-        "status": "verified | rejected | processing",
-        "date": "10-20-2023",
-        "notes": "License is genuine"
-      }
+      "verificationId": 1
     },
     {
-      "id": "2",
-      "lawyer_id": "2",
+      "id": 2,
+      "lawyerId": 2,
       "info": "lawyer license bla bla bla",
-      "verification": {
-        "id": "10",
-        "verifierId": "20",
-        "status": "verified | rejected | processing",
-        "date": "10-20-2023",
-        "notes": "License is genuine"
-      }
+      "verificationId": 10
     }
   ]
 }
@@ -1687,16 +1745,10 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "lawyer_id": "228",
+    "id": 1,
+    "lawyerId": 228,
     "info": "lawyer license bla bla bla",
-    "verification": {
-      "id": "10",
-      "verifierId": "20",
-      "status": "verified | rejected | processing",
-      "date": "10-20-2023",
-      "notes": "License is genuine"
-    }
+    "verificationId": 1
   }
 }
 ```
@@ -1719,20 +1771,20 @@ Request body example
 
 ```json
 {
-  "id": "1",
-  "lawyer_id": "228",
+  "lawyerId": 228,
   "info": "lawyer license bla bla bla"
 }
 ```
 
-Expected response `200 OK`
+Expected response `201 Created`
 
 ```json
 {
   "result": {
     "id": "1",
-    "lawyer_id": "228",
-    "info": "lawyer license bla bla bla"
+    "lawyerId": 228,
+    "info": "lawyer license bla bla bla",
+    "verificationId": null
   }
 }
 ```
@@ -1742,7 +1794,7 @@ Expected errors `400 Bad request`
 ```json
 {
   "error": {
-    "message": "Lawyer with id {caseId} does not exist"
+    "message": "Lawyer with id does not exist"
   }
 }
 ```
@@ -1764,16 +1816,10 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "lawyer_id": "228",
+    "id": 1,
+    "lawyerId": 228,
     "info": "lawyer license bla bla bla which I received in 2010",
-    "verification": {
-      "id": "10",
-      "verifierId": "20",
-      "status": "verified | rejected | processing",
-      "date": "10-20-2023",
-      "notes": "License is genuine"
-    }
+    "verificationId": 1
   }
 }
 ```
@@ -1797,16 +1843,10 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "1",
-    "lawyer_id": "228",
-    "info": "lawyer license bla bla bla",
-    "verification": {
-      "id": "10",
-      "verifierId": "20",
-      "status": "verified | rejected | processing",
-      "date": "10-20-2023",
-      "notes": "License is genuine"
-    }
+    "id": 1,
+    "lawyerId": 228,
+    "info": "lawyer license bla bla bla which I received in 2010",
+    "verificationId": 1
   }
 }
 ```
@@ -1837,16 +1877,10 @@ Expected response `200 OK`
 
 ```json
 {
-  "id": "1",
-  "lawyer_id": "228",
-  "info": "lawyer license bla bla bla",
-  "verification": {
-    "id": "10",
-    "verifierId": "20",
-    "status": "verified",
-    "date": "10-20-2023",
-    "notes": "License is genuine"
-  }
+  "id": 1,
+  "lawyerId": 1,
+  "verificationId": 5,
+  "info": "some license"
 }
 ```
 
@@ -1876,16 +1910,10 @@ Expected response `200 OK`
 
 ```json
 {
-  "id": "1",
-  "lawyer_id": "228",
-  "info": "lawyer license bla bla bla",
-  "verification": {
-    "id": "10",
-    "verifierId": "20",
-    "status": "rejected",
-    "date": "10-20-2023",
-    "notes": "License is not genuine"
-  }
+  "id": 1,
+  "lawyerId": 1,
+  "verificationId": 5,
+  "info": "some license"
 }
 ```
 
@@ -1913,21 +1941,20 @@ Expected response `200 OK`
 {
   "result": [
     {
-      "id": "10",
-      "licenseId": "1",
-      "verifierId": "20",
-      "status": "verified | rejected | processing",
-      "date": "10-20-2023",
-      "notes": "License is genuine"
+      "id": 5,
+      "verifierId": 1,
+      "date": "2023-10-29T16:38:47.784Z",
+      "notes": "123",
+      "status": "verified | rejected"
     },
 
     {
       "id": "12",
-      "licenseId": "2",
-      "verifierId": "30",
-      "status": "verified | rejected | processing",
-      "date": "11-20-2023",
-      "notes": "License is not genuine"
+      "id": 5,
+      "verifierId": 1,
+      "date": "2023-10-29T16:38:47.784Z",
+      "notes": "123",
+      "status": "verified | rejected"
     }
   ]
 }
@@ -1952,12 +1979,11 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "10",
-    "licenseId": "1",
-    "verifierId": "20",
-    "status": "verified | rejected | processing",
-    "date": "10-20-2023",
-    "notes": "License is genuine"
+    "id": 5,
+    "verifierId": 1,
+    "date": "2023-10-29T16:38:47.784Z",
+    "notes": "123",
+    "status": "verified | rejected"
   }
 }
 ```
@@ -1980,11 +2006,9 @@ Request body example
 
 ```json
 {
-  "licenseId": "1",
-  "verifierId": "20",
-  "status": "verified | rejected | processing",
-  "date": "10-20-2023",
-  "notes": "License is genuine"
+  "verifierId": 1,
+  "notes": "123",
+  "status": "verified | rejected"
 }
 ```
 
@@ -1993,12 +2017,9 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "10",
-    "licenseId": "1",
-    "verifierId": "20",
-    "status": "verified | rejected | processing",
-    "date": "10-20-2023",
-    "notes": "License is genuine"
+    "verifierId": 1,
+    "notes": "123",
+    "status": "verified | rejected"
   }
 }
 ```
@@ -2030,12 +2051,9 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "10",
-    "licenseId": "1",
-    "verifierId": "20",
-    "status": "verified | rejected | processing",
-    "date": "10-20-2023",
-    "notes": "License is genuine"
+    "verifierId": 1,
+    "notes": "123",
+    "status": "verified | rejected"
   }
 }
 ```
@@ -2059,12 +2077,9 @@ Expected response `200 OK`
 ```json
 {
   "result": {
-    "id": "10",
-    "licenseId": "1",
-    "verifierId": "20",
-    "status": "verified | rejected | processing",
-    "date": "10-20-2023",
-    "notes": "License is genuine"
+    "verifierId": 1,
+    "notes": "123",
+    "status": "verified | rejected"
   }
 }
 ```

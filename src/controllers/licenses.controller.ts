@@ -1,29 +1,36 @@
 import { validateObject } from '@src/helpers/validation';
-import RoleTypes from '@src/infrastructure/enums/roles';
+import { licenseService } from '@src/services/license.service';
 import ValidationException from '@src/infrastructure/exceptions/validationException';
+import HttpException from '@src/infrastructure/exceptions/httpException';
 
 class LicensesController {
-  getAll(req, res, next) {
+  async getAll(req, res, next) {
     try {
-      return res.status(200).json({ result: [] });
+      const result = await licenseService.getAll();
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  getById(req, res, next) {
+  async getById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
+      const result = await licenseService.getById({ id: req.params.id });
+      if (!result) {
+        throw new HttpException(404, 'License was not found');
+      }
+
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  create(req, res, next) {
+  async create(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
-        lawyer_id: {
+        lawyerId: {
           required: true,
           type: 'number',
         },
@@ -37,17 +44,19 @@ class LicensesController {
         throw new ValidationException(400, JSON.stringify(errors));
       }
 
-      return res.status(201).json({ result: {} });
+      const result = await licenseService.create(body);
+
+      return res.status(201).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  update(req, res, next) {
+  async update(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
-        lawyer_id: {
+        lawyerId: {
           required: false,
           type: 'number',
         },
@@ -61,21 +70,30 @@ class LicensesController {
         throw new ValidationException(400, JSON.stringify(errors));
       }
 
-      return res.status(200).json({ result: {} });
+      const result = await licenseService.update({
+        id: req.params.id,
+        licenseInfo: body,
+      });
+
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  deleteById(req, res, next) {
+  async deleteById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
+      const result = await licenseService.deleteById({
+        id: req.params.id,
+      });
+
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  verify(req, res, next) {
+  async verify(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
@@ -89,13 +107,18 @@ class LicensesController {
         throw new ValidationException(400, JSON.stringify(errors));
       }
 
-      return res.status(200).json({ result: {} });
+      const result = await licenseService.verify({
+        id: req.params.id,
+        adminId: req?.userInfo?.id,
+        notes: body.notes,
+      });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  reject(req, res, next) {
+  async reject(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
@@ -109,7 +132,12 @@ class LicensesController {
         throw new ValidationException(400, JSON.stringify(errors));
       }
 
-      return res.status(200).json({ result: {} });
+      const result = await licenseService.reject({
+        id: req.params.id,
+        adminId: req?.userInfo?.id,
+        notes: body.notes,
+      });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }

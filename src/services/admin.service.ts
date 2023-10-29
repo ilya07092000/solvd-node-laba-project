@@ -31,6 +31,10 @@ class AdminService {
     return this.repository.getById({ id });
   }
 
+  getByUserId({ id }: { id: number }) {
+    return this.repository.getByUserId({ id });
+  }
+
   async create(data: CreateAdminDto) {
     try {
       /**

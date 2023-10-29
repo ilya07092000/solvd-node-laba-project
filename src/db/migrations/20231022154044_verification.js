@@ -5,7 +5,7 @@
 exports.up = async function (knex) {
   await knex.raw(`
     DO $$ BEGIN
-      CREATE TYPE verification_status AS ENUM ('verified', 'rejected', 'processing');
+      CREATE TYPE verification_status AS ENUM ('verified', 'rejected');
     EXCEPTION
         WHEN duplicate_object THEN null;
     END $$; 
@@ -17,7 +17,7 @@ exports.up = async function (knex) {
       verifier_id INT NOT NULL,
       date TIMESTAMP WITH TIME ZONE DEFAULT now(),
       notes VARCHAR(255) NOT NULL,
-      status verification_status NOT NULL DEFAULT 'processing',
+      status verification_status NOT NULL,
       CONSTRAINT fk_verifier
         FOREIGN KEY(verifier_id) 
             REFERENCES admin(id)

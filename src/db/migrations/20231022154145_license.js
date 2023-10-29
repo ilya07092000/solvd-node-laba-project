@@ -7,7 +7,8 @@ exports.up = async function (knex) {
     CREATE TABLE IF NOT EXISTS public.license (
       id SERIAL PRIMARY KEY,
       lawyer_id INT NOT NULL,
-      verification_id INT NOT NULL,
+      verification_id INT,
+      info VARCHAR(255),
       CONSTRAINT fk_lawyer
         FOREIGN KEY(lawyer_id) 
             REFERENCES lawyer(id),
