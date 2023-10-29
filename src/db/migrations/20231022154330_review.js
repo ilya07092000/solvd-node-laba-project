@@ -5,7 +5,7 @@
 exports.up = async function (knex) {
   await knex.raw(`
     DO $$ BEGIN
-      CREATE TYPE review_creator AS ENUM ('admin', 'client');
+      CREATE TYPE review_creator AS ENUM ('lawyer', 'client');
     EXCEPTION
         WHEN duplicate_object THEN null;
     END $$; 

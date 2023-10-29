@@ -1,32 +1,31 @@
 import { validateObject } from '@src/helpers/validation';
 import RoleTypes from '@src/infrastructure/enums/roles';
 import ValidationException from '@src/infrastructure/exceptions/validationException';
+import { reviewService } from '@src/services/review.service';
 
 class ReviewsController {
-  getAll(req, res, next) {
+  async getAll(req, res, next) {
     try {
-      return res.status(200).json({ result: [] });
+      const result = await reviewService.getAll();
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  getById(req, res, next) {
+  async getById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
+      const result = await reviewService.getById({ id: req.params.id });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  create(req, res, next) {
+  async create(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
-        caseId: {
-          required: true,
-          type: 'number',
-        },
         rate: {
           required: true,
           type: 'number',
@@ -48,24 +47,21 @@ class ReviewsController {
         throw new ValidationException(400, JSON.stringify(errors));
       }
 
-      return res.status(201).json({ result: {} });
+      const result = await reviewService.create(body);
+      return res.status(201).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  update(req, res, next) {
+  async update(req, res, next) {
     try {
       const body = req.body;
       const errors = validateObject(body, {
-        caseId: {
-          required: false,
-          type: 'number',
-        },
         rate: {
           required: false,
           type: 'number',
-          minValue: 0,
+          minValue: 1,
           maxValue: 5,
         },
         creator: {
@@ -82,16 +78,21 @@ class ReviewsController {
       if (errors.length) {
         throw new ValidationException(400, JSON.stringify(errors));
       }
+      const result = await reviewService.update({
+        id: req.params.id,
+        reviewInfo: body,
+      });
 
-      return res.status(200).json({ result: {} });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
   }
 
-  deleteById(req, res, next) {
+  async deleteById(req, res, next) {
     try {
-      return res.status(200).json({ result: {} });
+      const result = await reviewService.deleteById({ id: req.params.id });
+      return res.status(200).json({ result });
     } catch (e) {
       return next(e);
     }
