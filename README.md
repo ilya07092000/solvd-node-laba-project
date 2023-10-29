@@ -23,6 +23,8 @@
     - [Create Lawyer](#create-lawyer)
     - [Edit Lawyer By Id](#update-lawyer-info)
     - [Delete Lawyer By Id](#delete-lawyer-by-id)
+    - [Create lawyer's license](#create-lawyers-license)
+    - [Get lawyer's license](#get-lawyers-licenses)
   - [Clients](#clients)
     - [Get All](#get-all-clients)
     - [Get By Id](#get-client-by-id)
