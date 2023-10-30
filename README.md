@@ -25,6 +25,18 @@ In order to start application use this command:
 http://localhost:3000/api/v1/
 ```
 
+## Authentication
+
+This app use Oauth 2.0 auth.
+After login you will get two tokens: refresh and access. Use bearer acess token in authorization header.
+Example:
+
+```
+GET /protected-route
+Authorizations: bearer {access-token}
+Content-Type: application/json
+```
+
 ## Description
 
 This app is a Lawyer Matching Service platform which allows match clients and lawyers. As a client you can create your own accound and hire(create a case) a layer based on filter parameters as budget, avialability, lawyer type.
@@ -143,18 +155,6 @@ As a lawyer you can create your own account, fill information about yourself, li
 ```
 
 # API documentation
-
-## Authentication
-
-This app use Oauth 2.0 auth.
-After login you will get two tokens: refresh and access. Use bearer acess token in authorization header.
-Example:
-
-```
-GET /protected-route
-Authorizations: bearer {access-token}
-Content-Type: application/json
-```
 
 # End-points
 
