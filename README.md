@@ -2,7 +2,9 @@
 
 ## Project start
 
-In order to start application use this command:
+1. **rename .env.example to env**
+
+2. **In order to start application use this command:**
 
 ```
   docker compose up --build
@@ -58,6 +60,8 @@ As a lawyer you can create your own account, fill information about yourself, li
 - [Exceptions](#exceptions)
 - [Authentication](#authentication)
 - [End Points](#end-points)
+  - [Profile](#profile)
+    - [Get Profile](#get-profile)
   - [Auth](#auth)
     - [Registration](#registration)
     - [Login](#login)
