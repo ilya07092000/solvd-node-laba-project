@@ -535,7 +535,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "1698659583543",
+						"value": "1698683248541",
 						"type": "string"
 					}
 				]
@@ -725,7 +725,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "1698610443480",
+									"value": "1698683353027",
 									"type": "string"
 								}
 							]
@@ -733,13 +733,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/clients/7/cases",
+							"raw": "{{url}}/clients/1/cases",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"clients",
-								"7",
+								"1",
 								"cases"
 							]
 						}
@@ -752,7 +752,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "1698659216933",
+						"value": "1698683248541",
 						"type": "string"
 					}
 				]
@@ -833,7 +833,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"lawyerId\": 1,\n   \"clientId\": 1,\n   \"budget\": 1,\n   \"description\": \"some case\"\n}",
+							"raw": "{\n    \"lawyerId\": 2,\n   \"clientId\": 1,\n   \"budget\": 1,\n   \"description\": \"some case\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -915,7 +915,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "1698613381104",
+									"value": "1698683392652",
 									"type": "string"
 								}
 							]
@@ -923,13 +923,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/cases/14/admit",
+							"raw": "{{url}}/cases/2/admit",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"cases",
-								"14",
+								"2",
 								"admit"
 							]
 						}
@@ -944,7 +944,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "1698613381104",
+									"value": "1698683392652",
 									"type": "string"
 								}
 							]
@@ -952,13 +952,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/cases/14/reject",
+							"raw": "{{url}}/cases/2/reject",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"cases",
-								"14",
+								"2",
 								"reject"
 							]
 						}
@@ -973,7 +973,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "1698612427496",
+									"value": "1698683392652",
 									"type": "string"
 								}
 							]
@@ -981,13 +981,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/cases/6/fulfill",
+							"raw": "{{url}}/cases/2/fulfill",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"cases",
-								"6",
+								"2",
 								"fulfill"
 							]
 						}
@@ -1057,7 +1057,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "1698659583543",
+						"value": "1698683392652",
 						"type": "string"
 					}
 				]
@@ -1312,6 +1312,185 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "conflicts",
+			"item": [
+				{
+					"name": "Get all conflicts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/conflicts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"conflicts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get conflict by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/conflicts/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"conflicts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create conflict",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"caseId\": 1,\n  \"reason\": \"some reason text\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/conflicts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"conflicts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Conflict",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"reason\": \"I changed my mind\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/conflicts/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"conflicts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Roles By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/conflicts/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"conflicts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fulfill",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/conflicts/2/fulfill",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"conflicts",
+								"2",
+								"fulfill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reject",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/conflicts/2/reject",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"conflicts",
+								"2",
+								"reject"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "1698683392652",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -1751,7 +1930,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "1698660591465",
+						"value": "1698683392652",
 						"type": "string"
 					}
 				]
