@@ -11,6 +11,7 @@ import rolesRouter from './roles.router';
 import reviewsRouter from './reviews.router';
 import licensesRouter from './licenses.router';
 import verificationsRouter from './verifications';
+import profileRouter from './profile.router';
 
 router.use('/auth', authRouter);
 router.use('/users', usersRouter);
@@ -22,5 +23,6 @@ router.use('/roles', rolesRouter);
 router.use('/reviews', reviewsRouter);
 router.use('/licenses', licensesRouter);
 router.use('/verifications', verificationsRouter);
+router.use('/profile', profileRouter);
 
 export default router;

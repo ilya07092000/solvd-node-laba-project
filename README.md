@@ -160,6 +160,34 @@ As a lawyer you can create your own account, fill information about yourself, li
 
 ---
 
+## `/profile`
+
+Endpoint to work with profile
+
+### Registration
+
+`GET /`
+
+Request body example
+
+```json
+{
+  "result": {
+    "id": 1,
+    "email": "admin@admin.com",
+    "roleId": 1,
+    "city": "admin",
+    "firstName": "admin",
+    "lastName": "admin",
+    "admin": {
+      "id": 1,
+      "userId": 1,
+      "isActive": true
+    }
+  }
+}
+```
+
 ## `/auth`
 
 Endpoint to work with authentication
