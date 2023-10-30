@@ -166,6 +166,9 @@ Endpoint to work with profile
 
 ### Get Profile
 
+- Required:
+  - access token
+
 `GET /`
 
 Request body example
@@ -346,6 +349,9 @@ Endpoint to work with users
 
 ### Get All Users
 
+- Required:
+  - access token
+
 `GET /users` - get all user with base info
 
 Expected response `200 OK`
@@ -385,6 +391,9 @@ Expected errors `401 Unathorized`
 
 ### Get User By Id
 
+- Required:
+  - acess token
+
 `GET /users/:id` - get user by id
 
 Expected response `200 OK`
@@ -413,6 +422,10 @@ Expected errors `401 Unathorized`
 ```
 
 ### Create User
+
+- Required:
+  - acess token
+  - admin role
 
 `POST /users`
 
@@ -456,6 +469,10 @@ Expected errors `401 Unathorized`
 
 ### Edit User By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `PUT /users/:id`
 
 Request body example
@@ -493,6 +510,10 @@ Expected errors `401 Unathorized`
 
 ### Delete User By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `DELETE /users/:id`
 
 Expected response `200 OK`
@@ -526,6 +547,9 @@ Endpoint to work with lawyers
 
 ### Get Lawyers
 
+- Required:
+  - acess token
+
 `get /lawyers` - get all lawyers with all info
 
 Expected response `200 OK`
@@ -557,6 +581,9 @@ Expected errors `401 Unathorized`
 
 ### Get Lawyer By Id
 
+- Required:
+  - acess token
+
 `get /lawyers/:id` - get lawyer by id
 
 Expected response `200 OK`
@@ -585,6 +612,10 @@ Expected errors `401 Unathorized`
 ```
 
 ### Create Lawyer
+
+- Required:
+  - acess token
+  - admin role
 
 `POST /lawyers`
 
@@ -627,6 +658,10 @@ Expected errors `401 Unathorized`
 
 ### Update Lawyer Info
 
+- Required:
+  - acess token
+  - admin role
+
 `PUT /lawyers/:id`
 
 Request body example
@@ -667,6 +702,10 @@ Expected errors `401 Unathorized`
 
 ### Delete Lawyer By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `DELETE /lawyers/:id`
 
 Expected response `200 OK`
@@ -695,6 +734,10 @@ Expected errors `401 Unathorized`
 ```
 
 ### Create lawyer's license
+
+- Required:
+  - acess token
+  - lawyer role
 
 `POST /lawyers/licenses`
 
@@ -730,6 +773,9 @@ Expected errors `401 Unathorized`
 ```
 
 ### Get lawyer's licenses
+
+- Required:
+  - acess token
 
 `GET /lawyers/:id/licenses`
 
@@ -770,6 +816,9 @@ Endpoint to work with clients
 
 ### Get All Clients
 
+- Required:
+  - acess token
+
 `GET /clients` - get all clients with all info
 
 Expected response `200 OK`
@@ -803,6 +852,9 @@ Expected errors `401 Unathorized`
 
 ### Get Client By Id
 
+- Required:
+  - acess token
+
 `GET /clients/:id` - get client by id with all info
 
 Expected response `200 OK`
@@ -828,6 +880,10 @@ Expected errors `401 Unathorized`
 ```
 
 ### Create Client
+
+- Required:
+  - acess token
+  - admin role
 
 `POST /clients`
 
@@ -864,6 +920,10 @@ Expected errors `401 Unathorized`
 
 ### Update Client Info
 
+- Required:
+  - acess token
+  - admin role
+
 `PUT /clients/:id`
 
 Request body example
@@ -898,6 +958,10 @@ Expected errors `401 Unathorized`
 
 ### Delete Client By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `DELETE /clients/:id`
 
 Expected response `200 OK`
@@ -923,6 +987,10 @@ Expected errors `401 Unathorized`
 ```
 
 ### Create Client's case
+
+- Required:
+  - acess token
+  - client role
 
 `POST /clients/cases`
 
@@ -964,6 +1032,9 @@ Expected errors `401 Unathorized`
 ```
 
 ### Get Client's cases
+
+- Required:
+  - acess token
 
 `POST /clients/7/cases`
 
@@ -1012,6 +1083,10 @@ Endpoint to work with cases
 
 ### Create A Case
 
+- Required:
+  - acess token
+  - admin role
+
 `POST /cases`
 
 Request body example
@@ -1055,6 +1130,10 @@ Expected errors message `400 Bad Request`
 
 ### Delete Client By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `DELETE /clients/:id`
 
 Expected response `200 OK`
@@ -1084,6 +1163,9 @@ Expected errors `401 Unathorized`
 ```
 
 ### Get All Cases
+
+- Required:
+  - acess token
 
 `Get /cases`
 
@@ -1135,6 +1217,9 @@ Expected errors `401 Unathorized`
 
 ### Get Case By ID
 
+- Required:
+  - acess token
+
 `GET /cases:id`
 
 Expected response `200 OK`
@@ -1164,6 +1249,10 @@ Expected errors message `400 Bad Request`
 ```
 
 ### Edit A Case
+
+- Required:
+  - acess token
+  - admin role
 
 `PUT /cases/:id`
 
@@ -1206,6 +1295,10 @@ Expected errors message `400 Bad Request`
 
 `POST /clients`
 
+- Required:
+  - acess token
+  - admin role
+
 Request body example
 
 ```json
@@ -1242,6 +1335,10 @@ Expected errors `401 Unathorized`
 }
 ```
 
+- Required:
+  - acess token
+  - admin role
+
 ### Delete Case By Id
 
 `DELETE /cases/:id`
@@ -1274,6 +1371,11 @@ Expected errors `401 Unathorized`
 
 ### Fulfill A Case
 
+- Required:
+  - acess token
+  - lawyer role
+  - the same lawyer id as in case
+
 `POST /cases/:id/fulfill`
 
 Expected response `200 OK`
@@ -1303,6 +1405,11 @@ Expected errors `401 Unathorized`
 ```
 
 ### Reject A Case
+
+- Required:
+  - acess token
+  - lawyer role
+  - the same lawyer id as in case
 
 `POST /cases/:id/reject`
 
@@ -1336,6 +1443,11 @@ Expected errors `401 Unathorized`
 
 #### Lawyer can admit (take part in) this case
 
+- Required:
+  - acess token
+  - lawyer role
+  - the same lawyer id as in case
+
 `POST /cases/:id/admit`
 
 Expected response `200 OK`
@@ -1365,6 +1477,11 @@ Expected errors `401 Unathorized`
 ```
 
 ### Create Case's Review
+
+- Required:
+  - acess token
+  - lawyer or admin role
+  - lawyer or admin id to match lawyer or admin id inside case
 
 `POST /cases/reviews`
 
@@ -1401,6 +1518,9 @@ Expected errors message `404 Unauthorized`
 ```
 
 ### Get Case's Reviews
+
+- Required:
+  - acess token
 
 `GET /cases/1/reviews`
 
@@ -1439,6 +1559,10 @@ Endpoint to work with users
 
 ### Get All Admins
 
+- Required:
+  - acess token
+  - admin role
+
 `GET /admins` - get all admins
 
 Expected response `200 OK`
@@ -1472,6 +1596,10 @@ Expected errors `401 Unathorized`
 
 ### Get Admin By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `GET /admins/:id` - get admin by id
 
 Expected response `200 OK`
@@ -1497,6 +1625,10 @@ Expected errors `401 Unathorized`
 ```
 
 ### Create Admin
+
+- Required:
+  - acess token
+  - admin role
 
 `POST /admins`
 
@@ -1532,6 +1664,10 @@ Expected errors `401 Unathorized`
 
 ### Edit Admin By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `PUT /admins/:id`
 
 Request body example
@@ -1566,6 +1702,10 @@ Expected errors `401 Unathorized`
 
 ### Delete Admin By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `DELETE /admin/:id`
 
 Expected response `200 OK`
@@ -1595,6 +1735,9 @@ Expected errors `401 Unathorized`
 Endpoint to work with roles
 
 ### Get All Roles
+
+- Required:
+  - acess token
 
 `GET /roles` - get all roles
 
@@ -1627,6 +1770,9 @@ Expected errors `401 Unathorized`
 
 ### Get Role By Id
 
+- Required:
+  - acess token
+
 `GET /roles/:id` - get role by id
 
 Expected response `200 OK`
@@ -1651,6 +1797,10 @@ Expected errors `401 Unathorized`
 ```
 
 ### Create Role
+
+- Required:
+  - acess token
+  - admin role
 
 `POST /roles`
 
@@ -1685,6 +1835,10 @@ Expected errors `401 Unathorized`
 
 ### Edit Role By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `PUT /roles/:id`
 
 Request body example
@@ -1718,6 +1872,10 @@ Expected errors `401 Unathorized`
 
 ### Delete Role By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `DELETE /roles/:id`
 
 Expected response `200 OK`
@@ -1746,6 +1904,9 @@ Expected errors `401 Unathorized`
 Endpoint to work with reviews
 
 ### Get All Reviews
+
+- Required:
+  - acess token
 
 `GET /reviews` - get all reviews
 
@@ -1782,6 +1943,9 @@ Expected errors `401 Unathorized`
 
 ### Get Review By Id
 
+- Required:
+  - acess token
+
 `GET /reviews/:id` - get review by id
 
 Expected response `200 OK`
@@ -1808,6 +1972,10 @@ Expected errors `400 Bad request`
 ```
 
 ### Create Review
+
+- Required:
+  - acess token
+  - admin role
 
 `POST /reviews`
 
@@ -1846,6 +2014,10 @@ Expected errors `400 Bad request`
 
 ### Edit Review By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `PUT /reviews/:id`
 
 Request body example
@@ -1881,6 +2053,10 @@ Expected errors `400 Bad request`
 
 ### Delete Review By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `DELETE /reviews/:id`
 
 Expected response `200 OK`
@@ -1911,6 +2087,9 @@ Expected errors `401 Unathorized`
 Endpoint to work with licenses
 
 ### Get All Licenses
+
+- Required:
+  - acess token
 
 `GET /licenses` - get all licenses
 
@@ -1946,6 +2125,9 @@ Expected errors `401 Unathorized`
 ```
 
 ### Get License By Id
+
+- Required:
+  - acess token
 
 `GET /licenses/:id` - get license by id
 
@@ -2010,6 +2192,10 @@ Expected errors `400 Bad request`
 
 ### Edit License By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `PUT /licenses/:id`
 
 Request body example
@@ -2045,6 +2231,10 @@ Expected errors `400 Bad request`
 
 ### Delete License By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `DELETE /licenses/:id`
 
 Expected response `200 OK`
@@ -2071,6 +2261,10 @@ Expected errors `401 Unathorized`
 ```
 
 ### Verify License By Id
+
+- Required:
+  - acess token
+  - admin role
 
 `PUT /licenses/:id/verify`
 
@@ -2104,6 +2298,10 @@ Expected errors `401 Unathorized`
 ```
 
 ### Reject License By Id
+
+- Required:
+  - acess token
+  - admin role
 
 `PUT /licenses/:id/reject`
 
@@ -2141,6 +2339,10 @@ Expected errors `401 Unathorized`
 Endpoint to work with verifications
 
 ### Get All Verifications
+
+- Required:
+  - acess token
+  - admin role
 
 `GET /verifications` - get all verifications
 
@@ -2181,6 +2383,10 @@ Expected errors `401 Unathorized`
 
 ### Get Verification By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `GET /verifications/:id` - get verification by id
 
 Expected response `200 OK`
@@ -2208,6 +2414,10 @@ Expected errors `400 Bad request`
 ```
 
 ### Create verification
+
+- Required:
+  - acess token
+  - admin role
 
 `POST /verifications`
 
@@ -2245,6 +2455,10 @@ Expected errors `400 Bad request`
 
 ### Edit Verification By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `PUT /verifications/:id`
 
 Request body example
@@ -2279,6 +2493,10 @@ Expected errors `400 Bad request`
 
 ### Delete Verification By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `DELETE /verifications/:id`
 
 Expected response `200 OK`
@@ -2304,6 +2522,9 @@ Expected errors `401 Unathorized`
 ```
 
 ## `/conflicts`
+
+- Required:
+  - acess token
 
 Endpoint to work with conflicts
 
@@ -2346,6 +2567,9 @@ Expected errors `401 Unathorized`
 
 ### Get Conflict By Id
 
+- Required:
+  - acess token
+
 `GET /conflicts/:id` - get conflict by id
 
 Expected response `200 OK`
@@ -2373,6 +2597,10 @@ Expected errors `400 Bad request`
 ```
 
 ### Create conflict
+
+- Required:
+  - acess token
+  - admin role
 
 `POST /conflicts`
 
@@ -2413,6 +2641,10 @@ Expected errors `400 Bad request`
 
 ### Edit Conflict By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `PUT /conflicts/:id`
 
 Request body example
@@ -2449,6 +2681,10 @@ Expected errors `400 Bad request`
 
 ### Delete Conflict By Id
 
+- Required:
+  - acess token
+  - admin role
+
 `DELETE /conflicts/:id`
 
 Expected response `200 OK`
@@ -2476,6 +2712,10 @@ Expected errors `401 Unathorized`
 ```
 
 ### Fulfill Conflict By Id
+
+- Required:
+  - acess token
+  - admin role
 
 `PUT /conflicts/:id/fulfill`
 
@@ -2506,6 +2746,10 @@ Expected errors `400 Bad request`
 ```
 
 ### Reject Conflict By Id
+
+- Required:
+  - acess token
+  - admin role
 
 `PUT /conflicts/:id/fulfill`
 
