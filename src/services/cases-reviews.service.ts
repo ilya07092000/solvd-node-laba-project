@@ -48,12 +48,23 @@ class CasesReviewsService {
     caseId: number;
     data: CreateReviewDto;
   }) {
+    /**
+     * get user info and role
+     */
     const userInfo = await this.userService.getById({ id: userId });
     const userRoleInfo = await this.roleService.getById({
       id: userInfo.roleId,
     });
+
+    /**
+     * get case
+     */
     const caseInfo = await this.caseService.getById({ id: caseId });
 
+    /**
+     * depends on role type
+     * need to grab lawyer or client info
+     */
     let caseParticipant;
     if (userRoleInfo.type === RoleTypes.CLIENT) {
       caseParticipant = await this.clientService.getByUserId({ id: userId });
@@ -73,10 +84,17 @@ class CasesReviewsService {
       }
     }
 
+    /**
+     * create new review
+     */
     const newReview = await this.reviewService.create({
       ...data,
       creator: userRoleInfo.type as RoleTypes.LAWYER | RoleTypes.CLIENT,
     });
+
+    /**
+     * attach review to case
+     */
     await this.repository.create({ caseId, reviewId: newReview.id });
     return newReview;
   }
