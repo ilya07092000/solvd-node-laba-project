@@ -1,6 +1,7 @@
 import HttpException from '@src/infrastructure/exceptions/httpException';
 import { CaseService, caseService } from './case.service';
 import { LawyerService, lawyerService } from './lawyer.service';
+import CaseStatuses from '@src/infrastructure/enums/caseStatuses';
 
 class LawyerCasesService {
   private caseService: CaseService;
@@ -11,54 +12,50 @@ class LawyerCasesService {
     this.lawyerService = lawyerService;
   }
 
-  async admitCase(userId: number, caseId: number) {
+  async checkLawyerPermission({
+    caseId,
+    userId,
+  }: {
+    caseId: number;
+    userId: number;
+  }) {
+    /**
+     * check whether layer exists
+     */
     const lawyerInfo = await this.lawyerService.getByUserId({ id: userId });
     if (!lawyerInfo) {
       throw new HttpException(400, 'Lawyer Was Not Found');
     }
 
+    /**
+     * check whether layer available
+     */
+    if (!lawyerInfo.available) {
+      throw new HttpException(400, 'Lawyer Is Not Available');
+    }
+
+    /**
+     * check whether lawyer belongs to the case
+     */
     const caseInfo = await this.caseService.getById({ id: caseId });
     if (caseInfo.lawyerId !== lawyerInfo.id) {
       throw new HttpException(400, 'It is not your case!');
     }
+    return true;
+  }
 
-    if (!lawyerInfo.available) {
-      throw new HttpException(400, 'Lawyer Is Not Available');
-    }
+  async admitCase(userId: number, caseId: number) {
+    await this.checkLawyerPermission({ userId, caseId });
     return this.caseService.startCase({ id: caseId });
   }
 
   async rejectCase(userId: number, caseId: number) {
-    const lawyerInfo = await this.lawyerService.getByUserId({ id: userId });
-    if (!lawyerInfo) {
-      throw new HttpException(400, 'Lawyer Was Not Found');
-    }
-
-    const caseInfo = await this.caseService.getById({ id: caseId });
-    if (caseInfo.lawyerId !== lawyerInfo.id) {
-      throw new HttpException(400, 'It is not your case!');
-    }
-
-    if (!lawyerInfo.available) {
-      throw new HttpException(400, 'Lawyer Is Not Available');
-    }
+    await this.checkLawyerPermission({ userId, caseId });
     return this.caseService.rejectCase({ id: caseId });
   }
 
   async fulfillCase(userId: number, caseId: number) {
-    const lawyerInfo = await this.lawyerService.getByUserId({ id: userId });
-    if (!lawyerInfo) {
-      throw new HttpException(400, 'Lawyer Was Not Found');
-    }
-
-    const caseInfo = await this.caseService.getById({ id: caseId });
-    if (caseInfo.lawyerId !== lawyerInfo.id) {
-      throw new HttpException(400, 'It is not your case!');
-    }
-
-    if (!lawyerInfo.available) {
-      throw new HttpException(400, 'Lawyer Is Not Available');
-    }
+    await this.checkLawyerPermission({ userId, caseId });
     return this.caseService.fulfillCase({ id: caseId });
   }
 

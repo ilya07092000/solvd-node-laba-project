@@ -119,7 +119,7 @@ class CaseService {
     if (currCase.status !== CaseStatuses.ACTIVE) {
       throw new HttpException(
         400,
-        'You can not start this case! It was already finished or rejected',
+        'You can not start this case! It was not started yet!',
       );
     }
 
