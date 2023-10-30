@@ -164,7 +164,7 @@ As a lawyer you can create your own account, fill information about yourself, li
 
 Endpoint to work with profile
 
-### Registration
+### Get Profile
 
 `GET /`
 
