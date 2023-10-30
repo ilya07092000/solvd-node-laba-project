@@ -2544,14 +2544,12 @@ Expected response `200 OK`
     {
       "id": "1",
       "adminId": "1",
-      "caseId": "1",
       "reason": "Lawyer stole my money",
       "status": "processing | fulfilled | rejected"
     },
     {
       "id": "2",
       "adminId": "2",
-      "caseId": "2",
       "reason": "Lawyer is very bad",
       "status": "processing | fulfilled | rejected"
     }
@@ -2583,7 +2581,6 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "caseId": "1",
     "reason": "Lawyer stole my money",
     "status": "processing | fulfilled | rejected"
   }
@@ -2613,7 +2610,6 @@ Request body example
 ```json
 {
   "adminId": "1",
-  "caseId": "1",
   "reason": "Lawyer stole my money",
   "status": "processing | fulfilled | rejected"
 }
@@ -2626,7 +2622,6 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "caseId": "1",
     "reason": "Lawyer stole my money",
     "status": "processing | fulfilled | rejected"
   }
@@ -2666,7 +2661,6 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "caseId": "1",
     "reason": "Lawyer stole my time",
     "status": "processing | fulfilled | rejected"
   }
@@ -2698,7 +2692,6 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "caseId": "1",
     "reason": "Lawyer stole my money",
     "status": "processing | fulfilled | rejected"
   }
@@ -2721,7 +2714,7 @@ Expected errors `401 Unathorized`
   - acess token
   - admin role
 
-`PUT /conflicts/:id/fulfill`
+`POST /conflicts/:id/fulfill`
 
 Request body example
 
@@ -2732,7 +2725,6 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "caseId": "1",
     "reason": "Lawyer stole my time",
     "status": "fulfilled"
   }
@@ -2755,7 +2747,7 @@ Expected errors `400 Bad request`
   - acess token
   - admin role
 
-`PUT /conflicts/:id/fulfill`
+`POST /conflicts/:id/reject`
 
 Request body example
 
@@ -2766,7 +2758,6 @@ Expected response `200 OK`
   "result": {
     "id": "1",
     "adminId": "1",
-    "caseId": "1",
     "reason": "Lawyer stole my time",
     "status": "rejected"
   }

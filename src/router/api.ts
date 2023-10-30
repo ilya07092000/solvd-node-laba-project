@@ -12,6 +12,7 @@ import reviewsRouter from './reviews.router';
 import licensesRouter from './licenses.router';
 import verificationsRouter from './verifications';
 import profileRouter from './profile.router';
+import conflictsRouter from './conflicts.router';
 
 router.use('/auth', authRouter);
 router.use('/users', usersRouter);
@@ -24,5 +25,6 @@ router.use('/reviews', reviewsRouter);
 router.use('/licenses', licensesRouter);
 router.use('/verifications', verificationsRouter);
 router.use('/profile', profileRouter);
+router.use('/conflicts', conflictsRouter);
 
 export default router;
