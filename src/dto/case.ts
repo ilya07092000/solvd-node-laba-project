@@ -1,11 +1,11 @@
-import { CaseStatus } from 'aws-sdk/clients/support';
+import CaseStatuses from '@src/infrastructure/enums/caseStatuses';
 
 class CaseDto {
   id: number;
   lawyerId: number;
   clientId: number;
   description: string;
-  status: CaseStatus;
+  status: CaseStatuses;
   budget: number;
   startDate: Date;
   endDate: Date;
@@ -35,7 +35,7 @@ class CreateCaseDto {
   lawyerId: number;
   clientId: number;
   description: string;
-  status?: CaseStatus;
+  status?: CaseStatuses;
   budget: number;
   startDate?: Date;
   endDate?: Date;
