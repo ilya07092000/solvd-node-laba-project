@@ -11,6 +11,7 @@ exports.up = async function (knex) {
       CONSTRAINT fk_user
         FOREIGN KEY(user_id) 
             REFERENCES "user"(id)
+            ON DELETE CASCADE
   )`);
 };
 

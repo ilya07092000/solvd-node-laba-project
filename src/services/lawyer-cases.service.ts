@@ -17,6 +17,11 @@ class LawyerCasesService {
       throw new HttpException(400, 'Lawyer Was Not Found');
     }
 
+    const caseInfo = await this.caseService.getById({ id: caseId });
+    if (caseInfo.lawyerId !== lawyerInfo.id) {
+      throw new HttpException(400, 'It is not your case!');
+    }
+
     if (!lawyerInfo.available) {
       throw new HttpException(400, 'Lawyer Is Not Available');
     }
@@ -29,6 +34,11 @@ class LawyerCasesService {
       throw new HttpException(400, 'Lawyer Was Not Found');
     }
 
+    const caseInfo = await this.caseService.getById({ id: caseId });
+    if (caseInfo.lawyerId !== lawyerInfo.id) {
+      throw new HttpException(400, 'It is not your case!');
+    }
+
     if (!lawyerInfo.available) {
       throw new HttpException(400, 'Lawyer Is Not Available');
     }
@@ -39,6 +49,11 @@ class LawyerCasesService {
     const lawyerInfo = await this.lawyerService.getByUserId({ id: userId });
     if (!lawyerInfo) {
       throw new HttpException(400, 'Lawyer Was Not Found');
+    }
+
+    const caseInfo = await this.caseService.getById({ id: caseId });
+    if (caseInfo.lawyerId !== lawyerInfo.id) {
+      throw new HttpException(400, 'It is not your case!');
     }
 
     if (!lawyerInfo.available) {

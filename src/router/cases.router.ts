@@ -5,12 +5,18 @@ import casesController from '@src/controllers/cases.controller';
 import authMiddleware from '@src/middlewares/auth.middleware';
 import RoleTypes from '@src/infrastructure/enums/roles';
 import lawyerCasesController from '@src/controllers/lawyer-cases.controller';
+import casesReviewsControler from '@src/controllers/cases-reviews.controler';
 
 /**
  * FOR AUTH USERS
  */
 router.get('/', [authMiddleware([])], casesController.getAll);
 router.get('/:id', [authMiddleware([])], casesController.getById);
+router.get(
+  '/:id/reviews',
+  [authMiddleware([])],
+  casesReviewsControler.getCasesReviews,
+);
 
 /**
  * FOR ADMINS
@@ -40,6 +46,15 @@ router.post(
   '/:id/reject',
   [authMiddleware([RoleTypes.LAWYER])],
   lawyerCasesController.rejectCase,
+);
+
+/**
+ * FOR CLIENT AND LAWYER
+ */
+router.post(
+  '/:id/reviews',
+  [authMiddleware([RoleTypes.LAWYER, RoleTypes.CLIENT])],
+  casesReviewsControler.create,
 );
 
 export default router;

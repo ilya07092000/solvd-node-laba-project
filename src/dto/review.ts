@@ -4,7 +4,7 @@ class ReviewDto {
   id: number;
   rate: number;
   message: number;
-  creator: RoleTypes.ADMIN | RoleTypes.CLIENT;
+  creator: RoleTypes.LAWYER | RoleTypes.CLIENT;
 
   constructor({ id, rate, message, creator }) {
     this.id = id;
@@ -17,7 +17,7 @@ class ReviewDto {
 class CreateReviewDto {
   rate: number;
   message: number;
-  creator: RoleTypes.ADMIN | RoleTypes.CLIENT;
+  creator: RoleTypes.LAWYER | RoleTypes.CLIENT;
 
   constructor({ rate, message, creator }) {
     this.rate = rate;

@@ -1,4 +1,44 @@
-# API documentation
+# Needed Information
+
+## Project start
+
+In order to start application use this command:
+
+```
+  docker compose up --build
+```
+
+**First user with admin role will be created automatically**
+
+- Credentials for admin
+
+```json
+{
+  "email": "admin@admin.com",
+  "password": "admin"
+}
+```
+
+## Base url
+
+```
+http://localhost:3000/api/v1/
+```
+
+## Description
+
+This app is a Lawyer Matching Service platform which allows match clients and lawyers. As a client you can create your own accound and hire(create a case) a layer based on filter parameters as budget, avialability, lawyer type.
+As a lawyer you can create your own account, fill information about yourself, like price, occupation (eg. Business, Criminal, Family), age, experience, location, etc.
+
+### Stack
+
+- node.js
+- express
+- TS
+- posgresql
+- redis
+- docker
+- knex
 
 ### Navigation
 
@@ -85,17 +125,6 @@
 
 ---
 
-## Description
-
-This app is a Lawyer Matching Service platform which allows match clients and lawyers. As a client you can create your own accound and hire(create a case) a layer based on filter parameters as budget, avialability, lawyer type.
-As a lawyer you can create your own account, fill information about yourself, like price, occupation (eg. Business, Criminal, Family), age, experience, location, etc.
-
-## Base url
-
-```
-http://localhost:3000/api/v1/
-```
-
 ## Exceptions
 
 - 500 Internal Server Error
@@ -112,6 +141,8 @@ http://localhost:3000/api/v1/
   }
 }
 ```
+
+# API documentation
 
 ## Authentication
 
@@ -1305,6 +1336,75 @@ Expected errors `401 Unathorized`
 }
 ```
 
+### Create Case's Review
+
+`POST /cases/reviews`
+
+Request body example
+
+```json
+{
+  "rate": 1,
+  "message": "all is ok"
+}
+```
+
+Expected response `201 Created`
+
+```json
+{
+  "result": {
+    "id": 2,
+    "rate": 1,
+    "message": "all is ok",
+    "creator": "client | lawyer"
+  }
+}
+```
+
+Expected errors message `404 Unauthorized`
+
+```json
+{
+  "error": {
+    "message": "Session Does Not Exist!"
+  }
+}
+```
+
+### Get Case's Reviews
+
+`GET /cases/1/reviews`
+
+Expected response `201 Created`
+
+```json
+{
+  "result": [
+    {
+      "id": 1,
+      "rate": 1,
+      "creator": "lawyer"
+    },
+    {
+      "id": 2,
+      "rate": 1,
+      "creator": "client"
+    }
+  ]
+}
+```
+
+Expected errors message `404 Unauthorized`
+
+```json
+{
+  "error": {
+    "message": "Session Does Not Exist!"
+  }
+}
+```
+
 ## `/admins`
 
 Endpoint to work with users
@@ -1628,14 +1728,12 @@ Expected response `200 OK`
   "result": [
     {
       "id": "1",
-      "caseId": "1",
       "rate": "[1-5]",
       "creator": "admin | client",
       "message": "Very cool lawyer"
     },
     {
       "id": "2",
-      "caseId": "2",
       "rate": "[1-5]",
       "creator": "admin | client",
       "message": "Very cool lawyer"
@@ -1664,7 +1762,6 @@ Expected response `200 OK`
 {
   "result": {
     "id": "1",
-    "caseId": "1",
     "rate": "[1-5]",
     "creator": "admin | client",
     "message": "Very cool lawyer"
@@ -1690,7 +1787,6 @@ Request body example
 
 ```json
 {
-  "caseId": "1",
   "rate": "[1-5]",
   "creator": "admin | client",
   "message": "Very cool lawyer"
@@ -1703,7 +1799,6 @@ Expected response `200 OK`
 {
   "result": {
     "id": "1",
-    "caseId": "1",
     "rate": "[1-5]",
     "creator": "admin | client",
     "message": "Very cool lawyer"
@@ -1739,7 +1834,6 @@ Expected response `200 OK`
 {
   "result": {
     "id": "1",
-    "caseId": "1",
     "rate": "[1-5]",
     "creator": "admin | client",
     "message": "Very cool lawyer"
@@ -1767,7 +1861,6 @@ Expected response `200 OK`
 {
   "result": {
     "id": "1",
-    "caseId": "1",
     "rate": "[1-5]",
     "creator": "admin | client",
     "message": "Very cool lawyer"

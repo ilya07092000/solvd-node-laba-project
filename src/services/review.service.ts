@@ -7,7 +7,6 @@ import {
 
 class ReviewService {
   private repository: ReviewRepository;
-  private;
 
   constructor(repository: ReviewRepository) {
     this.repository = repository;
