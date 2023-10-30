@@ -62,7 +62,12 @@ class LawyerCasesService {
     return this.caseService.fulfillCase({ id: caseId });
   }
 
-  getLawyerCases({ lawyerId }) {
+  async getLawyerCases({ lawyerId }) {
+    const lawyer = await this.lawyerService.getById({ id: lawyerId });
+    if (!lawyer) {
+      throw new HttpException(404, 'Lawyer Was Not Found!');
+    }
+
     return this.caseService.getByLawyerId({ id: lawyerId });
   }
 }

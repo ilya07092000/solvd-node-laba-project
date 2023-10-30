@@ -7,16 +7,40 @@ import RoleTypes from '@src/infrastructure/enums/roles';
 import lawyerLicenseController from '@src/controllers/lawyer-license.controller';
 import lawyerCasesController from '@src/controllers/lawyer-cases.controller';
 
-router.use(authMiddleware([]));
+/**
+ * AUTH
+ */
+router.get('/', [authMiddleware([])], lawyersController.getAll);
+router.get('/:id', [authMiddleware([])], lawyersController.getById);
+router.get(
+  '/:id/licenses',
+  [authMiddleware([])],
+  lawyerLicenseController.getAllLicenses,
+);
+router.get(
+  '/:id/cases',
+  [authMiddleware([])],
+  lawyerCasesController.getAllCases,
+);
 
-router.get('/', lawyersController.getAll);
-router.get('/:id', lawyersController.getById);
-router.post('/', lawyersController.create);
-router.put('/:id', lawyersController.update);
-router.delete('/:id', lawyersController.deleteById);
-router.get('/:id/licenses', lawyerLicenseController.getAllLicenses);
-router.get('/:id/cases', lawyerCasesController.getAllCases);
+/**
+ * ADMIN
+ */
+router.post('/', [authMiddleware([RoleTypes.ADMIN])], lawyersController.create);
+router.put(
+  '/:id',
+  [authMiddleware([RoleTypes.ADMIN])],
+  lawyersController.update,
+);
+router.delete(
+  '/:id',
+  [authMiddleware([RoleTypes.ADMIN])],
+  lawyersController.deleteById,
+);
 
+/**
+ * lawyer
+ */
 router.use(authMiddleware([RoleTypes.LAWYER]));
 router.post('/licenses', lawyerLicenseController.addLicense);
 
