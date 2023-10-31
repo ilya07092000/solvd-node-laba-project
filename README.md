@@ -2,7 +2,7 @@
 
 ## Project start
 
-1. **rename .env.example to env**
+1. **rename .env.example to .env**
 
 2. **In order to start application use this command:**
 
