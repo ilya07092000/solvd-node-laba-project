@@ -21,6 +21,13 @@
 }
 ```
 
+### Useful files
+
+- [UML db schema](./diagrams/db-diagram.png)
+- [Seeds](./data/seeds)
+- [Migrations](./src/db/migrations)
+- [Postman Collection](./postman-collection.json)
+
 ## Base url
 
 ```
@@ -41,7 +48,7 @@ Content-Type: application/json
 
 ## Description
 
-This app is a Lawyer Matching Service platform which allows match clients and lawyers. As a client you can create your own accound and hire(create a case) a layer based on filter parameters as budget, avialability, lawyer type.
+This app is a Lawyer Matching Service platform which allows to match clients and lawyers. As a client you can create your own accound and hire(create a case) a lwayer.
 As a lawyer you can create your own account, fill information about yourself, like price, occupation (eg. Business, Criminal, Family), age, experience, location, etc.
 
 ### Stack
