@@ -535,7 +535,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "1698683248541",
+						"value": "1698757324887",
 						"type": "string"
 					}
 				]
@@ -725,7 +725,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "1698683353027",
+									"value": "1698757269037",
 									"type": "string"
 								}
 							]
@@ -1046,6 +1046,73 @@
 								"cases",
 								"1",
 								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Conflict",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1698757269037",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reason\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/cases/1/conflicts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cases",
+								"1",
+								"conflicts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Case's conflicts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1698757324887",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cases/1/conflicts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cases",
+								"1",
+								"conflicts"
 							]
 						}
 					},
@@ -1430,13 +1497,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/conflicts/2/fulfill",
+							"raw": "{{url}}/conflicts/3/fulfill",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"conflicts",
-								"2",
+								"3",
 								"fulfill"
 							]
 						}
@@ -1468,7 +1535,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "1698683392652",
+						"value": "1698757324887",
 						"type": "string"
 					}
 				]
