@@ -1224,7 +1224,7 @@ Expected errors `401 Unathorized`
 - Required:
   - acess token
 
-`GET /cases:id`
+`GET /cases/:id`
 
 Expected response `200 OK`
 
@@ -1295,7 +1295,7 @@ Expected errors message `400 Bad Request`
 }
 ```
 
-### Create A Case
+### Create A Client
 
 `POST /clients`
 
@@ -1553,6 +1553,86 @@ Expected errors message `404 Unauthorized`
 {
   "error": {
     "message": "Session Does Not Exist!"
+  }
+}
+```
+
+### Create Case's conflict
+
+- Required:
+  - acess token
+  - user role which take part in this case
+
+`POST /cases/:id/conflicts`
+
+Request body example
+
+```json
+{
+  "reason": "some reason"
+}
+```
+
+Expected response `201 Created`
+
+```json
+{
+  "result": {
+    "id": 3,
+    "adminId": null,
+    "caseId": 1,
+    "reason": "some reason",
+    "status": "processing"
+  }
+}
+```
+
+Expected errors message `400 Bad Request`
+
+```json
+{
+  "error": {
+    "message": "You are not allowed to perfom this action!"
+  }
+}
+```
+
+### Get Case's conflicts
+
+- Required:
+  - acess token
+
+`GET /cases/:id/conflicts`
+
+Expected response `200 OK`
+
+```json
+{
+  "result": [
+    {
+      "id": 2,
+      "adminId": null,
+      "caseId": 1,
+      "reason": "some reason text",
+      "status": "fulfilled"
+    },
+    {
+      "id": 3,
+      "adminId": null,
+      "caseId": 1,
+      "reason": "123",
+      "status": "fulfilled"
+    }
+  ]
+}
+```
+
+Expected errors message `400 Bad Request`
+
+```json
+{
+  "error": {
+    "message": "You are not allowed to perfom this action!"
   }
 }
 ```

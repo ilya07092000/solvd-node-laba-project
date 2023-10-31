@@ -51,13 +51,17 @@ class ConflictRepository {
       `,
       [id],
     );
-    const result = req.rows[0];
+
+    const result = req.rows;
     return result
-      ? new ConflictDto({
-          ...result,
-          caseId: result.case_id,
-          adminId: result.admin_id,
-        })
+      ? result.map(
+          (conflict) =>
+            new ConflictDto({
+              ...conflict,
+              caseId: conflict.case_id,
+              adminId: conflict.admin_id,
+            }),
+        )
       : null;
   }
 

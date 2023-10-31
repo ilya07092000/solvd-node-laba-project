@@ -6,6 +6,7 @@ import authMiddleware from '@src/middlewares/auth.middleware';
 import RoleTypes from '@src/infrastructure/enums/roles';
 import lawyerCasesController from '@src/controllers/lawyer-cases.controller';
 import casesReviewsControler from '@src/controllers/cases-reviews.controler';
+import casesConflictsController from '@src/controllers/cases-conflicts.controller';
 
 /**
  * FOR AUTH USERS
@@ -16,6 +17,20 @@ router.get(
   '/:id/reviews',
   [authMiddleware([])],
   casesReviewsControler.getCasesReviews,
+);
+router.get(
+  '/:id/conflicts',
+  [authMiddleware([])],
+  casesConflictsController.getAll,
+);
+
+/**
+ * FOR CLIENTS
+ */
+router.post(
+  '/:id/conflicts',
+  [authMiddleware([RoleTypes.CLIENT])],
+  casesConflictsController.create,
 );
 
 /**

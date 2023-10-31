@@ -3,7 +3,7 @@ import ConflictStatuses from '@src/infrastructure/enums/conflictStatuses';
 class CreateConflictDto {
   caseId: number;
   reason: string;
-  status: ConflictStatuses;
+  status?: ConflictStatuses;
 
   constructor({ caseId, reason, status }) {
     this.caseId = caseId;
