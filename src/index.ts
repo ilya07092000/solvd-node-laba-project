@@ -20,9 +20,15 @@ async function booststrap() {
   await redisConnectionInstance.makeConnection();
   await postgresConnectionInstance.makeConnection();
 
-  app.listen(process.env.PORT, () =>
-    console.log(`Running on port ${process.env.PORT}`),
-  );
+  /**
+   * prevent multiple connections in test env
+   */
+  if (process.env.NODE_ENV !== 'test') {
+    app.listen(process.env.PORT, () =>
+      console.log(`Running on port ${process.env.PORT}`),
+    );
+  }
 }
 
 booststrap();
+module.exports = app;
