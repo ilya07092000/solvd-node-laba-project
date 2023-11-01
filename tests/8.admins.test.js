@@ -2,7 +2,7 @@ const app = require('../src/index');
 const request = require('supertest');
 const { loginRequest, adminCreds } = require('./helpers/mock-login');
 
-describe('users', () => {
+describe('admins', () => {
   let adminAccessToken;
 
   beforeAll(async () => {
