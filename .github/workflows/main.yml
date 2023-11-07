@@ -51,7 +51,7 @@ jobs:
       - run: yarn db
       - uses: dkershner6/jest-coverage-commenter-action@v1
         with:
-          test_command: yarn jest --maxWorkers=1 --forceExit --detectOpenHandles --coverage --testLocationInResults
+          test_command: yarn jest --maxWorkers=1 --forceExit --detectOpenHandles --coverage
           github_token: '${{ secrets.GITHUB_TOKEN }}'
         env:
           PORT: 3000
