@@ -37,7 +37,15 @@ jobs:
           --health-retries 5
 
     steps:
-      - run: npm ci
+      - name: Install dependencies
+        run: |
+          if [ -e yarn.lock ]; then
+          yarn install --frozen-lockfile
+          elif [ -e package-lock.json ]; then
+          npm ci
+          else
+          npm i
+          fi
       - run: npm run test
         env:
           PORT: 3000
