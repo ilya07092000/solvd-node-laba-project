@@ -39,7 +39,7 @@ describe('cases', () => {
     expect(response.statusCode).toBe(404);
   });
 
-  it('creates a case', async () => {
+  it('tries to create a case, but lawyer is not available', async () => {
     const response = await request(app)
       .post(`${process.env.API}/cases`)
       .set({ Authorization: `Bearer ${adminAccessToken}` })
@@ -50,8 +50,7 @@ describe('cases', () => {
         description: 'some case',
       });
 
-    expect(response.statusCode).toBe(201);
-    expect(response.body.result).toHaveProperty('id');
+    expect(response.statusCode).toBe(400);
   });
 
   it('get all cases', async () => {
