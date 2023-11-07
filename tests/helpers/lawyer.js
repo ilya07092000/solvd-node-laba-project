@@ -9,7 +9,10 @@ const getLawyer = async () => {
   if (lawyerLogin.statusCode !== 200) {
     const response = await request(app).get(`${process.env.API}/roles`);
     roles = response.body.result;
-    console.log('roles', roles);
+    console.log('roles', {
+      ...lawyerCreds,
+      roleId: roles.find((r) => r.type === 'lawyer').id,
+    });
     await registerRequest(app, request, {
       ...lawyerCreds,
       roleId: roles.find((r) => r.type === 'lawyer').id,
