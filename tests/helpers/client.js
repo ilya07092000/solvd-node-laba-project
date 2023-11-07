@@ -10,10 +10,11 @@ const getClient = async () => {
     const response = await request(app).get(`${process.env.API}/roles`);
     roles = response.body.result;
 
-    clientLogin = await registerRequest(app, request, {
+    await registerRequest(app, request, {
       ...clientCreds,
       roleId: +roles.find((r) => r.type === 'client').id,
     });
+    clientLogin = await loginRequest(app, request, clientCreds);
   }
   clientAccessToken = clientLogin.body.result.tokens.access;
 
