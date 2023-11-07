@@ -6,7 +6,6 @@ class AuthController {
   async registration(req, res, next) {
     try {
       const body = req.body;
-      console.log(body);
       const errors = validateObject(body, {
         email: {
           required: true,

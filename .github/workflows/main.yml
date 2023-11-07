@@ -3,6 +3,8 @@ on:
     branches:
       - main
 
+permissions: write-all
+
 jobs:
   build:
     # Container must run in Linux-based operating systems
@@ -47,24 +49,22 @@ jobs:
         run: |
           npm ci
       - run: yarn db
-
-      - name: Test Report
-        uses: dkershner6/jest-coverage-commenter-action@v1
-          with:
-            test_command: yarn jest --maxWorkers=1 --forceExit --detectOpenHandles --coverage --testLocationInResults
-            github_token: "${{ secrets.GITHUB_TOKEN }}"
-          env:
-            PORT: 3000
-            ACCESS_TOKEN_EXPIRATION_MINUTES: 15
-            REFRESH_TOKEN_EXPIRATION_MINUTES: 1440
-            LOGIN: login
-            PASSWORD: '$2b$10$dhyXNSam3m45sDqRdJtFYelz6iuhYRqf3piuBCwf7xTThUVWuBzXu'
-            SALT_ROUNDS: 10
-            REDIS_HOST: redis
-            REDIS_PORT: 6379
-            API: /api/v1
-            DB_USER: postgres
-            DB_PORT: 5432
-            DB_DATABASE: postgres
-            DB_PASSWORD: pass
-            DB_HOST: db
+      - uses: dkershner6/jest-coverage-commenter-action@v1
+        with:
+          test_command: yarn jest --maxWorkers=1 --forceExit --detectOpenHandles --coverage
+          github_token: '${{ secrets.GITHUB_TOKEN }}'
+        env:
+          PORT: 3000
+          ACCESS_TOKEN_EXPIRATION_MINUTES: 15
+          REFRESH_TOKEN_EXPIRATION_MINUTES: 1440
+          LOGIN: login
+          PASSWORD: '$2b$10$dhyXNSam3m45sDqRdJtFYelz6iuhYRqf3piuBCwf7xTThUVWuBzXu'
+          SALT_ROUNDS: 10
+          REDIS_HOST: redis
+          REDIS_PORT: 6379
+          API: /api/v1
+          DB_USER: postgres
+          DB_PORT: 5432
+          DB_DATABASE: postgres
+          DB_PASSWORD: pass
+          DB_HOST: db
