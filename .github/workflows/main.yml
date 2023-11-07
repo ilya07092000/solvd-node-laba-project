@@ -37,6 +37,7 @@ jobs:
           --health-retries 5
 
     steps:
+      - run: npm ci
       - run: npm run test
         env:
           PORT: 3000
