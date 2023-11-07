@@ -1,7 +1,7 @@
 on:
-  push:
+  pull_request:
     branches:
-    - main
+      - main
 
 jobs:
   build:
@@ -42,12 +42,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-    
+
       - name: Install deps
         run: |
           npm ci
       - run: yarn db
       - run: npm run test-coverage
+
+      - name: Jest Coverage Comment
+        uses: MishaKav/jest-coverage-comment@main
+
         env:
           PORT: 3000
           ACCESS_TOKEN_EXPIRATION_MINUTES: 15
