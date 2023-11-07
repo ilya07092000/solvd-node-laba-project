@@ -12,7 +12,7 @@ const getClient = async () => {
 
     await registerRequest(app, request, {
       ...clientCreds,
-      roleId: roles.find((r) => r.type === 'client').id,
+      roleId: +roles.find((r) => r.type === 'client').id,
     });
     clientLogin = await registerRequest(app, request, clientCreds);
   }
