@@ -7,7 +7,13 @@ const getLawyer = async () => {
 
   let lawyerLogin = await loginRequest(app, request, lawyerCreds);
   if (lawyerLogin.statusCode !== 200) {
-    await registerRequest(app, request, lawyerCreds);
+    const response = await request(app).get(`${process.env.API}/roles`);
+    roles = response.body.result;
+
+    await registerRequest(app, request, {
+      ...lawyerCreds,
+      roleId: roles.find((r) => r.type === 'lawyer').id,
+    });
     lawyerLogin = await registerRequest(app, request, lawyerCreds);
   }
   lawyerAccessToken = lawyerLogin.body.result.tokens.access;

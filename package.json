@@ -10,8 +10,8 @@
     "build": "tsc && tsc-alias",
     "start": "NODE_ENV=production npm run build && NODE_ENV=production node ./dist/index.js",
     "db": "knex migrate:latest && knex seed:run",
-    "test": "jest --forceExit --detectOpenHandles  --watchAll --maxWorkers=1",
-    "test-coverage": "jest --forceExit --detectOpenHandles  --watchAll --maxWorkers=1 --coverage"
+    "test": "jest --forceExit  --maxWorkers=1 --detectOpenHandles ",
+    "test-coverage": "jest  --maxWorkers=1 --coverage --forceExit --detectOpenHandles"
   },
   "dependencies": {
     "@types/express": "^4.17.19",
