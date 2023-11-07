@@ -1,7 +1,7 @@
 on:
-  push:
+  pull_request_target:
     branches:
-    - main
+      - main
 
 jobs:
   build:
@@ -42,7 +42,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-    
+
       - name: Install deps
         run: |
           npm ci
@@ -63,3 +63,7 @@ jobs:
           DB_DATABASE: postgres
           DB_PASSWORD: pass
           DB_HOST: db
+
+      - uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          coverage-file: ./coverage/report.json
