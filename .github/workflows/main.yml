@@ -13,8 +13,8 @@ jobs:
         image: postgres:latest
         env:
           POSTGRES_DB: postgres
-          POSTGRES_USER: pass
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: pass
         ports:
           - 5432:5432
         # Set health checks to wait until postgres has started
@@ -46,7 +46,8 @@ jobs:
       - name: Install deps
         run: |
           npm ci
-      - run: npm run test
+      - run: yarn db
+      - run: npm run test-coverage
         env:
           PORT: 3000
           ACCESS_TOKEN_EXPIRATION_MINUTES: 15
