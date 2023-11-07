@@ -7,8 +7,6 @@ jobs:
   build:
     # Container must run in Linux-based operating systems
     runs-on: ubuntu-latest
-    # Image from Docker hub
-    container: node:20
 
     services:
       postgres:
@@ -37,15 +35,17 @@ jobs:
           --health-retries 5
 
     steps:
-      - name: Install dependencies
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+    
+      - name: Install deps
         run: |
-          if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
           npm ci
-          else
-          npm i
-          fi
       - run: npm run test
         env:
           PORT: 3000
