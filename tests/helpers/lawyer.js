@@ -10,11 +10,10 @@ const getLawyer = async () => {
     const response = await request(app).get(`${process.env.API}/roles`);
     roles = response.body.result;
 
-    await registerRequest(app, request, {
+    lawyerLogin = await registerRequest(app, request, {
       ...lawyerCreds,
       roleId: +roles.find((r) => r.type === 'lawyer').id,
     });
-    lawyerLogin = await registerRequest(app, request, lawyerCreds);
   }
   lawyerAccessToken = lawyerLogin.body.result.tokens.access;
 
