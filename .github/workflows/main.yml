@@ -48,6 +48,8 @@ jobs:
           npm ci
       - run: yarn db
       - uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          test-script: yarn jest --maxWorkers=1 --forceExit --detectOpenHandles --coverage --testLocationInResults --outputFile=report.json
         env:
           PORT: 3000
           ACCESS_TOKEN_EXPIRATION_MINUTES: 15
