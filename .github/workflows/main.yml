@@ -3,6 +3,8 @@ on:
     branches:
       - main
 
+permissions: write-all
+
 jobs:
   build:
     # Container must run in Linux-based operating systems
